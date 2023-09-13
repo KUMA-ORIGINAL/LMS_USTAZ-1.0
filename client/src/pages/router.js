@@ -14,11 +14,9 @@ const Routing = () => {
       <Route path='/' element={<Introduction/>}/>
       <Route path='/auth' element={<Authorization/>}/>
       <Route path='/profile' element={<Profile/>}/>
-
       <Route path='/admin/finance' element={<Finance/>}/>
       <Route path='/admin/mentors' element={<Mentors/>}/>
       <Route path='/admin/courses'/>
-
       <Route path='/course/lecture' element={<Course/>}/>
       <Route path='/course/rating' element={<Rating/>}/>
     </Routes>

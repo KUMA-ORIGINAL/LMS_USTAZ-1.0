@@ -28,7 +28,6 @@ const Authorization = () => {
                         <img src={showPassword ? EyeImg : EyeCloseImg} alt="eye-click" onClick={togglePasswordVisibility} />
                         </div>
                 </div>
-                <a href="#" className="auth__form-forgot">Забыли пароль?</a>
                 <button>Войти</button>
             </div>
         </div>
