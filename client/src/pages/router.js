@@ -5,7 +5,8 @@ import Profile from './Profile';
 import Authorization from './Authorization';
 import Finance from './Finance';
 import Course from "./Course";
-import MentorCard from './Mentors/components/MentorCard';
+import Mentors from "./Mentors";
+import Rating from "./Rating"
 
 const Routing = () => {
   return (
