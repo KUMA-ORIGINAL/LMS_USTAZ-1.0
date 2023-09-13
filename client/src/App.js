@@ -1,11 +1,12 @@
-import Authorization from "./pages/Authorization";
-import Profile from "./pages/Profile";
+import {BrowserRouter} from "react-router-dom";
+
+import Routing from "./pages/router";
 
 function App() {
   return (
-    <>
-    <Authorization/>
-    </>
+    <BrowserRouter>
+      <Routing/>
+    </BrowserRouter>
   );
 }
 
