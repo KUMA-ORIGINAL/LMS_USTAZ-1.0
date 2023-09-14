@@ -113,12 +113,10 @@ video {
 .courses__wrapper-card{
     width: 600px;
     padding: 15px;
-    max-height: 280px;
-    border:2px solid black;
-    border-radius: 24px;
+    border:2px solid #156DD1;
+    border-radius: 7px;
     display: flex;
     justify-content: space-between;
-    background: #fda4a5;
 }
 .course__card-info{
     display: flex;
@@ -126,9 +124,12 @@ video {
     row-gap: 15px;
 }
 .course__card-title{
+    font-weight: 600;
     font-size: 34px;
-    margin-top: 30px;
-    color: white;
+    margin:10px 0px 0px 0px;
+}
+.course__card-text{
+    color: rgb(106, 106, 106);
 }
 .course__card-btn{
     padding: 10px 20px;
@@ -140,4 +141,6 @@ video {
 .course__card-img{
     width: 250px;
     height: auto;
+    object-fit:cover ;
 }
+
