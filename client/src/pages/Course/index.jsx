@@ -1,8 +1,12 @@
-import "./index.css";
+import SideBar from '../../components/SideBar'
+import './index.css'
 
 const Course = () => {
   return (
-    <div className='container'>Course</div>
+    <>
+      <SideBar></SideBar>
+      <div className="container">Course</div>
+    </>
   )
 }
 
