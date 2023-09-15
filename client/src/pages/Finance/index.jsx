@@ -1,8 +1,13 @@
 import React from 'react'
+import SideBar from '../../components/SideBar'
 
 const Finance = () => {
   return (
-    <div>Finance</div>
+    <>
+      <SideBar></SideBar>
+
+      <div>Finance</div>
+    </>
   )
 }
 

@@ -46,14 +46,14 @@ header{
 }
 
   
-  .video-container {
+.video-container {
     position: relative;
     width: 100%;
     height: 100%;
     overflow: hidden;
-  }
+}
   
-  video {
+video {
     position: absolute;
     top: 0;
     left: 0;
@@ -61,7 +61,7 @@ header{
     height: 100%;
     object-fit: cover;
     z-index: -1;
-  }
+}
   
 .intro__title{
     font-family: "Montserrat";
@@ -99,3 +99,48 @@ header{
     border: 3px solid #156DD1;
     background: #156DD1;
 }
+
+.courses__content-title{
+    text-align: center;
+    font-size: 40px;
+    margin: 50px;
+}
+.courses__content-wrapper{
+    display: flex;
+    column-gap: 20px;
+    justify-content: space-between;
+}
+.courses__wrapper-card{
+    width: 600px;
+    padding: 15px;
+    border:2px solid #156DD1;
+    border-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+}
+.course__card-info{
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+.course__card-title{
+    font-weight: 600;
+    font-size: 34px;
+    margin:10px 0px 0px 0px;
+}
+.course__card-text{
+    color: rgb(106, 106, 106);
+}
+.course__card-btn{
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background: #156DD1;
+    color: white;
+}
+.course__card-img{
+    width: 250px;
+    height: auto;
+    object-fit:cover ;
+}
+

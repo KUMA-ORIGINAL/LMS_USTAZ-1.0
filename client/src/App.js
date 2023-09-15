@@ -2,7 +2,7 @@ import {BrowserRouter} from "react-router-dom";
 
 import Routing from "./pages/router";
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <Routing/>
@@ -10,4 +10,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
