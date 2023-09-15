@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import pre_save
@@ -52,6 +53,12 @@ class User(AbstractUser):
 
     def __str__(self):
         return f'{self.email} | {self.first_name} | {self.last_name}'
+
+    def save(self, *args, **kwargs):
+        if self.password:
+            self.password = make_password(self.password)
+            print("set_password")
+        super().save(*args, **kwargs)
 
 
 def calculate_age(birth_date):
