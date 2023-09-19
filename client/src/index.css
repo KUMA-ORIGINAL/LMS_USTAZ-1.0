@@ -24,13 +24,6 @@ body{
   background: #F4F9FD;
 }
 
-.admin-content{
-  height: 100%;
-  display: flex;
-  column-gap: 20px;
-  position: relative;
-}
-
 .container{
   max-width: 1200px;
   margin: 0 auto;
@@ -54,3 +47,20 @@ body{
 }
 
 
+
+/* Admin pages main styles */
+
+.admin-content{
+  height: 100%;
+  display: flex;
+  column-gap: 20px;
+  position: relative;
+}
+
+.admin-panel{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 100px;
+  width: 70%;
+}
