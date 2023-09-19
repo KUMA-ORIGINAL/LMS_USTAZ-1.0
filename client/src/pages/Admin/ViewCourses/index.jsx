@@ -1,9 +1,9 @@
 import React from 'react'
 
-const AdminCourses = () => {
+const ViewCourses = () => {
   return (
     <div>AdminCourses</div>
   )
 }
 
-export default AdminCourses
+export default ViewCourses

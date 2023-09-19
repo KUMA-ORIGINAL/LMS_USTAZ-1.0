@@ -1,3 +1,9 @@
+.main-content{
+  height: 100%;
+  display: flex;
+  column-gap: 20px;
+  position: relative;
+}
 .mentors__title {
   font-size: 64px;
   color: #0a1629;

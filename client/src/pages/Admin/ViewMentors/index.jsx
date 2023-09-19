@@ -1,12 +1,11 @@
 import React from 'react'
-import SideBar from '../../components/SideBar'
 import './index.css'
 import MentorCard from './components/MentorCard'
+import SideBar from '../Components/SideBar'
 
-const Mentors = () => {
+const ViewMentors = () => {
   return (
     <>
-      <SideBar></SideBar>
       <section className="mentors">
         <div className="container">
           <h2 className="mentors__title">Менторы</h2>
@@ -19,4 +18,4 @@ const Mentors = () => {
   )
 }
 
-export default Mentors
+export default ViewMentors

@@ -1,5 +1,5 @@
 import React from 'react'
-import userImg from '../../../assets/images/profile-avatar.png'
+import userImg from '../../../../assets/images/profile-avatar.png'
 
 const users = [
   {

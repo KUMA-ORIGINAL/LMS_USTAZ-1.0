@@ -1,14 +1,23 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes } from "react-router-dom";
 
-import Introduction from './Introduction'
-import Profile from './Profile'
-import Authorization from './Authorization'
-import Finance from './Finance'
-import Course from './Course'
-import Mentors from './Mentors'
-import Rating from './Rating'
-import AdminCourses from './AdminCourses'
-import AdminStudents from './AdminStudents'
+import Introduction from "./Introduction";
+import Profile from "./Profile";
+import Authorization from "./Authorization";
+
+import Course from "./Course";
+import Rating from "./Rating";
+
+//import admin panel pages
+import Dashboard from "./Admin/Dashboard";
+import ViewMentors from "./Admin/ViewMentors";
+import ViewCourses from "./Admin/ViewCourses";
+import ViewStudents from "./Admin/ViewStudents";
+import AdminLayout from "./Admin/Components/AdminLayout";
+import StatProfit from "./Admin/StatProfit";
+import StatExpenses from "./Admin/StatExpenses";
+import StatRoi from "./Admin/StatROI";
+import SalesFunnel from "./Admin/SalesFunnel";
+
 
 const Routing = () => {
   return (
@@ -17,15 +26,23 @@ const Routing = () => {
         <Route path="/" element={<Introduction />} />
         <Route path="/auth" element={<Authorization />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/admin/finance" element={<Finance />} />
-        <Route path="/admin/mentors" element={<Mentors />} />
-        <Route path="/admin/courses" element={<AdminCourses />} />
-        <Route path="/admin/students" element={<AdminStudents />} />
         <Route path="/course/lecture" element={<Course />} />
         <Route path="/course/rating" element={<Rating />} />
+
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="view-mentors" element={<ViewMentors />} />
+          <Route path="view-courses" element={<ViewCourses />} />
+          <Route path="view-students" element={<ViewStudents />} />
+          <Route path="stat-profit" element={<StatProfit/>}/>
+          <Route path="stat-expenses" element={<StatExpenses/>}/>
+          <Route path="stat-roi" element={<StatRoi/>}/>
+          <Route path="sales-funnel" element={<SalesFunnel/>}/>
+        </Route>
+        
       </Routes>
     </>
-  )
-}
+  );
+};
 
-export default Routing
+export default Routing;
