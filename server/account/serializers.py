@@ -1,6 +1,15 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import User
+from .models import User, RatingStudent
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token['id'] = user.id
+        token['email'] = user.email
+        return token
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -16,11 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
         return data
 
 
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-        # Добавьте необходимые дополнительные поля в токен, если это необходимо
-        token['id'] = user.id
-        token['email'] = user.email
-        return token
+class RatingStudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RatingStudent
+        fields = '__all__'

@@ -3,9 +3,12 @@ from datetime import date
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+
+from course.models import Course
 
 
 class CustomUserManager(BaseUserManager):
@@ -36,11 +39,15 @@ class User(AbstractUser):
         ('mentor', 'Ментор'),
         ('student', 'Студент'),
     )
+    POSITION_CHOICES = (
+        ('backend', 'backend'),
+        ('frontend', 'frontend')
+    )
 
     username = None
     email = models.EmailField(unique=True)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
-    position = models.CharField(max_length=50, blank=True, null=True)
+    position = models.CharField(max_length=50, choices=POSITION_CHOICES, blank=True, null=True)
     birth_date = models.DateField(default=date.today)
     age = models.PositiveIntegerField(blank=True, null=True)
     phone_number = models.CharField(max_length=10)
@@ -58,7 +65,12 @@ class User(AbstractUser):
         if self.password:
             self.password = make_password(self.password)
             print("set_password")
-        super().save(*args, **kwargs)
+
+        is_new = self._state.adding
+        super(User, self).save(*args, **kwargs)
+
+        if is_new and self.role == 'student':
+            RatingStudent.objects.create()
 
 
 def calculate_age(birth_date):
@@ -73,15 +85,23 @@ def update_age(sender, instance, **kwargs):
         instance.age = calculate_age(instance.birth_date)
 
 
+class RatingStudent(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'student'})
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    points = models.PositiveIntegerField(
+        validators=[
+            MinValueValidator(1, message="Баллы должны быть не меньше 1."),
+            MaxValueValidator(25, message="Баллы должны быть не больше 25."),
+        ]
+    )
+    updated = models.DateTimeField(auto_now=True)
+
+
+# class Application(models.Model):
+#     pass
+
 # class UserProgress(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE)
 #     courses_completed = models.PositiveIntegerField(default=0)
 #     total_courses = models.PositiveIntegerField(default=0)
-#
-#
-# class UserCourse(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-#
-#     def __str__(self):
-#         return f'{self.user} | {self.course}'
+
