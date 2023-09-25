@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import User, Rating
+from .models import User, RatingStudent
 
 
 @admin.register(User)
@@ -9,6 +9,6 @@ class UserAdmin(admin.ModelAdmin):
     list_filter = ('role',)
 
 
-@admin.register(Rating)
+@admin.register(RatingStudent)
 class Rating(admin.ModelAdmin):
-    list_display = ('student', 'points')
+    list_display = ('student', 'course', 'points')

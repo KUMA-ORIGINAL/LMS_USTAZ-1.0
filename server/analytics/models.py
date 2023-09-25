@@ -23,3 +23,27 @@ class Expense(Transaction):
 
 class Income(Transaction):
     pass
+
+
+class SalesFunnel(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    description = models.TextField(blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created']
+
+    def __str__(self):
+        return self.name
+
+
+class FunnelStage(models.Model):
+    sales_funnel = models.ForeignKey(SalesFunnel, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    order = models.PositiveIntegerField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name

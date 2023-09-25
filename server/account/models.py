@@ -8,6 +8,8 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
+from course.models import Course
+
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -63,7 +65,12 @@ class User(AbstractUser):
         if self.password:
             self.password = make_password(self.password)
             print("set_password")
-        super().save(*args, **kwargs)
+
+        is_new = self._state.adding
+        super(User, self).save(*args, **kwargs)
+
+        if is_new and self.role == 'student':
+            RatingStudent.objects.create()
 
 
 def calculate_age(birth_date):
@@ -78,8 +85,9 @@ def update_age(sender, instance, **kwargs):
         instance.age = calculate_age(instance.birth_date)
 
 
-class Rating(models.Model):
+class RatingStudent(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'student'})
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     points = models.PositiveIntegerField(
         validators=[
             MinValueValidator(1, message="Баллы должны быть не меньше 1."),
@@ -88,15 +96,12 @@ class Rating(models.Model):
     )
     updated = models.DateTimeField(auto_now=True)
 
+
+# class Application(models.Model):
+#     pass
+
 # class UserProgress(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE)
 #     courses_completed = models.PositiveIntegerField(default=0)
 #     total_courses = models.PositiveIntegerField(default=0)
-#
-#
-# class UserCourse(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-#
-#     def __str__(self):
-#         return f'{self.user} | {self.course}'
+
