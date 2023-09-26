@@ -19,6 +19,7 @@ const Authorization = () => {
   const handleLogin = async () => {
     try {
       const result = await login({ email, password })
+      console.log(result)
       dispatch(setUser(result.data.user))
       dispatch(setTokens(result.data.tokens))
     } catch (error) {
