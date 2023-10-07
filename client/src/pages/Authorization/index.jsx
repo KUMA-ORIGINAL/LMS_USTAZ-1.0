@@ -1,10 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './index.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLoginMutation } from '../../store/api/auth'
-import { setUser, setTokens, setError } from '../../store/reducers/auth/auth'
+import {
+  setUser,
+  setAccess,
+  setRefresh,
+  setError,
+} from '../../store/reducers/auth/auth'
+import { useNavigate } from 'react-router-dom'
 import EyeImg from '../../assets/images/auth-eye.png'
 import EyeCloseImg from '../../assets/images/auth-eyeclose.png'
+import { Button } from '@mui/base/Button'
 
 const Authorization = () => {
   const dispatch = useDispatch()
@@ -12,6 +19,8 @@ const Authorization = () => {
   const [password, setPassword] = useState('')
   const [login, { isLoading }] = useLoginMutation()
   const [showPassword, setShowPassword] = useState(false)
+  const authorized = useSelector((state) => state.auth.authorized)
+  const navigate = useNavigate()
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
@@ -19,13 +28,19 @@ const Authorization = () => {
   const handleLogin = async () => {
     try {
       const result = await login({ email, password })
+      dispatch(setAccess(result.data.access))
+      dispatch(setRefresh(result.data.refresh))
+      dispatch(setUser({ email, password }))
       console.log(result)
-      dispatch(setUser(result.data.user))
-      dispatch(setTokens(result.data.tokens))
     } catch (error) {
       dispatch(setError(error.message))
     }
   }
+  useEffect(() => {
+    if (authorized === true) {
+      navigate('/profile')
+    }
+  }, [authorized])
 
   return (
     <div className="container">
