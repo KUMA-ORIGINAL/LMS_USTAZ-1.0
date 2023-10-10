@@ -4,101 +4,100 @@ header{
     height: 750px;
     overflow: hidden;
 }
-.header__content{
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 80px;
-    padding-top: 10px;
+.header__content {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 80px;
+  padding-top: 10px;
 }
 .header__content-container{
     display: flex;
     align-items: center;
     justify-content: space-between;
+
 }
 .header__nav-list{
     display: flex;
     list-style: none;
     column-gap: 40px;
-    margin-right: 440px;
 }
-.header__item-link{
-    font-weight: 700;
-    text-decoration: none;
-    color:#ffffff;
+.header__item-link {
+  font-weight: 700;
+  text-decoration: none;
+  color: #ffffff;
 
-    transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
 }
-.header__item-link:hover{
-    color: #156DD1;
+.header__item-link:hover {
+  color: #156dd1;
 }
-.header__content-btn{
-    padding: 10px 24px;
-    background: #156DD1;
-    border: 2px solid #156DD1;
-    border-radius: 8px;
-    text-decoration: none;
-    color: white;
-    transition: all 0.2s ease-in-out;
+.header__content-btn {
+  padding: 10px 24px;
+  background: #156dd1;
+  border: 2px solid #156dd1;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.2s ease-in-out;
 }
-.header__content-btn:hover{
-    background: transparent;
-    color: #ffffff;
-    border: 2px solid white;
+.header__content-btn:hover {
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid white;
 }
 
-  
 .video-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
-  
+
 video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
-  
-.intro__title{
-    font-family: "Montserrat";
-    margin-top: 100px;
-    font-size: 50px;
-    max-width: 650px;
-    color: #ffffff;
+
+.intro__title {
+  font-family: 'Montserrat';
+  margin-top: 100px;
+  font-size: 50px;
+  max-width: 650px;
+  color: #ffffff;
 }
-.intro__title-mark{
-    color: #00499c;
-    font-weight: 800;
+.intro__title-mark {
+  color: #00499c;
+  font-weight: 800;
 }
-.intro__content-box{
-    margin-top: 50px;
+.intro__content-box {
+  margin-top: 50px;
 }
-.intro__box-btn{
-    margin-left: 10px;
-    border: 3px solid #156DD1;
-    padding: 15px 100px;
-    background: #156DD1;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.3s ease-in-out;
+.intro__box-btn {
+  margin-left: 10px;
+  border: 3px solid #156dd1;
+  padding: 15px 100px;
+  background: #156dd1;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
 }
-.intro__btn-submit{
-    background: transparent; 
-    border: 3px solid white;  
+.intro__btn-submit {
+  background: transparent;
+  border: 3px solid white;
 }
-.intro__box-btn:hover{
-    background: transparent; 
-    border: 3px solid white;  
+.intro__box-btn:hover {
+  background: transparent;
+  border: 3px solid white;
 }
-.intro__btn-submit:hover{
-    border: 3px solid #156DD1;
-    background: #156DD1;
+.intro__btn-submit:hover {
+  border: 3px solid #156dd1;
+  background: #156dd1;
 }
 
 
@@ -308,4 +307,76 @@ video {
 
 
 
+.metods__box-title {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 25px;
+}
+.metods__box-text {
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+.metods__img {
+  max-width: 60px;
+}
 
+/* FAQ */
+.questions {
+  margin-top: 120px;
+}
+.questions__title {
+  font-size: 50px;
+  text-align: center;
+}
+.questions__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  list-style-type: none;
+}
+.questions__item {
+  padding: 15px 25px;
+  background-color: #00254f;
+  border: 1px solid #00254f;
+  border-radius: 10px;
+}
+.questions__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.questions__what {
+  font-size: 20px;
+}
+.questions__bottom {
+  transition: 0.3s;
+  overflow: hidden;
+}
+.questions__icon {
+  transform: rotate(90deg);
+  font-size: 20px;
+  transition: 0.5s;
+}
+.questions__icon.active {
+  transform: rotate(270deg);
+}
+
+.accordion-arrow {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  display: block;
+  width: 30px;
+  height: 17px;
+  fill: rgb(255, 123, 0);
+  transform: translateY(-50%);
+}
+
+.accordion-arrow.active {
+  transform: translateY(-50%) rotate(180deg);
+  fill: green;
+}
