@@ -15,8 +15,8 @@ import ViewStudents from "./Admin/ViewStudents";
 import AdminLayout from "./Admin/Components/AdminLayout";
 import StatProfit from "./Admin/StatProfit";
 import StatExpenses from "./Admin/StatExpenses";
-import StatRoi from "./Admin/StatROI";
 import SalesFunnel from "./Admin/SalesFunnel";
+import ViewMail from "./Admin/ViewMail";
 
 
 const Routing = () => {
@@ -34,9 +34,9 @@ const Routing = () => {
           <Route path="view-mentors" element={<ViewMentors />} />
           <Route path="view-courses" element={<ViewCourses />} />
           <Route path="view-students" element={<ViewStudents />} />
+          <Route path="view-mail" element={<ViewMail />} />
           <Route path="stat-profit" element={<StatProfit/>}/>
           <Route path="stat-expenses" element={<StatExpenses/>}/>
-          <Route path="stat-roi" element={<StatRoi/>}/>
           <Route path="sales-funnel" element={<SalesFunnel/>}/>
         </Route>
         

@@ -7,13 +7,13 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import LaptopChromebookOutlinedIcon from "@mui/icons-material/LaptopChromebookOutlined";
 import LocalLibraryOutlinedIcon from "@mui/icons-material/LocalLibraryOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import { ColorModeContext, tokens } from "../../../theme";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -106,10 +106,18 @@ const SideBar = () => {
                 )
               }
             >
+
               <Typography>
                 {theme.palette.mode === "dark" ? "Dark" : "Light"}
               </Typography>
             </MenuItem>
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Home
+            </Typography>
 
             <Item
               title="Dashboard"
@@ -147,7 +155,13 @@ const SideBar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-
+            <Item
+              title="Mail"
+              to="/admin/view-mail"
+              icon={<EmailOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Typography
               variant="h6"
               color={colors.grey[300]}
@@ -166,13 +180,6 @@ const SideBar = () => {
               title="Expenses"
               to="/admin/stat-expenses"
               icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="ROI"
-              to="/admin/stat-roi"
-              icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif, serif;
+    font-family: "Montserrat", sans-serif, serif;
 }
 
 html {
@@ -58,9 +58,6 @@ body{
 }
 
 .admin-panel{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 100px;
-  width: 70%;
+  width: 100%;
 }
+

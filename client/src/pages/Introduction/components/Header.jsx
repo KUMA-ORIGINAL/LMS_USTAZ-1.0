@@ -6,7 +6,6 @@ import Video from "../../../assets/videos/intro-header.mp4";
 const Header = () => {
   return (
     <header>
-
         <div className="video-container">
           <video autoPlay loop muted>
             <source src={Video} type="video/mp4" />

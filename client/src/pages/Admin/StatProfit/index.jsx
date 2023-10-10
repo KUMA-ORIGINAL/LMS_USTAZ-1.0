@@ -2,6 +2,7 @@ import {useState} from 'react'
 import { Line } from "react-chartjs-2"
 import {Chart as ChartJs} from "chart.js/auto"
 import { useTheme } from '@mui/material';
+import Title from '../Components/Title';
 
 const StatProfit = () => {
   const theme = useTheme();
@@ -33,9 +34,6 @@ const StatProfit = () => {
         {
           label: 'Доход (в сомах)',
           data: data,
-          borderColor: "white", 
-          backgroundColor: '#599bff', 
-          pointBackgroundColor: 'blue',
           borderWidth: 2, 
           pointRadius: 4, 
         },
@@ -49,12 +47,12 @@ const StatProfit = () => {
       y: {
         beginAtZero: true,
         ticks: {
-          color: 'white', 
+          color: theme.palette.mode === "dark" ? "white" : 'black', 
         },
       },
       x: {
         ticks: {
-          color: 'white', 
+          color: theme.palette.mode === "dark" ? "white" : 'black', 
         },
       },
     },
@@ -64,7 +62,10 @@ const StatProfit = () => {
 
   return (
     <div className='admin-panel'>
+      <Title title="Profit - Прибыль"/> 
+      <div style={{width:"950px", margin:"50px auto"}}>
       <Line data={data} options={options}/>
+      </div>
     </div>
   )
 }
