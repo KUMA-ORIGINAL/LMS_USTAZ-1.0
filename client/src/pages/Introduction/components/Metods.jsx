@@ -41,19 +41,18 @@ const array = [
 
 const Metods = () => {
   return (
-    <section className="metods">
+    <section id='methods' className="metods">
       <div className="container">
         <h2 className="metods__title">Методика Обучения</h2>
-        <span className="metods__subtitle">
+        <p className="metods__subtitle">
           Мы разработали уникальную методику обучения
-        </span>
-
+        </p>
         <div className="metods__content">
           {array.map((item, i) => {
             return (
               <div key={i} className="metods__box">
                 <img src={item.img} alt="" className="metods__img" />
-                <span className="metods__box-title">{item.title}</span>
+                <h4 className="metods__box-title">{item.title}</h4>
                 <p className="metods__box-text">{item.text}</p>
               </div>
             )

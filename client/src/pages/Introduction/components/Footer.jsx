@@ -4,7 +4,7 @@ import TelegramIcon from "../images/telegram.png";
 
 const Footer = () => {
   return (
-    <footer className='ifooter'>
+    <footer id="contacts" className='ifooter'>
         <div className="ifooter__content">
             <div className="ifooter__content-info">
                 <div className="ifooter__info-logo">

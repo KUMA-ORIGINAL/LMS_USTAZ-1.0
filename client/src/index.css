@@ -11,7 +11,10 @@ html {
   --main-color:#3F8CFF;
   --secondary-color:#599bff;
   --active-color:#0063f7;
+  scroll-behavior: smooth;
 }
+
+
 
 html, 
 body,
@@ -46,6 +49,12 @@ body{
   background: #555;
 }
 
+@media all and (max-width:480px) {
+  .container{
+    max-width: none;
+    padding: 0px 15px;
+  }
+}
 
 
 /* Admin pages main styles */

@@ -4,13 +4,13 @@ import LogoImg from "../images/logo.png";
 
 const Courses = () => {
   return (
-    <section className="intro-courses">
+    <section id="courses" className="intro-courses">
     <h2 className="intro__courses-title">Чему Вы хотите научиться?</h2>
     <p className="intro__courses-subtitle">Выберите курс, который вам нужен. Потом наслаждайтесь учебой.</p>
     <div className="intro__courses-wrapper">
       <div className="intro__courses-card">
           <img src={HTMLImg} alt="" className="intro__cc-img"/>
-          <p  className="intro__cc-suptitle">180 часов</p>
+          <p  className="intro__cc-suptitle">40 часов</p>
           <h4  className="intro__cc-title">HTML ВЕРСТКА</h4>
           <p  className="intro__cc-text">Хорошо организованные и простые для понимания учебные пособия с большим количе ...</p>
           <div className="intro__courses-mentor">
@@ -26,7 +26,7 @@ const Courses = () => {
       <div className="intro__courses-card">
           <img src={HTMLImg} alt="" className="intro__cc-img"/>
           <p  className="intro__cc-suptitle">180 часов</p>
-          <h4  className="intro__cc-title">HTML ВЕРСТКА</h4>
+          <h4  className="intro__cc-title">FRONT-END</h4>
           <p  className="intro__cc-text">Хорошо организованные и простые для понимания учебные пособия с большим количе ...</p>
           <div className="intro__courses-mentor">
               <div className="intro__cmimg-wrapper">
@@ -41,7 +41,7 @@ const Courses = () => {
       <div className="intro__courses-card">
           <img src={HTMLImg} alt="" className="intro__cc-img"/>
           <p  className="intro__cc-suptitle">180 часов</p>
-          <h4  className="intro__cc-title">HTML ВЕРСТКА</h4>
+          <h4  className="intro__cc-title">BACK-END (PYTHON)</h4>
           <p  className="intro__cc-text">Хорошо организованные и простые для понимания учебные пособия с большим количе ...</p>
           <div className="intro__courses-mentor">
               <div className="intro__cmimg-wrapper">

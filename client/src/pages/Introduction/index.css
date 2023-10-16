@@ -4,32 +4,179 @@ header{
     height: 750px;
     overflow: hidden;
 }
-.header__content {
-  max-width: 1200px;
-  margin: 0 auto;
-  height: 80px;
-  padding-top: 10px;
+
+.navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 75px;
+  padding: 15px 0px;
+  z-index: 100;
+  background: transparent;
 }
-.header__content-container{
+.navbar.scrolled {
+  background: #00254f; /* Your desired blue color */
+}
+
+.navbar__wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.hamb {
+  display: none;
+}
+
+.popup {
+  display: none;
+}
+
+.logo {
+  text-decoration: none;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+
+.navbar__wrap .menu {
+  display: flex;
+  align-items: center;
+  column-gap: 40px;
+}
+
+.navbar__wrap .menu > li {
+  display: flex;
+  align-items: stretch;
+}
+
+
+.navbar__wrap .menu > li > a:hover {
+  color: rgb(130, 130, 130);
+}
+
+.header__item-link{
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+}
+.header__content-link,.header__list-link{
+  padding: 10px 35px;
+  border: 1px solid black;
+  background: transparent;
+  text-decoration: none;
+  color: rgb(239, 239, 239);
+  font-weight: 500;
+  transition: all 0.4s ease-in-out;
+}
+.header__list-link{
+display: none;
+}
+@media (max-width: 480px) {
+  .header__content-btn{
+    display: none;
+  }
+.navbar{
+
+  box-shadow: 0px 0px 15px black;
+}
+.header__list-link{
+  margin-top: 50px;
+  display: inline;
+}
+.header__content-link{
+  display: none;
+}
+  .navbar__wrap .menu {
+    display: none;
+  }
+
+  .hamb {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+  }
 
-}
-.header__nav-list{
+  .hamb__field {
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  .bar {
+    display: block;
+    width: 30px;
+    height: 3px;
+    margin: 6px auto;
+    background-color: #ffffff;
+    transition: 0.2s;
+  }
+
+  .popup {
+    position: fixed;
+    top: 75px;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 100;
     display: flex;
-    list-style: none;
-    column-gap: 40px;
-}
-.header__item-link {
-  font-weight: 700;
-  text-decoration: none;
-  color: #ffffff;
+    transition: 0.3s;
+  }
 
-  transition: all 0.2s ease-in;
-}
-.header__item-link:hover {
-  color: #156dd1;
+  .popup.open {
+    left: 0;
+  }
+
+  .popup .menu {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: 50px 0;
+    overflow: auto;
+  }
+
+  .popup .menu > li {
+    width: 100%;
+  }
+
+  .popup .menu > li > a {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3f3f3f;
+  }
+
+  .popup .menu > li > a:hover {
+    background-color: rgba(122, 82, 179, 0.1);
+  }
+
+  .hamb__field.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamb__field.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamb__field.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  body.noscroll {
+    overflow: hidden;
+  }
+  
 }
 .header__content-btn {
   padding: 10px 24px;
@@ -109,6 +256,7 @@ video {
     display: flex;
     justify-content: space-between;
 }
+
 .advantages__card{
     display: flex;
     align-items: start;
@@ -129,7 +277,14 @@ video {
     font-size: 14px;
     line-height: 170%; /* 23.8px */
 }
-
+@media all and (max-width:480px) {
+  .advantages{
+    flex-direction: column;
+    row-gap: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
 
 
 /* INTRO COURSES SECTION */
@@ -209,7 +364,7 @@ video {
 
 .iform{
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 150px auto;
 }
 .iform-title{
     text-align: center;
@@ -247,6 +402,17 @@ video {
     background: #00499c;
 }
 
+@media all and (max-width:480px) {
+  .iform-content{
+    margin: 50px 20px;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 20px;
+  }
+  .iform__content-btn{
+    padding: 20px 45px;
+}
+}
 /* INTRO FOOTER  */
 .ifooter{
     margin-top: 150px;
@@ -302,34 +468,93 @@ video {
     padding: 30px 0px;
     text-align: center;
     color: #8F91D0;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 
+@media all and (max-width:480px) {
+  .ifooter__content{
+    padding: 50px 45px;
+  }
+}
 
+
+/* Metods */
+
+.metods {
+  margin-top: 120px;
+}
+.metods__title {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.80);
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 150%; /* 54px */
+}
+.metods__subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.40);
+  font-size: 18px;
+  line-height: 150%; /* 27px */
+  margin-top: 15px;
+}
+.metods__info {
+  font-size: 40px;
+  text-align: center;
+  margin-top: 120px;
+}
+.metods__content {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 100px;
+}
+.metods__box {
+  border: 2px solid white;
+  padding: 30px 40px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  transition: 0.3s;
+}
+.metods__box:hover {
+  transform: scale(1.1);
+}
 .metods__box-title {
   margin-top: 20px;
   display: flex;
   justify-content: center;
   text-align: center;
-  font-size: 25px;
+  font-size: 18px;
 }
 .metods__box-text {
   margin-top: 10px;
-  font-size: 14px;
   text-align: center;
+  color: rgba(255, 255, 255, 0.40);
+  font-size: 14px; 
 }
 .metods__img {
   max-width: 60px;
 }
-
+@media all  and (max-width:480px){
+  .metods__content{
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+}
 /* FAQ */
 .questions {
   margin-top: 120px;
 }
 .questions__title {
-  font-size: 50px;
   text-align: center;
+  color: rgba(255, 255, 255, 0.80);
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 150%; /* 54px */
+  margin-bottom: 40px;
 }
 .questions__content {
   display: grid;

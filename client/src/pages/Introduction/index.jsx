@@ -4,7 +4,7 @@ import Courses from './components/Courses';
 import Footer from "./components/Footer";
 import Application from "./components/Application";
 import Metods from "./components/Metods"
-import Accordeon from './components/Accordeon'
+import Questions from "./components/Questions";
 const Introduction = () => {
   return (
     <div >
@@ -12,7 +12,7 @@ const Introduction = () => {
       <Advantages/>
       <Courses/>
       <Metods/>
-      <Accordeon/>
+      <Questions/>
       <Application/>
       <Footer/>
     </div>
