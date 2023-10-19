@@ -1,35 +1,65 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const authSlice = createSlice({
+const initialState = {
+  name: null,
+  token: null,
+}
+
+export const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    user: null,
-    accessToken: null,
-    refreshToken: null,
-    authorized: false,
-    error: null,
-  },
+  initialState,
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload
-    },
-    setAccess: (state, action) => {
-      state.accessToken = action.payload.accessToken
-      state.authorized = true
-    },
-    setRefresh: (state, action) => {
-      state.refreshToken = action.payload.refreshToken
-      state.authorized = true
-    },
-    setError: (state, action) => {
-      state.error = action.payload
+      localStorage.setItem(
+        'user',
+        JSON.stringify({
+          name: action.payload.name,
+          token: action.payload.token,
+        })
+      )
+      state.name = action.payload.name
+      state.token = action.payload.token
     },
   },
 })
 
-export const { setUser, setAccess, setRefresh, setError } = authSlice.actions
-
+export const selectAuth = (state) => state.auth 
+export const {setUser} = authSlice.actions 
 export default authSlice.reducer
+
+
+// import { createSlice } from '@reduxjs/toolkit'
+
+// const authSlice = createSlice({
+//   name: 'auth',
+//   initialState: {
+//     user: null,
+//     accessToken: null,
+//     refreshToken: null,
+//     authorized: false,
+//     error: null,
+//   },
+//   reducers: {
+//     setUser: (state, action) => {
+//       state.user = action.payload
+//     },
+//     setAccess: (state, action) => {
+//       state.accessToken = action.payload.accessToken
+//       state.authorized = true
+//     },
+//     setRefresh: (state, action) => {
+//       state.refreshToken = action.payload.refreshToken
+//     },
+//     setError: (state, action) => {
+//       state.error = action.payload
+//       state.authorized = false
+//     },
+//   },
+// })
+
+// export const { setUser, setAccess, setRefresh, setError } = authSlice.actions
+
+// export default authSlice.reducer
 
 // import { createSlice } from '@reduxjs/toolkit';
 

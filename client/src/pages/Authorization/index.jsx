@@ -1,46 +1,46 @@
 import React, { useEffect, useState } from 'react'
 import './index.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { useLoginMutation } from '../../store/api/auth'
-import {
-  setUser,
-  setAccess,
-  setRefresh,
-  setError,
-} from '../../store/reducers/auth/auth'
+import { useLoginUserMutation } from '../../store/api/authApi'
 import { useNavigate } from 'react-router-dom'
+import { setUser } from '../../store/reducers/auth/authReducer'
 import EyeImg from '../../assets/images/auth-eye.png'
 import EyeCloseImg from '../../assets/images/auth-eyeclose.png'
-import { Button } from '@mui/base/Button'
+import { toast } from 'react-toastify'
+import { useDispatch } from 'react-redux'
+
+const initialState = {
+  email: '',
+  password: '',
+}
 
 const Authorization = () => {
   const dispatch = useDispatch()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [login, { isLoading }] = useLoginMutation()
+  const [formValue, setFormValue] = useState(initialState)
+  const { email, password } = formValue
+  const [loginUser, { data, isSuccess }] = useLoginUserMutation()
   const [showPassword, setShowPassword] = useState(false)
-  const authorized = useSelector((state) => state.auth.authorized)
   const navigate = useNavigate()
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
   }
+  const handleChange = (e) => {
+    setFormValue({ ...formValue, [e.target.value]: e.target.value })
+  }
   const handleLogin = async () => {
-    try {
-      const result = await login({ email, password })
-      dispatch(setAccess(result.data.access))
-      dispatch(setRefresh(result.data.refresh))
-      dispatch(setUser({ email, password }))
-      console.log(result)
-    } catch (error) {
-      dispatch(setError(error.message))
+    if (email && password) {
+      await loginUser({ email, password })
+    } else {
+      toast.error('Пожалуйста, заполните все поля')
     }
   }
   useEffect(() => {
-    if (authorized === true) {
-      navigate('/profile')
+    if (isSuccess) {
+      toast.success('User Login Successfuly')
+      dispatch(setUser({ token: data.data.token, name: data.result.name }))
+      navigate('/student')
     }
-  }, [authorized])
+  }, [isSuccess])
 
   return (
     <div className="container">
@@ -54,7 +54,7 @@ const Authorization = () => {
               id="email-input"
               className="auth__form-email"
               placeholder="youremail@gmail.com"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleChange}
             />
           </div>
           <div className="auth__form-box">
@@ -65,7 +65,7 @@ const Authorization = () => {
                 id="password-input"
                 className="auth__form-pass"
                 placeholder="Ваш пароль"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleChange}
               />
               <img
                 src={showPassword ? EyeImg : EyeCloseImg}
@@ -75,11 +75,7 @@ const Authorization = () => {
             </div>
           </div>
 
-          <button
-            className="auth__submit-btn"
-            onClick={() => handleLogin()}
-            disabled={isLoading}
-          >
+          <button className="auth__submit-btn" onClick={() => handleLogin()}>
             Войти
           </button>
         </div>

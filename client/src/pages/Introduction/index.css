@@ -138,7 +138,7 @@ display: none;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     padding: 50px 0;
     overflow: auto;
   }
@@ -259,7 +259,7 @@ video {
 
 .advantages__card{
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     column-gap: 17px;
 }
 .advantages__card-title{
