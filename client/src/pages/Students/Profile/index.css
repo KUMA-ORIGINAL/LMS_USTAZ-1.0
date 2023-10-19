@@ -51,7 +51,7 @@
 .profile__courses-nav a{
   margin: 15px 0px;
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   color: white;
   text-decoration: none;
   font-size: 22px;
