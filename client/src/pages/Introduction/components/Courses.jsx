@@ -9,7 +9,7 @@ const Courses = () => {
     <p className="intro__courses-subtitle">Выберите курс, который вам нужен. Потом наслаждайтесь учебой.</p>
     <div className="intro__courses-wrapper">
       <div className="intro__courses-card">
-          <img src={HTMLImg} alt="" className="intro__cc-img"/>
+          <img src="https://i.pinimg.com/564x/46/2e/81/462e81e9aed0ba78212a5a0f6b6777d4.jpg" alt="" className="intro__cc-img"/>
           <p  className="intro__cc-suptitle">40 часов</p>
           <h4  className="intro__cc-title">HTML ВЕРСТКА</h4>
           <p  className="intro__cc-text">Хорошо организованные и простые для понимания учебные пособия с большим количе ...</p>

@@ -9,7 +9,7 @@ const Footer = () => {
             <div className="ifooter__content-info">
                 <div className="ifooter__info-logo">
                     <img src={LogoImg} alt="" />
-                    <h3>USTA <br /> SCHOOL</h3>
+                    <h3>USTAZ <br /> ACADEMY</h3>
                 </div>
                 <p className="ifooter__info-text">Образование путь к <br /> возможностям!</p>
                 <nav className="ifooter__info-nav">
