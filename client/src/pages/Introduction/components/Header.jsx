@@ -82,8 +82,8 @@ const Header = () => {
                 Связаться с нами
               </Link>
             </ul>
-          <Link href="" className="header__content-btn" onClick={closeOnClick}>
-            Связаться с нами
+          <Link href="" className="header__content-btn" >
+            Войти
           </Link>
         </div>
       </div>

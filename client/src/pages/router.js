@@ -17,11 +17,11 @@ import SalesFunnel from "./Admin/SalesFunnel";
 import ViewMail from "./Admin/ViewMail";
 
 
-import Navigation from "./Students/components/Navigation";
 import StudentHome from "./Students/Home";
 import StudentProfile from "./Students/Profile";
 import StudentCourse from "./Students/Course";
 import StudentRating from "./Students/Rating";
+import StudentPageLayout from "./Students/components/StudentPageLayout";
 
 
 const Routing = () => {
@@ -32,7 +32,7 @@ const Routing = () => {
         <Route path="/" element={<Introduction />} />
         <Route path="/auth" element={<Authorization />} />
 
-        <Route path="/student" element={<Navigation/>}>
+        <Route path="/student" element={<StudentPageLayout/>}>
           <Route path="home" element={<StudentHome/>}/>
           <Route path="profile" element={<StudentProfile/>}/>
           <Route path="course" element={<StudentCourse/>}/>

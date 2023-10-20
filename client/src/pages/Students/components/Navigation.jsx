@@ -1,91 +1,184 @@
-import { useState, useEffect } from 'react';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import StarBorderPurple500SharpIcon from '@mui/icons-material/StarBorderPurple500Sharp';
+import { useState, useContext } from "react";
+import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
+import "react-pro-sidebar/dist/css/styles.css";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Link } from "react-router-dom";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined';
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined';
+import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import { ColorModeContext, tokens } from "../../../theme";
 
-const Navigation = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [value, setValue] = useState('home');
-
-  // Update the value when the location changes
-  useEffect(() => {
-    if (location.pathname === '/student/home') {
-      setValue('home');
-    } else if (location.pathname === '/student/course') {
-      setValue('course');
-    } else if (location.pathname === '/student/rating') {
-      setValue('rating');
-    } else if (location.pathname === '/student/profile') {
-      setValue('profile');
-    }
-  }, [location]);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  const defaultStyle ={
-    fontSize:"30px"
-  }
-  const activeStyle = {
-    color: "#156dd1",
-    fontSize: '35px', 
-  };
-  const navStyle = {
-    position: 'fixed',
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    zIndex: 1000,
-    borderRadius: "20px 20px 0px 0px",
-    padding:"10px"
-  };
-
+const Item = ({ title, to, icon, selected, setSelected }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   return (
-    <>
-      <Outlet />
-      <BottomNavigation
-        className="Nav"
-        showLabels
-        value={value}
-        onChange={handleChange}
-        style={navStyle}
-      >
-        <BottomNavigationAction
-          value={"home"}
-          onClick={() => navigate('/student/home')}
-          label="Главная"
-          icon={<HomeOutlinedIcon sx={value === 'home' ? activeStyle : defaultStyle} />}
-          style={value === 'home' ? activeStyle : defaultStyle}
-        />
-        <BottomNavigationAction
-          value={"course"}
-          onClick={() => navigate('/student/course')}
-          label="Лекции"
-          icon={<LibraryBooksOutlinedIcon sx={value === 'course' ? activeStyle : defaultStyle} />}
-          style={value === 'course' ? activeStyle : defaultStyle}
-        />
-        <BottomNavigationAction
-          value={"rating"}
-          onClick={() => navigate('/student/rating')}
-          label="Рейтинг"
-          icon={<StarBorderPurple500SharpIcon sx={value === 'rating' ? activeStyle :defaultStyle} />}
-          style={value === 'rating' ? activeStyle : defaultStyle}
-        />
-        <BottomNavigationAction
-          value={"profile"}
-          onClick={() => navigate('/student/profile')}
-          label="Профиль"
-          icon={<AccountCircleOutlinedIcon sx={value === 'profile' ? activeStyle : defaultStyle} />}
-          style={value === 'profile' ? activeStyle : defaultStyle}
-        />
-      </BottomNavigation>
-    </>
+    <MenuItem
+      active={selected === title}
+      style={{
+        color: colors.grey[100],
+      }}
+      onClick={() => setSelected(title)}
+      icon={icon}
+    >
+      <Typography>{title}</Typography>
+      <Link to={to} />
+    </MenuItem>
   );
 };
 
-export default Navigation;
+const SideBar = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [selected, setSelected] = useState("Dashboard");
+
+  const theme = useTheme();
+
+  const colors = tokens(theme.palette.mode);
+  const colorMode = useContext(ColorModeContext);
+  return (
+    <Box
+      sx={{
+        "& .pro-sidebar-inner": {
+          background: `${colors.primary[400]} !important`,
+        },
+        "& .pro-icon-wrapper": {
+          backgroundColor: "transparent !important",
+        },
+        "& .pro-inner-item": {
+          padding: "5px 35px 5px 20px !important",
+        },
+        "& .pro-inner-item:hover": {
+          color: "grey !important",
+        },
+        "& .pro-menu-item.active": {
+          color: "#0063f7 !important",
+        },
+      }}
+    >
+      <ProSidebar collapsed={isCollapsed}>
+        <Menu iconShape="square">
+          <MenuItem
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+            style={{
+              margin: "10px 0 20px 0",
+              color: colors.grey[100],
+            }}
+          >
+            {!isCollapsed && (
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                ml="15px"
+              >
+                <Typography variant="h3" color={colors.grey[100]}>
+                  Ustaz LMS
+                </Typography>
+
+                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                  <MenuOutlinedIcon />
+                </IconButton>
+              </Box>
+            )}
+          </MenuItem>
+          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+            <MenuItem
+            
+              style={{
+                backgroundColor: "transparent", // Устанавливаем фон элемента в прозрачный цвет
+                color: theme.palette.mode === "dark" ? "#fff" : "#000", // Устанавливаем цвет текста
+                cursor: "pointer", // Устанавливаем курсор на указатель при наведении
+              }}
+              onClick={colorMode.toggleColorMode}
+              icon={
+                theme.palette.mode === "dark" ? (
+                  <DarkModeOutlinedIcon />
+                ) : (
+                  <LightModeOutlinedIcon />
+                )
+              }
+            >
+
+              <Typography>
+                {theme.palette.mode === "dark" ? "Dark" : "Light"}
+              </Typography>
+            </MenuItem>
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              General
+            </Typography>
+
+            <Item
+              title="Home"
+              to="/student/home"
+              icon={<HomeOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Course
+            </Typography>
+            <Item
+              title="Lecture"
+              to="/student/course"
+              icon={<LibraryBooksOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Rating"
+              to="/student/rating"
+              icon={<GradeOutlinedIcon  />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Profile
+            </Typography>
+            <Item
+              title="Profile"
+              to="/student/profile"
+              icon={<PersonOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Certificate"
+              to="/student"
+              icon={<WorkspacePremiumOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Password"
+              to="/student"
+              icon={<ShieldOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+          </Box>
+        </Menu>
+      </ProSidebar>
+    </Box>
+  );
+};
+
+export default SideBar;
