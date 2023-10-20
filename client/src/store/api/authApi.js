@@ -8,7 +8,7 @@ export const authApi = createApi({
       query: (body) => {
         return {
           url: '/api/token/',
-          method: 'post',
+          method: 'POST',
           body
         }
       }
