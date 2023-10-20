@@ -61,7 +61,6 @@ const StudentProfile = () => {
                                     </tr>
                                     </tbody>
                                 </table>
-                      
                         </div>
           </div>
         </section>

@@ -32,22 +32,7 @@ body{
   margin: 0 auto;
 }
 
-::-webkit-scrollbar{
-  width: 7px;
-}
 
-::-webkit-scrollbar-track{
-  background: white;
-}
-
-::-webkit-scrollbar-thumb{
-  background: var(--active-color);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-track:hover{
-  background: #555;
-}
 
 @media all and (max-width:480px) {
   .container{
