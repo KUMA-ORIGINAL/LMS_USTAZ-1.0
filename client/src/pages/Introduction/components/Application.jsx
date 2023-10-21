@@ -2,7 +2,7 @@ import React from 'react'
 
 const Application = () => {
   return (
-    <section className='iform'>
+    <section className='iform' id='anketa'>
         <h2 className='iform-title'>Получить консультацию</h2>
         <div className="iform-content">
             <input type="text" className='iform__content-input' placeholder='Ваше имя' required/>

@@ -1,8 +1,9 @@
-import {Link} from "react-router-dom";
-import Logo from "../../../assets/images/usta-logo.png";
+
+import Logo from "../../../assets/images/ustaz.png";
 import "../index.css";
-import Video from "../../../assets/videos/intro-header.mp4";
+import Video from "../../../assets/videos/intro-header23.mp4";
 import { useState, useEffect } from "react";
+import {Link} from "react-router-dom"
 const Header = () => {
   const [isScrolled, setScrolled] = useState(false);
   const [isPopupOpen, setPopupOpen] = useState(false);
@@ -20,7 +21,7 @@ const Header = () => {
     document.body.classList.remove("noscroll");
   };
   const handleScroll = () => {
-    if (window.scrollY > 750) {
+    if (window.scrollY > 500) {
       setScrolled(true);
     } else {
       setScrolled(false);
@@ -49,40 +50,32 @@ const Header = () => {
               <span className="bar"></span>
             </div>
           </div>
-          <Link href="#" className="logo" id="logo">
+          <a href="#" className="logo" id="logo">
             <img src={Logo} alt="" />
-          </Link>
+          </a>
           <ul className={`menu ${isMenuOpen ? 'open' : ''}`} id="menu">
               <li className="header__list-item">
-                <Link href="#" className="header__item-link" onClick={closeOnClick}>
-                  О нас
-                </Link>
+                <a href="#courses" className="header__item-link" onClick={closeOnClick}>
+                  Курсы
+                </a>
               </li>
               <li className="header__list-item">
-                <Link href="#" className="header__item-link" onClick={closeOnClick}>
-                  Наши преимущества
-                </Link>
+                <a href="#methods" className="header__item-link" onClick={closeOnClick}>
+                  Методика
+                </a>
               </li>
               <li className="header__list-item">
-                <Link href="#" className="header__item-link" onClick={closeOnClick}>
-                  Услуги
-                </Link>
+                <a href="#faq" className="header__item-link" onClick={closeOnClick}>
+                  FAQ
+                </a>
               </li>
               <li className="header__list-item">
-                <Link href="#" className="header__item-link" onClick={closeOnClick}>
-                  Отзывы
-                </Link>
+                <a href="#anketa" className="header__item-link" onClick={closeOnClick}>
+                Консультация
+                </a>
               </li>
-              <li className="header__list-item">
-                <Link href="#" className="header__item-link" onClick={closeOnClick}>
-                  Контакты
-                </Link>
-              </li>
-              <Link href="" className="header__list-link" onClick={closeOnClick}>
-                Связаться с нами
-              </Link>
             </ul>
-          <Link href="" className="header__content-btn" >
+          <Link to="/auth" className="header__content-btn" >
             Войти
           </Link>
         </div>
@@ -92,33 +85,38 @@ const Header = () => {
         {isPopupOpen && (
           <ul className="menu">
             <li>
-              <Link href="#" onClick={closeOnClick}>
-                О нас
-              </Link>
+              <a href="#courses" onClick={closeOnClick}>
+                Курсы
+              </a>
             </li>
             <li>
-              <Link href="#" onClick={closeOnClick}>
-                Наши преимущества
-              </Link>
+              <a href="#methods" onClick={closeOnClick}>
+                Методика 
+              </a>
             </li>
             <li>
-              <Link href="#" onClick={closeOnClick}>
-                Услуги
-              </Link>
+              <a href="#faq" onClick={closeOnClick}>
+                Вопросы
+              </a>
             </li>
             <li>
-              <Link href="#" onClick={closeOnClick}>
-                Отзывы
-              </Link>
+              <a href="#anketa" onClick={closeOnClick}>
+                Консультация
+              </a>
             </li>
             <li>
-              <Link href="#" onClick={closeOnClick}>
-                Контакты
+              <Link to="/auth" onClick={closeOnClick}>
+                Консультация
               </Link>
             </li>
           </ul>
         )}
       </div>
+    
+    <div className="headerIntro">
+      <h1> Ustaz<span>School</span></h1>
+      <p className="headerItext">Твой путь в мир Айти!</p>
+    </div>
     </div>
     </header>
   );

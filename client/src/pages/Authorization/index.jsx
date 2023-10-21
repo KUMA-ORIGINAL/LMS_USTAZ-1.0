@@ -14,7 +14,7 @@ const Authorization = () => {
   const dispatch = useDispatch()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loginUser, { data, isSuccess }] = useLoginUserMutation()
+  const [loginUser, { data, isSuccess, isError }] = useLoginUserMutation()
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
 
@@ -39,10 +39,17 @@ const Authorization = () => {
   // console.log(data, isSuccess)
   useEffect(() => {
     if (isSuccess) {
-      toast.success('User Login Successfuly')
+      toast.success('Авторизация прошла успешно!')
       navigate('/student/profile')
     }
   }, [isSuccess])
+
+  useEffect(() => {
+    if(isError){
+      toast.error("Неправильный логин или пароль!");
+    }
+  }, [isError]);
+  
 
   return (
     <div className="container">

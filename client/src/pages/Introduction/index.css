@@ -10,13 +10,13 @@ header{
   left: 0;
   top: 0;
   width: 100%;
-  height: 75px;
+  height: 100px;
   padding: 15px 0px;
   z-index: 100;
   background: transparent;
 }
 .navbar.scrolled {
-  background: #00254f; /* Your desired blue color */
+  backdrop-filter: blur(10px);
 }
 
 .navbar__wrap {
@@ -34,7 +34,9 @@ header{
   display: none;
 }
 
-.logo {
+.logo img {
+  max-width: 70px;
+  max-height: 70px;
   text-decoration: none;
   color: #fff;
   font-size: 20px;
@@ -63,8 +65,9 @@ header{
 
 .header__item-link{
   text-decoration: none;
-  color: rgb(255, 255, 255);
+  color: whitesmoke;
   font-weight: 600;
+  font-size: 18px;
 }
 .header__content-link,.header__list-link{
   padding: 10px 35px;
@@ -78,14 +81,64 @@ header{
 .header__list-link{
 display: none;
 }
+.header__content-btn {
+  padding: 10px 24px;
+  background: #156dd1;
+  border: 2px solid #156dd1;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.2s ease-in-out;
+}
+.header__content-btn:hover {
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid white;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+h1{
+  font-family: 'Montserrat';
+  margin-top: 200px ;
+  font-size: 70px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 900;
+}
+h1 span {
+  color: #00a2ff;
+}
+.headerItext{
+  max-width: 320px;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: 500;
+  font-size: 20px;
+}
 @media (max-width: 480px) {
   .header__content-btn{
     display: none;
   }
-.navbar{
 
-  box-shadow: 0px 0px 15px black;
-}
+  header{
+    height: 500px;
+  }
 .header__list-link{
   margin-top: 50px;
   display: inline;
@@ -97,6 +150,9 @@ display: none;
     display: none;
   }
 
+  h1{
+    font-size: 60px;
+  }
   .hamb {
     display: flex;
     align-items: center;
@@ -178,74 +234,8 @@ display: none;
   }
   
 }
-.header__content-btn {
-  padding: 10px 24px;
-  background: #156dd1;
-  border: 2px solid #156dd1;
-  border-radius: 8px;
-  text-decoration: none;
-  color: white;
-  transition: all 0.2s ease-in-out;
-}
-.header__content-btn:hover {
-  background: transparent;
-  color: #ffffff;
-  border: 2px solid white;
-}
 
-.video-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
 
-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-
-.intro__title {
-  font-family: 'Montserrat';
-  margin-top: 100px;
-  font-size: 50px;
-  max-width: 650px;
-  color: #ffffff;
-}
-.intro__title-mark {
-  color: #00499c;
-  font-weight: 800;
-}
-.intro__content-box {
-  margin-top: 50px;
-}
-.intro__box-btn {
-  margin-left: 10px;
-  border: 3px solid #156dd1;
-  padding: 15px 100px;
-  background: #156dd1;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: all 0.3s ease-in-out;
-}
-.intro__btn-submit {
-  background: transparent;
-  border: 3px solid white;
-}
-.intro__box-btn:hover {
-  background: transparent;
-  border: 3px solid white;
-}
-.intro__btn-submit:hover {
-  border: 3px solid #156dd1;
-  background: #156dd1;
-}
 
 
 /* ADVANTAGES SECTION */
@@ -322,6 +312,12 @@ video {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+}
+.intro__cc-img{
+  max-width: 350px;
+  max-height: 234px;
+  object-fit: cover;
+  border-radius: 15px;
 }
 .intro__cc-text{
     max-width: 350px;
@@ -435,8 +431,8 @@ video {
     column-gap: 10px;
 }
 .ifooter__info-logo img{
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
 }
 .ifooter__info-nav{
     display: flex;
@@ -507,7 +503,7 @@ video {
   margin-top: 80px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 100px;
+  gap: 50px;
 }
 .metods__box {
   border: 2px solid white;

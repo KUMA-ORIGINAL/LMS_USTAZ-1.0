@@ -1,4 +1,4 @@
-import LogoImg from "../images/usta-school.png";
+import LogoImg from "../../../assets/images/ustaz.png";
 import InstagramIcon from "../images/instagram.png";
 import TelegramIcon from "../images/telegram.png";
 
@@ -9,12 +9,12 @@ const Footer = () => {
             <div className="ifooter__content-info">
                 <div className="ifooter__info-logo">
                     <img src={LogoImg} alt="" />
-                    <h3>USTAZ <br /> ACADEMY</h3>
+                    <h3>USTAZ <br /> SCHOOL</h3>
                 </div>
                 <p className="ifooter__info-text">Образование путь к <br /> возможностям!</p>
                 <nav className="ifooter__info-nav">
-                    <a href="#" className="ifooter__info-link"><img src={InstagramIcon} alt="" /></a>
-                    <a href="#" className="ifooter__info-link"><img src={TelegramIcon} alt="" /></a>
+                    <a href="https://www.instagram.com/ustaz.it/" className="ifooter__info-link"><img src={InstagramIcon} alt="" /></a>
+                    <a href="https://t.me/ma1abakiev" className="ifooter__info-link"><img src={TelegramIcon} alt="" /></a>
                 </nav>
             </div>
             <nav className="ifooter__content-nav">

@@ -1,6 +1,6 @@
 import './index.css'
 
-import ProfileAvatar from '../../../assets/images/mee.png'
+
 
 
 
@@ -8,7 +8,7 @@ const StudentProfile = () => {
   return (
         <section className="profile-user">
           <div className="profile__card">
-            <img src={ProfileAvatar} alt="" className="profile__card-img" />
+            <img src="https://i.pinimg.com/564x/48/6c/a0/486ca00640b169300b48e9ceacd8e401.jpg" alt="" className="profile__card-img" />
             <div className="profile__card-box">
             <h3 className="profile__card-title">Максат Каныбеков</h3>
               <p className="profile__card-email">
