@@ -1,6 +1,6 @@
 import './index.css'
 
-import ProfileAvatar from '../../../assets/images/profile-avatar.png'
+import ProfileAvatar from '../../../assets/images/mee.png'
 
 
 
@@ -28,7 +28,7 @@ const StudentProfile = () => {
                 <p className="pm__card-metric">150</p>
               </div>
               <div className="profile__metric-card">
-              <p className="pm__card-title">Всего курсов</p>
+              <p className="pm__card-title">Всего наград</p>
                 <p className="pm__card-metric">1</p>
               </div>
             </div>
@@ -61,7 +61,7 @@ const StudentProfile = () => {
                                     </tr>
                                     </tbody>
                                 </table>
-                        </div>
+            </div>
           </div>
         </section>
   )

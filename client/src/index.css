@@ -55,3 +55,9 @@ body{
   width: 100%;
 }
 
+
+.student-row:hover {
+  background-color: #1F2A40;
+  cursor: pointer;
+}
+

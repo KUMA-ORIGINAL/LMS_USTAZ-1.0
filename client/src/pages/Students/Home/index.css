@@ -1,0 +1,18 @@
+.student-home{
+    width: 100%;
+    padding-top: 20px;
+    padding-right: 40px;
+}
+.sh__welcome{
+    width: 60%;
+    height: 50px;
+    border-radius: 10px;
+    background: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-size: 18px;
+    box-shadow: 0 0 7px 3px grey;
+}

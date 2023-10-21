@@ -12,6 +12,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined';
 import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import ContentPasteOutlinedIcon from '@mui/icons-material/ContentPasteOutlined';
 import { ColorModeContext, tokens } from "../../../theme";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -106,7 +107,7 @@ const SideBar = () => {
             >
 
               <Typography>
-                {theme.palette.mode === "dark" ? "Dark" : "Light"}
+                {theme.palette.mode === "dark" ? "Темная" : "Светлая"}
               </Typography>
             </MenuItem>
             <Typography
@@ -114,11 +115,11 @@ const SideBar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              General
+            Основное
             </Typography>
 
             <Item
-              title="Home"
+              title="Главная"
               to="/student/home"
               icon={<HomeOutlinedIcon />}
               selected={selected}
@@ -130,17 +131,24 @@ const SideBar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Course
+              Обучение
             </Typography>
             <Item
-              title="Lecture"
+              title="Лекции"
               to="/student/course"
               icon={<LibraryBooksOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Rating"
+              title="Тестирование"
+              to="/student/course"
+              icon={<ContentPasteOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Рейтинг"
               to="/student/rating"
               icon={<GradeOutlinedIcon  />}
               selected={selected}
@@ -151,26 +159,19 @@ const SideBar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Profile
+              Личный кабинет
             </Typography>
             <Item
-              title="Profile"
+              title="Профиль"
               to="/student/profile"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Certificate"
+              title="Награды"
               to="/student"
               icon={<WorkspacePremiumOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Password"
-              to="/student"
-              icon={<ShieldOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
