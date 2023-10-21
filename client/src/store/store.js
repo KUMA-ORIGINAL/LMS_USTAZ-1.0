@@ -5,9 +5,9 @@ import { authApi } from './api/authApi'
 
 const store = configureStore({
   reducer: rootReducer,
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware().concat(authApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(authApi.middleware),
 })
-// setupListeners(store.dispatch)
+setupListeners(store.dispatch)
 
 export default store

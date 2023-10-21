@@ -5,18 +5,15 @@ import { useNavigate } from 'react-router-dom'
 import { setUser } from '../../store/reducers/auth/authReducer'
 import EyeImg from '../../assets/images/auth-eye.png'
 import EyeCloseImg from '../../assets/images/auth-eyeclose.png'
-import { toast } from 'react-toastify'
-import { useDispatch } from 'react-redux'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
-const initialState = {
-  email: '',
-  password: '',
-}
+import { useDispatch } from 'react-redux'
 
 const Authorization = () => {
   const dispatch = useDispatch()
-  const [formValue, setFormValue] = useState(initialState)
-  const { email, password } = formValue
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [loginUser, { data, isSuccess }] = useLoginUserMutation()
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
@@ -24,21 +21,26 @@ const Authorization = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
   }
-  const handleChange = (e) => {
-    setFormValue({ ...formValue, [e.target.value]: e.target.value })
-  }
+
   const handleLogin = async () => {
     if (email && password) {
-      await loginUser({ email, password })
+      const result = await loginUser({ email, password })
+      dispatch(setUser(result))
     } else {
       toast.error('Пожалуйста, заполните все поля')
     }
   }
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value)
+  }
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value)
+  }
+  // console.log(data, isSuccess)
   useEffect(() => {
     if (isSuccess) {
       toast.success('User Login Successfuly')
-      dispatch(setUser({ token: data.data.token, name: data.result.name }))
-      navigate('/student')
+      navigate('/student/profile')
     }
   }, [isSuccess])
 
@@ -54,7 +56,8 @@ const Authorization = () => {
               id="email-input"
               className="auth__form-email"
               placeholder="youremail@gmail.com"
-              onChange={handleChange}
+              onChange={handleEmailChange}
+              value={email}
             />
           </div>
           <div className="auth__form-box">
@@ -65,7 +68,8 @@ const Authorization = () => {
                 id="password-input"
                 className="auth__form-pass"
                 placeholder="Ваш пароль"
-                onChange={handleChange}
+                value={password}
+                onChange={handlePasswordChange}
               />
               <img
                 src={showPassword ? EyeImg : EyeCloseImg}
