@@ -1,7 +1,8 @@
 
-import Logo from "../../../assets/images/ustaz.png";
+import Logo from "../../../assets/images/ustaaaz.png";
 import "../index.css";
 import Video from "../../../assets/videos/intro-header23.mp4";
+import DownArrowImg from "../../../assets/images/down-arrow.png";
 import { useState, useEffect } from "react";
 import {Link} from "react-router-dom"
 const Header = () => {
@@ -116,6 +117,7 @@ const Header = () => {
     <div className="headerIntro">
       <h1> Ustaz<span>School</span></h1>
       <p className="headerItext">Твой путь в мир Айти!</p>
+      <img src={DownArrowImg} alt="" className="header__downarrow" />
     </div>
     </div>
     </header>

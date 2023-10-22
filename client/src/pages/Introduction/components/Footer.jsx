@@ -1,4 +1,4 @@
-import LogoImg from "../../../assets/images/ustaz.png";
+import LogoImg from "../../../assets/images/ustazzz.png";
 import InstagramIcon from "../images/instagram.png";
 import TelegramIcon from "../images/telegram.png";
 
