@@ -105,9 +105,9 @@ const Header = () => {
               </a>
             </li>
             <li>
-              <Link to="/auth" onClick={closeOnClick}>
-                Консультация
-              </Link>
+            <Link to="/auth" className="header__content-btn" >
+            Войти
+          </Link>
             </li>
           </ul>
         )}

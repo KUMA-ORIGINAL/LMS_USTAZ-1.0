@@ -13,8 +13,8 @@ const Footer = () => {
                 </div>
                 <p className="ifooter__info-text">Образование путь к <br /> возможностям!</p>
                 <nav className="ifooter__info-nav">
-                    <a href="https://www.instagram.com/ustaz.it/" className="ifooter__info-link"><img src={InstagramIcon} alt="" /></a>
-                    <a href="https://t.me/ma1abakiev" className="ifooter__info-link"><img src={TelegramIcon} alt="" /></a>
+                    <a target="blank" href="https://www.instagram.com/ustaz.it/" className="ifooter__info-link"><img src={InstagramIcon} alt="" /></a>
+                    <a target="blank" href="https://t.me/ma1abakiev" className="ifooter__info-link"><img src={TelegramIcon} alt="" /></a>
                 </nav>
             </div>
             <nav className="ifooter__content-nav">
