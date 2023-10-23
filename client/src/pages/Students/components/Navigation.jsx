@@ -114,7 +114,7 @@ const SideBar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-            Основное
+            Home  
             </Typography>
 
             <Item
@@ -130,7 +130,7 @@ const SideBar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Обучение
+              Course
             </Typography>
             <Item
               title="Лекции"
@@ -158,7 +158,7 @@ const SideBar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Личный кабинет
+              Profile
             </Typography>
             <Item
               title="Профиль"

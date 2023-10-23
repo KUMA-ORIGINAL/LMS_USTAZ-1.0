@@ -23,10 +23,10 @@ export const authSlice = createSlice({
   },
 })
 
-// export const selectAuth = (state) => state.auth
 export const { setUser } = authSlice.actions
 export default authSlice.reducer
 
+// export const selectAuth = (state) => state.auth
 // import { createSlice } from '@reduxjs/toolkit'
 
 // const authSlice = createSlice({
