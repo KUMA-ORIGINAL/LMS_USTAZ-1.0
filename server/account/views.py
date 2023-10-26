@@ -1,6 +1,7 @@
 from django.db.models import Window, F
 from django.db.models.functions import Rank
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 from .models import User, ProfileStudent
 from .permissions import IsAdminOrMentorPermission
@@ -10,7 +11,7 @@ from .serializers import UserSerializer, ProfileStudentSerializer
 class UserView(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAdminOrMentorPermission]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         queryset = User.objects.all()
