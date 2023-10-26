@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import User, RatingStudent
+from .models import User, ProfileStudent
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -25,7 +25,9 @@ class UserSerializer(serializers.ModelSerializer):
         return data
 
 
-class RatingStudentSerializer(serializers.ModelSerializer):
+class ProfileStudentSerializer(serializers.ModelSerializer):
+    rank = serializers.IntegerField()
+
     class Meta:
-        model = RatingStudent
-        fields = '__all__'
+        model = ProfileStudent
+        fields = ('id', 'points', 'updated', 'created', 'student', 'course', 'awards', 'rank')
