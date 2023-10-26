@@ -7,6 +7,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from phonenumber_field.modelfields import PhoneNumberField
 
 from course.models import Course
 
@@ -50,7 +51,7 @@ class User(AbstractUser):
     position = models.CharField(max_length=50, choices=POSITION_CHOICES, blank=True, null=True)
     birth_date = models.DateField(default=date.today)
     age = models.PositiveIntegerField(blank=True, null=True)
-    phone_number = models.CharField(max_length=10)
+    phone_number = PhoneNumberField()
     profile_picture = models.ImageField(upload_to='profile_pictures/%Y/%m/%d', blank=True, null=True)
 
     objects = CustomUserManager()
@@ -64,13 +65,13 @@ class User(AbstractUser):
     def save(self, *args, **kwargs):
         if self.password:
             self.password = make_password(self.password)
-            print("set_password")
 
         is_new = self._state.adding
+
         super(User, self).save(*args, **kwargs)
 
         if is_new and self.role == 'student':
-            RatingStudent.objects.create()
+            ProfileStudent.objects.create(student=self, course=None)
 
 
 def calculate_age(birth_date):
@@ -85,23 +86,22 @@ def update_age(sender, instance, **kwargs):
         instance.age = calculate_age(instance.birth_date)
 
 
-class RatingStudent(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'student'})
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+class Award(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+
+
+class ProfileStudent(models.Model):
+    student = models.OneToOneField(User, on_delete=models.CASCADE, limit_choices_to={'role': 'student'})
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True, )
     points = models.PositiveIntegerField(
+        default=0,
         validators=[
-            MinValueValidator(1, message="Баллы должны быть не меньше 1."),
+            MinValueValidator(0, message="Баллы должны быть не меньше 1."),
             MaxValueValidator(25, message="Баллы должны быть не больше 25."),
         ]
     )
+    awards = models.ManyToManyField(Award, blank=True)
     updated = models.DateTimeField(auto_now=True)
-
-
-# class Application(models.Model):
-#     pass
-
-# class UserProgress(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     courses_completed = models.PositiveIntegerField(default=0)
-#     total_courses = models.PositiveIntegerField(default=0)
-
+    created = models.DateTimeField(auto_now_add=True)

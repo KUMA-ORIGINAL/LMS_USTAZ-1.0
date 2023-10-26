@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 
@@ -44,4 +45,22 @@ class Content(models.Model):
                                on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     html_code = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+
+
+class Exam(models.Model):
+    ORDER_CHOICES = (
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3')
+    )
+    course = models.ManyToManyField(Course, related_name='exam_course')
+    order = models.CharField(max_length=1, choices=ORDER_CHOICES)
+    points = models.PositiveIntegerField(
+        default=0,
+        validators=[
+            MinValueValidator(1, message="Баллы должны быть не меньше 1."),
+            MaxValueValidator(100, message="Баллы должны быть не больше 100."),
+        ]
+    )
     created = models.DateTimeField(auto_now_add=True)
