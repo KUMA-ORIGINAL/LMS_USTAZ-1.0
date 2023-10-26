@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectAuth } from '../../../store/reducers/auth/authReducer';
+import { selectAuth } from '../../../store/slices/auth/authSlice';
 import Redirect from './Redirect';
 
 const PrivateRoute = ({ children }) => {
