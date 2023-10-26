@@ -1,34 +1,63 @@
-import { createSlice } from '@reduxjs/toolkit';
+// storeSlice.js
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  email: null,
-  accessToken: null,
+  user: null,
+  isAuth: false,
+  isLoading: false,
 };
 
-
-export const authSlice = createSlice({
-  name: 'auth',
+const storeSlice = createSlice({
+  name: "store",
   initialState,
   reducers: {
+    setAuth: (state, action) => {
+      state.isAuth = action.payload;
+    },
     setUser: (state, action) => {
-      localStorage.setItem(
-        'user',
-        JSON.stringify({
-          email: action.payload.email,
-          accestoken: action.payload.token,
-        })
-      );
-      state.email = action.payload.email;
-      state.accessToken = action.payload.accessToken;
+      state.user = action.payload;
+    },
+    setLoading: (state, action) => {
+      state.isLoading = action.payload;
     },
   },
 });
 
-// Define your selector to correctly access the auth state
-export const selectAuth = (state) => state.auth;
+export const { setAuth, setUser, setLoading } = storeSlice.actions;
+export default storeSlice.reducer;
 
-export const { setUser } = authSlice.actions;
-export default authSlice.reducer;
+
+// import { createSlice } from '@reduxjs/toolkit';
+
+// const initialState = {
+//   email: null,
+//   accessToken: null,
+// };
+
+
+// export const authSlice = createSlice({
+//   name: 'auth',
+//   initialState,
+//   reducers: {
+//     setUser: (state, action) => {
+//       localStorage.setItem(
+//         'user',
+//         JSON.stringify({
+//           email: action.payload.email,
+//           accestoken: action.payload.token,
+//         })
+//       );
+//       state.email = action.payload.email;
+//       state.accessToken = action.payload.accessToken;
+//     },
+//   },
+// });
+
+// // Define your selector to correctly access the auth state
+// export const selectAuth = (state) => state.auth;
+
+// export const { setUser } = authSlice.actions;
+// export default authSlice.reducer;
 
 // export const selectAuth = (state) => state.auth
 // import { createSlice } from '@reduxjs/toolkit'
