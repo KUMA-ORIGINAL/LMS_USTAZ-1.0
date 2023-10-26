@@ -139,7 +139,7 @@ export const themeSettings = (mode) => {
               light: colors.grey[100],
             },
             background: {
-              default: colors.primary[500],
+              default: colors.primary[600],
             },
           }
         : {
@@ -160,30 +160,30 @@ export const themeSettings = (mode) => {
           }),
     },
     typography: {
-        fontFamily: ["Poppins", "sans-serif"].join(","),
+        fontFamily: ["Montserrat", "sans-serif"].join(","),
         fontSize:12,
         h1:{
-            fontFamily: ["Poppins", "sans-serif"].join(","),
+            fontFamily: ["Montserrat", "sans-serif"].join(","),
             fontSize:40,
         },
         h2:{
-            fontFamily: ["Poppins", "sans-serif"].join(","),
+            fontFamily: ["Montserrat", "sans-serif"].join(","),
             fontSize:32,
         },
         h3:{
-            fontFamily: ["Poppins", "sans-serif"].join(","),
+            fontFamily: ["Montserrat", "sans-serif"].join(","),
             fontSize:24,
         },
         h4:{
-            fontFamily: ["Poppins", "sans-serif"].join(","),
+            fontFamily: ["Montserrat", "sans-serif"].join(","),
             fontSize:20,
         },
         h5:{
-            fontFamily: ["Poppins", "sans-serif"].join(","),
+            fontFamily: ["Montserrat", "sans-serif"].join(","),
             fontSize:16 ,
         },
         h6:{
-            fontFamily: ["Poppins", "sans-serif"].join(","),
+            fontFamily: ["Montserrat", "sans-serif"].join(","),
             fontSize:14,
         },
     }

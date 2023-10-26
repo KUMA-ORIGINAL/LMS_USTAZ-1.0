@@ -1,37 +1,60 @@
-import FrontImg from "../../../assets/images/courses-frontend.png";
-import BackImg from "../../../assets/images/courses-backend.png";
+import HTMLImg from "../images/html.png"
+
+import LogoImg from "../images/logo.png";
 
 const Courses = () => {
   return (
-    <secton id="courses">
-        <div className="container">
-            <div className="courses__content">
-                <h2 className="courses__content-title">Направления</h2>
-                <p className="courses__content-subtitle"></p>
-                <div className="courses__content-wrapper">
-                    <div className="courses__wrapper-card">
-                        <div className="course__card-info">
-                            <h4 className="course__card-title">Front-End</h4>
-                            <p className="course__card-text">
-                            Фронтенд разработка - это процесс создания пользовательского интерфейса веб-сайта или веб-приложения. Во фронтенд разработке используются такие технологит как HTML, CSS и JavaScript,
-                            </p>
-                            <button className="course__card-btn">Узнать больше</button>
-                        </div>
-                        <img src={FrontImg} alt="" className="course__card-img" />
-                    </div>
-                    <div className="courses__wrapper-card">
-                        <div className="course__card-info">
-                            <h4 className="course__card-title">Back-End</h4>
-                            <p className="course__card-text">
-                            Бэкенд-разработка - это процесс создания программной части веб-приложений и сервера, которая обрабатывает запросы от клиентов и управляет данными, обеспечивая их хранение, обновление и передачу между клиентами и базами данных. </p>
-                            <button className="course__card-btn">Узнать больше</button>
-                        </div>
-                        <img src={BackImg} alt="" className="course__card-img" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </secton>
+    <section id="courses" className="intro-courses">
+    <h2 className="intro__courses-title">Чему Вы хотите научиться?</h2>
+    <p className="intro__courses-subtitle">Выберите курс, который вам нужен. Потом наслаждайтесь учебой.</p>
+    <div className="intro__courses-wrapper">
+      <div className="intro__courses-card">
+          <img src={HTMLImg} alt="" className="intro__cc-img"/>
+          <p  className="intro__cc-suptitle">40 часов</p>
+          <h4  className="intro__cc-title">HTML ВЕРСТКА</h4>
+          <p  className="intro__cc-text">Хорошо организованные и простые для понимания учебные пособия с большим количе ...</p>
+          <div className="intro__courses-mentor">
+              <div className="intro__cmimg-wrapper">
+              <img src={LogoImg} alt="" className="intro__cm-img" />
+              </div>
+              <div className="intro__cm-info">
+                  <h5 className="intro__cm-name">Ramzan</h5>
+                  <p className="intro__cm-position">Mentor</p>
+              </div>
+          </div>
+      </div>
+      <div className="intro__courses-card">
+          <img src={HTMLImg} alt="" className="intro__cc-img"/>
+          <p  className="intro__cc-suptitle">180 часов</p>
+          <h4  className="intro__cc-title">FRONT-END</h4>
+          <p  className="intro__cc-text">Хорошо организованные и простые для понимания учебные пособия с большим количе ...</p>
+          <div className="intro__courses-mentor">
+              <div className="intro__cmimg-wrapper">
+              <img src={LogoImg} alt="" className="intro__cm-img" />
+              </div>
+              <div className="intro__cm-info">
+                  <h5 className="intro__cm-name">Maksat</h5>
+                  <p className="intro__cm-position">Mentor</p>
+              </div>
+          </div>
+      </div>
+      <div className="intro__courses-card">
+          <img src={HTMLImg} alt="" className="intro__cc-img"/>
+          <p  className="intro__cc-suptitle">180 часов</p>
+          <h4  className="intro__cc-title">BACK-END (PYTHON)</h4>
+          <p  className="intro__cc-text">Хорошо организованные и простые для понимания учебные пособия с большим количе ...</p>
+          <div className="intro__courses-mentor">
+              <div className="intro__cmimg-wrapper">
+              <img src={LogoImg} alt="" className="intro__cm-img" />
+              </div>
+              <div className="intro__cm-info">
+                  <h5 className="intro__cm-name">Kurmanbek</h5>
+                  <p className="intro__cm-position">Mentor</p>
+              </div>
+          </div>
+      </div>
+    </div>
+  </section>
   )
 }
 

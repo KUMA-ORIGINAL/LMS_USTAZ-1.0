@@ -1,11 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 
 import Introduction from "./Introduction";
-import Profile from "./Profile";
 import Authorization from "./Authorization";
 
-import Course from "./Course";
-import Rating from "./Rating";
+
 
 //import admin panel pages
 import Dashboard from "./Admin/Dashboard";
@@ -15,28 +13,41 @@ import ViewStudents from "./Admin/ViewStudents";
 import AdminLayout from "./Admin/Components/AdminLayout";
 import StatProfit from "./Admin/StatProfit";
 import StatExpenses from "./Admin/StatExpenses";
-import StatRoi from "./Admin/StatROI";
 import SalesFunnel from "./Admin/SalesFunnel";
+import ViewMail from "./Admin/ViewMail";
+
+
+import StudentHome from "./Students/Home";
+import StudentProfile from "./Students/Profile";
+import StudentCourse from "./Students/Course";
+import StudentRating from "./Students/Rating";
+import StudentPageLayout from "./Students/components/StudentPageLayout";
+import PrivateRoute from "./Students/components/PrivateRoute";
 
 
 const Routing = () => {
   return (
     <>
       <Routes>
+        
         <Route path="/" element={<Introduction />} />
         <Route path="/auth" element={<Authorization />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/course/lecture" element={<Course />} />
-        <Route path="/course/rating" element={<Rating />} />
 
+        <Route path="/student" element={<StudentPageLayout/>}>
+          <Route path="home" element={<StudentHome/>}/>
+          <Route path="profile" element={<StudentProfile/>}/>
+          <Route path="course" element={<StudentCourse/>}/>
+          <Route path="rating" element={<StudentRating/>}/>
+        </Route>
+        
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="view-mentors" element={<ViewMentors />} />
           <Route path="view-courses" element={<ViewCourses />} />
           <Route path="view-students" element={<ViewStudents />} />
+          <Route path="view-mail" element={<ViewMail />} />
           <Route path="stat-profit" element={<StatProfit/>}/>
           <Route path="stat-expenses" element={<StatExpenses/>}/>
-          <Route path="stat-roi" element={<StatRoi/>}/>
           <Route path="sales-funnel" element={<SalesFunnel/>}/>
         </Route>
         

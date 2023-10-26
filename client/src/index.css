@@ -4,14 +4,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif, serif;
+    font-family: "Montserrat", sans-serif, serif;
 }
 
 html {
   --main-color:#3F8CFF;
   --secondary-color:#599bff;
   --active-color:#0063f7;
+  scroll-behavior: smooth;
 }
+
+
 
 html, 
 body,
@@ -29,23 +32,14 @@ body{
   margin: 0 auto;
 }
 
-::-webkit-scrollbar{
-  width: 7px;
-}
 
-::-webkit-scrollbar-track{
-  background: white;
-}
 
-::-webkit-scrollbar-thumb{
-  background: var(--active-color);
-  border-radius: 10px;
+@media all and (max-width:480px) {
+  .container{
+    max-width: none;
+    padding: 0px 15px;
+  }
 }
-
-::-webkit-scrollbar-track:hover{
-  background: #555;
-}
-
 
 
 /* Admin pages main styles */
@@ -58,9 +52,12 @@ body{
 }
 
 .admin-panel{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 100px;
-  width: 70%;
+  width: 100%;
 }
+
+
+.student-row:hover {
+  background-color: #1F2A40;
+  cursor: pointer;
+}
+
