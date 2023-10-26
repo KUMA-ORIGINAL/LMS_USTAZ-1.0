@@ -1,9 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  name: null,
-  token: null,
-}
+  email: null,
+  accessToken: null,
+};
+
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -13,18 +14,21 @@ export const authSlice = createSlice({
       localStorage.setItem(
         'user',
         JSON.stringify({
-          name: action.payload.name,
-          token: action.payload.token,
+          email: action.payload.email,
+          accestoken: action.payload.token,
         })
-      )
-      state.name = action.payload.name
-      state.token = action.payload.token
+      );
+      state.email = action.payload.email;
+      state.accessToken = action.payload.accessToken;
     },
   },
-})
+});
 
-export const { setUser } = authSlice.actions
-export default authSlice.reducer
+// Define your selector to correctly access the auth state
+export const selectAuth = (state) => state.auth;
+
+export const { setUser } = authSlice.actions;
+export default authSlice.reducer;
 
 // export const selectAuth = (state) => state.auth
 // import { createSlice } from '@reduxjs/toolkit'

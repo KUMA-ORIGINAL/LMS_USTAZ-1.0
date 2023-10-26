@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { setUser } from '../../store/reducers/auth/authReducer'
 import EyeImg from '../../assets/images/auth-eye.png'
 import EyeCloseImg from '../../assets/images/auth-eyeclose.png'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import { useDispatch } from 'react-redux'
@@ -14,7 +14,7 @@ const Authorization = () => {
   const dispatch = useDispatch()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loginUser, { data, isSuccess, isError }] = useLoginUserMutation()
+  const [loginUser, { data:loginData, isSuccess, isError }] = useLoginUserMutation()
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
 
@@ -24,25 +24,30 @@ const Authorization = () => {
 
   const handleLogin = async () => {
     if (email && password) {
-      const result = await loginUser({ email, password })
-      dispatch(setUser(result))
+      await loginUser({ email, password })
     } else {
       toast.error('Пожалуйста, заполните все поля')
     }
   }
+
   const handleEmailChange = (event) => {
     setEmail(event.target.value)
   }
   const handlePasswordChange = (event) => {
     setPassword(event.target.value)
   }
-  // console.log(data, isSuccess)
   useEffect(() => {
     if (isSuccess) {
       toast.success('Авторизация прошла успешно!')
+      dispatch(setUser({
+        token: loginData.user.token,
+        email: loginData.user.email,
+      }))
       navigate('/student/profile')
     }
-  }, [isSuccess])
+    // Add loginData, dispatch, and navigate to the dependency array
+  }, [isSuccess, loginData, dispatch, navigate])
+  
 
   useEffect(() => {
     if(isError){

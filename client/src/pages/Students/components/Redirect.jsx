@@ -1,4 +1,3 @@
-import { current } from '@reduxjs/toolkit';
 import React, {useEffect, useState} from 'react'
 import {useNavigate} from "react-router-dom";
 
@@ -17,7 +16,7 @@ const Redirect = () => {
     return (
         <div >
             <div>
-                <p >Redirecting you in {count} sec</p>
+                <p>Redirecting you in {count} sec</p>
             </div>
         </div>
     )
