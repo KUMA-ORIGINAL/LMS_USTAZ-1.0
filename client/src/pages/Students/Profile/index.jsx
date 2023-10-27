@@ -1,51 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectAuth, setUser } from "../../../slices/authSlice";
+import { selectAuth } from "../../../slices/authSlice";
 import "./index.css";
-import { useGetProfileQuery } from "../../../http/auth.api";
-import { useEffect, useState } from "react";
-import axios from "axios"
+
 const StudentProfile = () => {
+  const storedUserData = JSON.parse(localStorage.getItem("user"));
+console.log(storedUserData);
   const auth = useSelector(selectAuth);
-  const dispatch = useDispatch();
-  const { access } = auth;
-  const [userData, setUserData] = useState(null);
-
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await axios.get("http://localhost:8000/api/account/", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access")}`,
-          },
-        });
-
-        if (response.status === 200) {
-          const userData = response.data;
-          localStorage.setItem("userData", JSON.stringify(userData));
-          setUserData(userData);
-        }
-      } catch (error) {
-        console.error("Ошибка при запросе данных пользователя:", error);
-      }
-    };
-
-    fetchUserProfile();
-    console.log(userData);
-  }, []);
-
-  
-  
   return (
     <section className="profile-user">
       <div className="profile__card">
         <img
-          src="https://i.pinimg.com/564x/48/6c/a0/486ca00640b169300b48e9ceacd8e401.jpg"
+          src={auth.photo || "https://i.pinimg.com/564x/48/6c/a0/486ca00640b169300b48e9ceacd8e401.jpg"}
           alt=""
           className="profile__card-img"
         />
         <div className="profile__card-box">
-          <h3 className="profile__card-title">maksatkanybekov2004</h3>
-          <p className="profile__card-email">{userData ? `Email: ${userData.email}` : 'Загрузка...'}</p>
+          <h3 className="profile__card-title">{auth.username || "Username"}</h3>
+          <p className="profile__card-email">{auth.email || "Email"}</p>
         </div>
         <button className="profile__card-logout">Выйти</button>
       </div>

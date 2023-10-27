@@ -1,5 +1,5 @@
 import EyeCloseImg from "../../assets/images/auth-eyeclose.png";
-import { useGetProfileQuery, useLoginUserMutation } from "../../http/auth.api";
+import { useLoginUserMutation } from "../../http/auth.api";
 import EyeImg from "../../assets/images/auth-eye.png";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,8 +13,6 @@ const Authorization = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const getProfileQuery = useGetProfileQuery();
   const dispatch = useDispatch();
 
   const [
@@ -35,23 +33,32 @@ const Authorization = () => {
     }
   };
   useEffect(() => {
-    console.log(loginData)
-    if(isLoginSuccess){
+    console.log(loginData);
+    if (isLoginSuccess) {
       toast.success("Вы успешно авторизовались!");
-      dispatch(setUser({access: loginData.access}));
-      localStorage.setItem("access", loginData.access);
-  
-      navigate("/student/profile");
+      const user = loginData.user ?? {}; // Use an empty object if user is undefined
+      dispatch(
+        setUser({
+          accessToken: loginData.tokens.access,
+          id: loginData.id,
+          name: loginData.first_name,
+          last_name: loginData.last_name,
+          photo: loginData.profile_picture,
+          role: loginData.role,
+          email: loginData.email
+        })
+      );
 
+      navigate("/student/profile");
     }
   }, [isLoginSuccess]);
+  
 
-  useEffect(() => {
-    if(isLoginError){
-      toast.error(loginError.data.message);
-    }
-  }, [isLoginError]);
-
+  if (isLoginError) {
+    console.error("Login Error:", loginError);
+    toast.error("Неправильный пароль или email!");
+  }
+  
   return (
     <div className="container">
       <div className="auth__content">

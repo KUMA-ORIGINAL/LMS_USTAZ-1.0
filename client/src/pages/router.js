@@ -22,6 +22,7 @@ import StudentProfile from "./Students/Profile";
 import StudentCourse from "./Students/Course";
 import StudentRating from "./Students/Rating";
 import StudentPageLayout from "./Students/components/StudentPageLayout";
+import PrivateRoute from "./Students/components/PrivateRoute";
 
 
 
@@ -33,7 +34,7 @@ const Routing = () => {
         <Route path="/" element={<Introduction />} />
         <Route path="/auth" element={<Authorization />} />
 
-        <Route path="/student" element={<StudentPageLayout/>}>
+        <Route path="/student" element={<PrivateRoute><StudentPageLayout/></PrivateRoute>}>
           <Route path="home" element={<StudentHome/>}/>
           <Route path="profile" element={<StudentProfile/>}/>
           <Route path="course" element={<StudentCourse/>}/>
