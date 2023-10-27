@@ -1,88 +1,18 @@
-import {makeAutoObservable} from "mobx";
-import AuthService from "../services/AuthService";
-import axios from 'axios';
-import {API_URL} from "../http";
+import {configureStore, combineReducers} from "@reduxjs/toolkit";
+import {authApi} from "../http/auth.api";
+import AuthReducer from "../slices/authSlice";
+import {setupListeners} from "@reduxjs/toolkit/query";
 
-export default class Store {
-    user = {};
-    isAuth = false;
-    isLoading = false;
 
-    constructor() {
-        makeAutoObservable(this);
-    }
+export const rootReducer =  combineReducers({
+    auth: AuthReducer,
+    [authApi.reducerPath]:authApi.reducer
+})
 
-    setAuth(bool) {
-        this.isAuth = bool;
-    }
+const store = configureStore({
+    reducer: rootReducer,
+    middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware)
+})
 
-    setUser(user) {
-        this.user = user;
-    }
-
-    setLoading(bool) {
-        this.isLoading = bool;
-    }
-
-    async login(email, password) {
-        try {
-            const response = await AuthService.login(email, password);
-            console.log(response);
-    
-            if (response && response.data && response.data.access) {
-                localStorage.setItem('token', response.data.access);
-                this.setAuth(true);
-                this.setUser(response.data.user);
-            } else {
-                console.error("Invalid response or missing data");
-            }
-        } catch (e) {
-            if (e.response && e.response.data && e.response.data.message) {
-                console.log(e.response.data.message);
-            } else if (e.message) {
-                console.error("Error occurred during login:", e.message);
-            } else {
-                console.error("Error occurred during login:", e);
-            }
-        }
-    }
-    
-
-    async registration(email, password) {
-        try {
-            const response = await AuthService.registration(email, password);
-            console.log(response)
-            localStorage.setItem('token', response.data.accessToken);
-            this.setAuth(true);
-            this.setUser(response.data.user);
-        } catch (e) {
-            console.log(e.response.data.message);
-        }
-    }
-
-    async logout() {
-        try {
-            const response = await AuthService.logout();
-            localStorage.removeItem('token');
-            this.setAuth(false);
-            this.setUser({});
-        } catch (e) {
-            console.log(e.response.data.message);
-        }
-    }
-
-    async checkAuth() {
-        this.setLoading(true);
-        try {
-            const response = await axios.get(`${API_URL}/refresh`, {withCredentials: true})
-            console.log(response);
-            localStorage.setItem('token', response.data.accessToken);
-            this.setAuth(true);
-            this.setUser(response.data.user);
-        } catch (e) {
-            console.log(e.response.data.message);
-        } finally {
-            this.setLoading(false);
-        }
-    }
-}
+export default store;
+setupListeners(store.dispatch);
