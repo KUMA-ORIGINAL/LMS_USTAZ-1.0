@@ -2,13 +2,12 @@ version: '3'
 
 services:
   server:
-    build: .
+    build:
+      context: .
     container_name: drf
     restart: always
-    command:
-      - bash
-      - -c
-      - "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: >
+      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/usta_server
     ports:
