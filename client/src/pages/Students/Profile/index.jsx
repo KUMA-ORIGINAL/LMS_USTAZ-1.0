@@ -1,21 +1,28 @@
 import './index.css'
-
-
-
-
+import { useContext, useEffect } from 'react';
+import {observer} from "mobx-react-lite";
+import { Context } from '../../../App';
 
 const StudentProfile = () => {
+  const {store} = useContext(Context);
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+        store.checkAuth()
+    }
+}, [])
+console.log(store.user);
+
   return (
         <section className="profile-user">
           <div className="profile__card">
             <img src="https://i.pinimg.com/564x/48/6c/a0/486ca00640b169300b48e9ceacd8e401.jpg" alt="" className="profile__card-img" />
             <div className="profile__card-box">
-            <h3 className="profile__card-title">Максат Каныбеков</h3>
+            <h3 className="profile__card-title">{store.isAuth ? `Пользователь авторизован ${store.user.email}` : 'АВТОРИЗУЙТЕСЬ'}</h3>
               <p className="profile__card-email">
                 maksatkanybekov2004@gmailcom
               </p>
             </div>
-            <button className="profile__card-logout">Выйти</button>
+            <button className="profile__card-logout" onClick={() => store.logout()}>Выйти</button>
           </div>
           <div className="profile-info">
             <div className="profile__info-metricks">
@@ -67,4 +74,4 @@ const StudentProfile = () => {
   )
 }
 
-export default StudentProfile
+export default observer(StudentProfile)
