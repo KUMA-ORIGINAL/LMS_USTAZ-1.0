@@ -1,6 +1,10 @@
 from rest_framework.permissions import BasePermission
 
 
-class IsAdminOrMentorPermission(BasePermission):
+class IsAdminOrMentorOrReadPermission(BasePermission):
     def has_permission(self, request, view):
-        return request.user.is_authenticated and (request.user.role == 'admin' or request.user.role == 'mentor')
+        if not request.user.is_authenticated:
+            return False
+        if request.user.role in ('admin', 'mentor'):
+            return True
+        return request.method == 'GET'
