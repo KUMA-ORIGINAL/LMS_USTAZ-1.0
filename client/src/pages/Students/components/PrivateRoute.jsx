@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectAuth } from '../../../store/slices/auth/authSlice';
+import { selectAuth } from '../../../slices/authSlice';
 import Redirect from './Redirect';
 
 const PrivateRoute = ({ children }) => {
- const {token} = useSelector(selectAuth)
+ const {id} = useSelector(selectAuth)
 
-  return token ? children : <Redirect />;
+  return id ? children : <Redirect />;
 };
 
 export default PrivateRoute;
