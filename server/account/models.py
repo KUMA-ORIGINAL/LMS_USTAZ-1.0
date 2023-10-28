@@ -98,10 +98,18 @@ class ProfileStudent(models.Model):
     points = models.PositiveIntegerField(
         default=0,
         validators=[
-            MinValueValidator(0, message="Баллы должны быть не меньше 1."),
+            MinValueValidator(0, message="Баллы должны быть не меньше 0."),
             MaxValueValidator(25, message="Баллы должны быть не больше 25."),
         ]
     )
     awards = models.ManyToManyField(Award, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+
+
+@receiver(pre_save, sender=ProfileStudent)
+def update_points(sender, instance, **kwargs):
+    if instance.pk is not None:
+        original_instance = sender.objects.get(pk=instance.pk)
+        if instance.points != original_instance.points:
+            instance.points = instance.points + original_instance.points
