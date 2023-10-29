@@ -47,12 +47,12 @@ class User(AbstractUser):
 
     username = None
     email = models.EmailField(unique=True)
+    phone_number = PhoneNumberField()
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
     position = models.CharField(max_length=50, choices=POSITION_CHOICES, blank=True, null=True)
     birth_date = models.DateField(default=date.today)
     age = models.PositiveIntegerField(blank=True, null=True)
-    phone_number = PhoneNumberField()
-    profile_picture = models.ImageField(upload_to='profile_pictures/%Y/%m/%d', blank=True, null=True)
+    profile_photo = models.ImageField(upload_to='profile_photo/', blank=True, null=True)
 
     objects = CustomUserManager()
 
@@ -60,7 +60,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return f'{self.email} | {self.first_name} | {self.last_name}'
+        return f'{self.first_name} | {self.last_name}'
 
     def save(self, *args, **kwargs):
         if self.password:
