@@ -1,0 +1,20 @@
+.profile-info {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.profile-info th,
+td {
+    width: 250px;
+    padding: 18px;
+    border: 1px solid #ddd;
+}
+
+.profile-info th {
+    color: #fff;
+    text-align: left;
+}
+
+.profile-info td {
+    text-align: left;
+}

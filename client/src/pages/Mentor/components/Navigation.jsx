@@ -8,11 +8,12 @@ import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined';
 import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
-import ContentPasteOutlinedIcon from '@mui/icons-material/ContentPasteOutlined';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import AddTaskOutlinedIcon from '@mui/icons-material/AddTaskOutlined';
 import { ColorModeContext, tokens } from "../../../theme";
+import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -114,13 +115,20 @@ const SideBar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-            Home  
+            General
             </Typography>
 
             <Item
               title="Главная"
-              to="/student/home"
+              to="/mentor/home"
               icon={<HomeOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Расписание"
+              to="/mentor/schedule"
+              icon={<CalendarMonthOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -134,22 +142,29 @@ const SideBar = () => {
             </Typography>
             <Item
               title="Лекции"
-              to="/student/course"
+              to="/mentor/lecture"
               icon={<LibraryBooksOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Тестирование"
-              to="/student/course"
-              icon={<ContentPasteOutlinedIcon />}
+              title="Посещения"
+              to="/mentor/visits"
+              icon={<AddTaskOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Рейтинг"
-              to="/student/rating"
+              title="Оценки"
+              to="/mentor/student-rating"
               icon={<GradeOutlinedIcon  />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Студенты"
+              to="/mentor/student-list"
+              icon={<PeopleAltOutlinedIcon  />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -162,15 +177,8 @@ const SideBar = () => {
             </Typography>
             <Item
               title="Профиль"
-              to="/student/profile"
+              to="/mentor/profile"
               icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Награды"
-              to="/student"
-              icon={<WorkspacePremiumOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

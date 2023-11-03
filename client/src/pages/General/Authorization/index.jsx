@@ -1,12 +1,12 @@
-import EyeCloseImg from "../../assets/images/auth-eyeclose.png";
-import { useLoginUserMutation } from "../../http/auth.api";
-import EyeImg from "../../assets/images/auth-eye.png";
+import EyeCloseImg from "../../../assets/images/auth-eyeclose.png";
+import { useLoginUserMutation } from "../../../http/auth.api";
+import EyeImg from "../../../assets/images/auth-eye.png";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {toast} from "react-toastify";
 import "./index.css";
-import {setUser} from "../../slices/authSlice"
+import {setUser} from "../../../slices/authSlice"
 
 const Authorization = () => {
   const navigate = useNavigate();

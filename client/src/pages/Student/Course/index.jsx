@@ -1,10 +1,13 @@
-
+import{useState, useEffect} from "react"
 import './index.css'
 
 const StudentCourse = () => {
+
   return (
     <>
-      <div className="container">Course</div>
+      <div className="container">
+        Lecture
+      </div>
     </>
   )
 }

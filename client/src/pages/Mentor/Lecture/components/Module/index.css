@@ -1,0 +1,28 @@
+.module{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.module-card{
+    margin-top: 50px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.module__info-btn{
+    display: flex;
+    align-items: center;
+
+    border: none;
+    border-radius: 7px;
+
+    padding: 15px 20px;
+    background: #1F2A40;
+    color: white;
+}
+.module__info-btn:active{
+    background: #182233;
+}

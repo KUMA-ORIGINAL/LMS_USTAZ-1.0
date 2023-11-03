@@ -1,10 +1,10 @@
 import React from 'react'
-import img1 from '../../../assets/images/metods/img11.png'
-import img2 from '../../../assets/images/metods/img22.png'
-import img3 from '../../../assets/images/metods/img33.png'
-import img4 from '../../../assets/images/metods/img44.png'
-import img5 from '../../../assets/images/metods/img55.png'
-import img6 from '../../../assets/images/metods/img66.png'
+import img1 from '../../../../assets/images/metods/img11.png'
+import img2 from '../../../../assets/images/metods/img22.png'
+import img3 from '../../../../assets/images/metods/img33.png'
+import img4 from '../../../../assets/images/metods/img44.png'
+import img5 from '../../../../assets/images/metods/img55.png'
+import img6 from '../../../../assets/images/metods/img66.png'
 
 const array = [
   {

@@ -2,13 +2,15 @@ import React from 'react'
 import SideBar from './Navigation'
 import { Outlet } from 'react-router-dom'
 
-const StudentPageLayout = () => {
+const MentorPageLayout = () => {
   return (
     <div className='admin-content'>
-        <SideBar/>
-        <Outlet/>
+        <SideBar />
+      <div className="content">
+        <Outlet />
+      </div>
     </div>
   )
 }
 
-export default StudentPageLayout
+export default MentorPageLayout

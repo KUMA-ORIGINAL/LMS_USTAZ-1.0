@@ -1,0 +1,54 @@
+/* Calendar structure */
+
+  h2{
+    margin-left: 50px;
+    margin-bottom: 20px;
+  }
+  .days-of-week {
+    max-width: 1000px;
+    background: white;
+    margin-left: 50px;
+    margin-bottom: 5px;
+    color: #000;
+    border: 1px solid black;
+
+    
+    display: grid;
+      grid-template-columns: repeat(7, 1fr); 
+}
+.calendar-dates{
+    max-width: 1000px;
+    margin-left: 50px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr); /* Days of the week layout */
+
+  }
+  .day {
+    border: 1px solid #ddd;
+    padding: 5px;
+  }
+  
+  .bold {
+    font-weight: bold;
+  }
+  .lesson {
+    background-color: #abb9c8;
+    color: #000000;
+    padding: 5px;
+    margin: 1px;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: bolder;
+}
+
+.lesson-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    border-bottom: 1px solid rgb(0, 0, 0);
+  }
+  
+  /* Customize your styling further as needed */
+  

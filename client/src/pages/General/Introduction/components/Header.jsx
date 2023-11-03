@@ -1,10 +1,10 @@
-
-import Logo from "../../../assets/images/ustaaaz.png";
+import Logo from "../../../../assets/images/ustaaaz.png";
 import "../index.css";
-import Video from "../../../assets/videos/intro-header23.mp4";
-import DownArrowImg from "../../../assets/images/down-arrow.png";
+import Video from "../../../../assets/videos/intro-header23.mp4";
+import DownArrowImg from "../../../../assets/images/down-arrow.png";
 import { useState, useEffect } from "react";
 import {Link} from "react-router-dom"
+
 const Header = () => {
   const [isScrolled, setScrolled] = useState(false);
   const [isPopupOpen, setPopupOpen] = useState(false);
