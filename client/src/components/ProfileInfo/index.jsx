@@ -1,24 +1,27 @@
 import React from 'react'
 import "./index.css";
 
+
 const ProfileInfo = () => {
+  const storedUserData = JSON.parse(localStorage.getItem("user"));
+  console.log(storedUserData);
   return (
     <table className='profile-info'>
     <tr>
       <th>Фамилия</th>
-      <td>Петров</td>
+      <td>{storedUserData.last_name}</td>
     </tr>
     <tr>
       <th>Имя</th>
-      <td>Иван</td>
+      <td>{storedUserData.first_name}</td>
     </tr>
     <tr>
       <th>Должность</th>
-      <td>Front-End Разработчик</td>
+      <td>{storedUserData.position.toUpperCase()} Разработчик</td>
     </tr>
     <tr>
       <th>Год рождения</th>
-      <td>1985</td>
+      <td>{storedUserData.birth_date}</td>
     </tr>
     <tr>
       <th>Telegram ник</th>
@@ -26,7 +29,7 @@ const ProfileInfo = () => {
     </tr>
     <tr>
       <th>Номер телефона</th>
-      <td>+7 (123) 456-7890</td>
+      <td>{storedUserData.phone_number}</td>
     </tr>
 </table>
   )

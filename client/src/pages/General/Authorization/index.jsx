@@ -42,16 +42,25 @@ const Authorization = () => {
           accessToken: loginData.tokens.access,
           id: loginData.id,
           name: loginData.first_name,
+          first_name: loginData.first_name,
           last_name: loginData.last_name,
-          photo: loginData.profile_picture,
+          position:loginData.position,
+          phone_number:loginData.phone_number,
+          birth_date:loginData.birth_date,
+          profile_photo: loginData.profile_photo,
           role: loginData.role,
-          email: loginData.email
+          email: loginData.email,
+          tokens:loginData.tokens,
         })
       );
-
-      navigate("/student/profile");
+      if(loginData.role === "mentor"){
+        navigate("/mentor/profile")
+      }else if(loginData.role === "student"){
+        navigate("/student/profile")
+      }
     }
   }, [isLoginSuccess]);
+  
   
 
   if (isLoginError) {

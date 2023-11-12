@@ -10,7 +10,9 @@ import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
-import TrendingUpOutlinedIcon from '@mui/icons-material/TrendingUpOutlined';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
+import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
 import { ColorModeContext, tokens } from "../../../theme";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -113,7 +115,7 @@ const SideBar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-            General
+            Студент
             </Typography>
 
             <Item
@@ -123,14 +125,28 @@ const SideBar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+            <Item
+              title="Профиль"
+              to="/student/profile"
+              icon={<PersonOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
 
             <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Course
+              Курсы
             </Typography>
+            <Item
+              title="Расписание"
+              to="/student/schedule"
+              icon={<CalendarMonthOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Item
               title="Лекции"
               to="/student/course"
@@ -145,24 +161,17 @@ const SideBar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+              <Item
+                title="Проекты"
+                to="/student/score"
+                icon={<AssignmentTurnedInOutlinedIcon  />}
+                selected={selected}
+                setSelected={setSelected}
+              />
             <Item
-              title="Рейтинг"
-              to="/student/rating"
-              icon={<TrendingUpOutlinedIcon  />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Profile
-            </Typography>
-            <Item
-              title="Профиль"
-              to="/student/profile"
-              icon={<PersonOutlinedIcon />}
+              title="Книги"
+              to="/student/score"
+              icon={<BookOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

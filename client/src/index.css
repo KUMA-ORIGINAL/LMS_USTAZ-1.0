@@ -31,9 +31,9 @@ body{
   max-width: 1200px;
   margin: 0 auto;
 }
-.rbc-off-range-bg {
+/* .rbc-off-range-bg {
   background: #444444 !important  ;
-}
+} */
 
 
 @media all and (max-width:480px) {
@@ -43,8 +43,6 @@ body{
   }
 }
 
-
-/* Admin pages main styles */
 .admin-content {
   display: flex;
   min-height: 100vh;
@@ -53,15 +51,15 @@ body{
 }
 
 .content {
+  padding: 20px;
   flex: 1;
-  overflow-y: auto; /* Разрешить скроллинг внутри Outlet, если содержимое слишком длинное */
+  overflow-y: auto; 
 }
 
-/* Добавьте следующие стили для SideBar */
 .sidebar {
-  width: 250px; /* Установите фиксированную ширину для SideBar */
-  max-height: 100%; /* Установите максимальную высоту для SideBar */
-  overflow-y: auto; /* Разрешить скроллинг внутри SideBar, если содержимое слишком длинное */
+  width: 250px; 
+  max-height: 100%; 
+  overflow-y: auto; 
 }
 
 .student-row:hover {
@@ -70,6 +68,6 @@ body{
 }
 
 #text-editor {
-  max-height: 250px; /* Максимальная высота */
-  overflow-y: auto; /* Разрешить скроллинг, если содержимое слишком длинное */
+  max-height: 250px;
+  overflow-y: auto; 
 }

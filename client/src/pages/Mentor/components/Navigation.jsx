@@ -57,7 +57,7 @@ const SideBar = () => {
           color: "grey !important",
         },
         "& .pro-menu-item.active": {
-          color: "#0063f7 !important",
+          color: "greyx !important",
         },
       }}
     >
@@ -115,7 +115,7 @@ const SideBar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-            General
+            Ментор
             </Typography>
 
             <Item
@@ -126,20 +126,26 @@ const SideBar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Расписание"
-              to="/mentor/schedule"
-              icon={<CalendarMonthOutlinedIcon />}
+              title="Профиль"
+              to="/mentor/profile"
+              icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-
             <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Course
+              Курс
             </Typography>
+            <Item
+              title="Занятия"
+              to="/mentor/schedule"
+              icon={<CalendarMonthOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Item
               title="Лекции"
               to="/mentor/lecture"
@@ -165,20 +171,6 @@ const SideBar = () => {
               title="Студенты"
               to="/mentor/student-list"
               icon={<PeopleAltOutlinedIcon  />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Profile
-            </Typography>
-            <Item
-              title="Профиль"
-              to="/mentor/profile"
-              icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

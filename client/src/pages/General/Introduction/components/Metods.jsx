@@ -43,6 +43,7 @@ const Metods = () => {
   return (
     <section id='methods' className="metods">
       <div className="container">
+        <div className="metods__box">
         <h2 className="metods__title">Методика Обучения</h2>
         <p className="metods__subtitle">
           Мы разработали уникальную методику обучения
@@ -57,6 +58,7 @@ const Metods = () => {
               </div>
             )
           })}
+        </div>
         </div>
       </div>
     </section>

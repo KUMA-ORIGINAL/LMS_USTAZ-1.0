@@ -21,6 +21,7 @@
     margin-left: 50px;
       display: grid;
       grid-template-columns: repeat(7, 1fr); /* Days of the week layout */
+    margin-bottom: 50px;
 
   }
   .day {
@@ -32,12 +33,11 @@
     font-weight: bold;
   }
   .lesson {
-    background-color: #abb9c8;
-    color: #000000;
-    padding: 5px;
+    padding:5px 8px;
     margin: 1px;
     border-radius: 3px;
-    font-size: 13px;
+    font-size: 12px;
+    background: #8d8d8d;
     font-weight: bolder;
 }
 
@@ -45,9 +45,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    border-bottom: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid;
+  }
+  .lesson-dropdown{
+    cursor: pointer;
   }
   
   /* Customize your styling further as needed */
