@@ -1,4 +1,4 @@
-import EyeCloseImg from "../../../assets/images/auth-eyeclose.png";
+ import EyeCloseImg from "../../../assets/images/auth-eyeclose.png";
 import { useLoginUserMutation } from "../../../http/auth.api";
 import EyeImg from "../../../assets/images/auth-eye.png";
 import React, { useState, useEffect } from "react";

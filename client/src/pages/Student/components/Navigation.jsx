@@ -163,14 +163,14 @@ const SideBar = () => {
             />
               <Item
                 title="Проекты"
-                to="/student/score"
+                to="/student/projects"
                 icon={<AssignmentTurnedInOutlinedIcon  />}
                 selected={selected}
                 setSelected={setSelected}
               />
             <Item
               title="Книги"
-              to="/student/score"
+              to="/student/books"
               icon={<BookOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

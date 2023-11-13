@@ -32,8 +32,8 @@ import StudentRating from "./Student/Rating";
 import StudentScores from "./Student/Scores";
 import StudentPageLayout from "./Student/components/StudentPageLayout";
 import PrivateRoute from "./Student/components/PrivateRoute";
-
-
+import StudentProject from "./Student/Projects";
+import StudentBooks from "./Student/Book";
 
 
 
@@ -72,6 +72,8 @@ const Routing = () => {
           <Route path="course" element={<StudentCourse/>}/>
           <Route path="rating" element={<StudentRating/>}/>
           <Route path="score" element={<StudentScores/>}/>
+          <Route path="projects" element={<StudentProject/>}/>
+          <Route path="books" element={<StudentBooks/>}/>
         </Route>
 
       </Routes>

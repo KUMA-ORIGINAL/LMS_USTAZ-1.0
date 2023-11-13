@@ -1,0 +1,27 @@
+.module-content{
+    width: 100%;
+}
+.moduls{
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.module__info-btn:hover{
+    cursor: pointer;
+}
+.MuiAccordion-root {
+    transition: height 0.3s ease;
+  }
+  
+  /* Уберите бордюр для всех аккордеонных панелей */
+  .MuiAccordionSummary-content.Mui-expanded {
+    border: none;
+  }
+  
+  /* Установите высоту для аккордеонных панелей с контентом */
+  .MuiAccordionDetails {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }

@@ -3,7 +3,7 @@ import Module from './components/Module/index';
 import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
 import "./index.css";
 
-const Lecture = () => {
+const StudentCourse = () => {
   return (
     <div className='mentor-container'>
       <h2 className='mc__title'>Учебный план курса</h2>
@@ -19,4 +19,4 @@ const Lecture = () => {
   )
 }
 
-export default Lecture
+export default StudentCourse

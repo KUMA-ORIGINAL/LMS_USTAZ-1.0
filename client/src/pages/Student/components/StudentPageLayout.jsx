@@ -6,7 +6,7 @@ const StudentPageLayout = () => {
   return (
     <div className='admin-content'>
         <SideBar/>
-        <div className="admin-panel">
+        <div className="content">
         <Outlet/>
         </div>
     </div>

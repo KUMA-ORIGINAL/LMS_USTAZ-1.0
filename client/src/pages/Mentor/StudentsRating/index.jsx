@@ -19,11 +19,9 @@ const MentorStudentsRating = () => {
     ],
   };
 
-  //states for save data
   const [data, setData] = useState(initialData);
 
 
-  //function for change score
   const handleScoreChange = (studentId, lessonIndex, newScore) => {
     const newData = { ...data };
     newData.students = data.students.map((student) => {
