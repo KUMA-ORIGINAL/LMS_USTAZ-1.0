@@ -13,7 +13,15 @@ const Lesson = ({ type, title }) => {
         {title}
       </Typography>
       <button className="lesson__card-btn">
-        {type === 'student' ? <RemoveRedEyeOutlinedIcon /> : <EditIcon />}
+        {type === 'student' ? (
+          <Link to={'lesson'}>
+            <RemoveRedEyeOutlinedIcon />
+          </Link>
+        ) : (
+          <Link to={'lesson'}>
+            <EditIcon />
+          </Link>
+        )}
       </button>
     </Paper>
   )
