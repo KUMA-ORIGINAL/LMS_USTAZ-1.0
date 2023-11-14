@@ -17,9 +17,6 @@ const ScoreTable = ({ data, onScoreChange }) => {
     setHighlightedHeader(null);
   }
 
-  const handleStudentHover = (studentId) => {
-    setHighlightedHeader(studentId);
-  };
 
   const [page, setPage] = useState(1);
 
@@ -66,7 +63,6 @@ const ScoreTable = ({ data, onScoreChange }) => {
           {data.students.map((student, studentIndex) => (
             <tr key={studentIndex}>
               <td 
-              onMouseEnter={() => handleStudentHover(student.id)}
               className={highlightedHeader === student.id ? 'highlighted' : ''}>
                 {student.name}</td>
               {student.scores.slice(startIndex, endIndex).map((score, lessonIndex) => (

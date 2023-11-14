@@ -6,25 +6,11 @@ import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUpload
 const StudentProjects = () => {
     const projectData = [
         {
-            title: "Разработка онлайн-магазина",
-            category: "Проект",
-            date: "18 Октября, 2023"
-        },
-        {
             title: "React: Новые возможности.",
             category: "Самостоятельная работа",
-            date: "3 Ноября, 2023"
-        },
-        {
-            title: "Разработка CRM-платформы",
-            category: "Курсовая работа",
-            date: "01 Сентября, 2023"
-        },
-        {
-            title: "Создание лендинг страницы",
-            category: "Практическая работа",
-            date: "10 Октября, 2023"
-        },
+            date: "3 Ноября, 2023", 
+            student:"Каныбеков Максат"
+        }
     ];
   return (
     <div>

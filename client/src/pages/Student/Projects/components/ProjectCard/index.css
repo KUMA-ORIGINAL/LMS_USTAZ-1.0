@@ -54,3 +54,9 @@
     font-size: 14px;
     font-weight: bold;
 }
+.project__card-footer{
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    margin-top: 10px;
+}

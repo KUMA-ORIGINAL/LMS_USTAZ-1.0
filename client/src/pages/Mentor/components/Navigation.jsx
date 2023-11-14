@@ -14,7 +14,7 @@ import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined
 import AddTaskOutlinedIcon from '@mui/icons-material/AddTaskOutlined';
 import { ColorModeContext, tokens } from "../../../theme";
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
-
+import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -171,6 +171,13 @@ const SideBar = () => {
               title="Студенты"
               to="/mentor/student-list"
               icon={<PeopleAltOutlinedIcon  />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Проекты"
+              to="/mentor/student-projects"
+              icon={<AssignmentTurnedInOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
