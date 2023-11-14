@@ -6,40 +6,41 @@ const MentorVisits = () => {
     dates: ['01.01', '01.02', '01.03', '01.04', '01.05', '01.06', "01.07"],
     students: [
       {
-        name: 'Асанов Курманбек',
+        name: 'Иванов Иван',
         visits: ['check', 'check', 'check', 'cancel', 'check', 'cancel', "check"],
       },
       {
-        name: 'Каныбеков Максат',
+        name: 'Петров Петр',
         visits: ['check', 'cancel', 'check', 'check', 'cancel', 'check', "cancel"],
       },
       {
-        name: 'Малабакиев Рамзан',
+        name: 'Сидоров Алексей',
         visits: ['check', 'cancel', 'check', 'check', 'cancel', 'check', "cancel"],
       },
       {
-        name: 'Раймжанов Байтур',
+        name: 'Козлов Николай',
         visits: ['check', 'cancel', 'check', 'check', 'cancel', 'check', "cancel"],
       },
       {
-        name: 'Мамбеткулов Ормон',
+        name: 'Морозов Николай',
         visits: ['check', 'cancel', 'check', 'check', 'cancel', 'check', "cancel"],
       },
       {
-        name: 'Максатбек у Марсель',
+        name: 'Васильев Дмитрий',
         visits: ['check', 'cancel', 'check', 'check', 'cancel', 'check', "cancel"],
       },      {
-        name: 'Канатбеков Саламат',
+        name: 'Павлов Андрей',
         visits: ['check', 'cancel', 'check', 'check', 'cancel', 'check', "cancel"],
       },
       {
-        name: 'Конурбаев Амир',
+        name: 'Федоров Артем',
         visits: ['check', 'check', 'check', 'check', 'cancel', 'check', "cancel"],
       },
     ],
   };
   return (
     <div className='content'>
+      <h2 style={{marginBottom:"20px"}}>Посещения студентов</h2>
      <Attendens data={dataFromBackend}/>
     </div>
 

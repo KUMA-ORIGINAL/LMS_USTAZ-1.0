@@ -10,16 +10,15 @@ const StudentHome = () => {
       </div>
       <div className="sh__content">
         <div className="sh__courses">
-          <h2>Мои курсы</h2>
+          <h2 style={{margin:"30px 0px"}}>Мои курсы</h2>
           <div className="sh__courses-card">
-            <CourseCard></CourseCard>
-            
+            <CourseCard/>
           </div>
         </div>
         <div className="sh__tasks">
-          <h2>Новости</h2>
+          <h2 style={{margin:"30px 0px"}}>Новости</h2>
           <div className="sh__news">
-            <NewsList></NewsList>
+            <NewsList/>
           </div>
         </div>
       </div>

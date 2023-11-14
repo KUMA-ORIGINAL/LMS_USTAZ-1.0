@@ -25,8 +25,7 @@ const CardContainer = styled.div`
   border: 1px solid #e1e1e1;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 10px;
-  max-width: 300px;
+  width: 310px;
 `;
 
 const CardImage = styled.img`
@@ -42,12 +41,12 @@ const CardContent = styled.div`
 `;
 
 const CardTitle = styled.h2`
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin: 0;
 `;
 
 const CardDescription = styled.p`
-  font-size: 1rem;
+  font-size: 0.7rem;
   margin: 10px 0;
 `;
 
