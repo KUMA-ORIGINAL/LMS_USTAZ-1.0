@@ -8,7 +8,7 @@ const ProfileCard = () => {
     console.log(storedUserData, "ld");
   return (
     <div className="profile-card">
-      <div className='profile__card-role'>Mentor</div>
+      <div className='profile__card-role'>{storedUserData.role.toUpperCase()}</div>
       <img src={`http://localhost:8000/${storedUserData.profile_photo}` || "https://i.pinimg.com/564x/48/6c/a0/486ca00640b169300b48e9ceacd8e401.jpg"} className="profile__card-img" />
       <div className='profile__card-wrapper'>
         <h3 className="profile__card-title">{storedUserData.last_name} {storedUserData.first_name}</h3>

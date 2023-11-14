@@ -5,15 +5,14 @@ import Typography from '@mui/material/Typography';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 
 import "./index.css"
-const Lesson = ({type}) => {
+const Lesson = ({type, title}) => {
   return (
     <Paper elevation={3} className="lesson-card" >
         <Typography variant="h6" component="div">
-          Основные теги в HTML
+          {title}
         </Typography>
         <button className='lesson__card-btn' >
           {type === "student" ?  <RemoveRedEyeOutlinedIcon/> : <EditIcon/>}
-       
         </button>
     </Paper>
   )

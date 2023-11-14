@@ -7,6 +7,20 @@ import EastIcon from '@mui/icons-material/East';
 
 const ScoreTable = ({ data, onScoreChange }) => {
   const [editableCell, setEditableCell] = useState(null);
+  const [highlightedHeader, setHighlightedHeader] = useState(null);
+
+  const handleTdHover = (header) => {
+    setHighlightedHeader(header);
+  }
+
+  const handleTdMouseLeave = () => {
+    setHighlightedHeader(null);
+  }
+
+  const handleStudentHover = (studentId) => {
+    setHighlightedHeader(studentId);
+  };
+
   const [page, setPage] = useState(1);
 
   const itemsPerPage = 7;
@@ -51,9 +65,12 @@ const ScoreTable = ({ data, onScoreChange }) => {
         <tbody>
           {data.students.map((student, studentIndex) => (
             <tr key={studentIndex}>
-              <td>{student.name}</td>
+              <td 
+              onMouseEnter={() => handleStudentHover(student.id)}
+              className={highlightedHeader === student.id ? 'highlighted' : ''}>
+                {student.name}</td>
               {student.scores.slice(startIndex, endIndex).map((score, lessonIndex) => (
-                <td key={lessonIndex} onClick={() => handleEditCell(student.id, lessonIndex + startIndex)} style={{ cursor: 'pointer' }}>
+                <td onMouseEnter={() => handleTdHover(student.id)} onMouseLeave={handleTdMouseLeave} key={lessonIndex} onClick={() => handleEditCell(student.id, lessonIndex + startIndex)} style={{ cursor: 'pointer' }}>
                   {isCellEditable(student.id, lessonIndex + startIndex) ? (
                     <div>
                       <input type="number" value={score} onChange={(e) => onScoreChange(student.id, lessonIndex + startIndex, e.target.value)} />
@@ -92,15 +109,22 @@ table {
   border-collapse: collapse;
   width:100%;
 }
+.highlighted {
+  background: #5d5d5d;
+}
 
 th, td {
   border: 1px solid;
   padding: 10px;
   width:auto;
+ 
 }
 
 td:first-child {
   max-width:350px;
+}
+td:not(:first-child){
+  text-align:center;
 }
 
 button{
@@ -109,5 +133,8 @@ button{
   border:none;
   border-radius:2px;
   color:auto;
+}
+td:hover{
+  background:#5d5d5d;
 }
 `

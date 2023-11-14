@@ -1,4 +1,4 @@
-/* .profile-info {
+.profile-info {
     width: 100%;
     border-collapse: collapse;
 }
@@ -13,8 +13,28 @@ td {
 .profile-info th {
     color: #fff;
     text-align: left;
+    width: 90px;
 }
 
 .profile-info td {
     text-align: left;
-} */
+}
+.profile-info td:hover{
+    cursor: pointer;
+}
+.profile-info td:hover + th,
+.profile-info td:hover ~ th {
+    background: #ddd;
+}
+
+.profile-info .highlighted {
+    background: #5d5d5d;
+  }
+  
+  .profile-info th:hover {
+    cursor: pointer;
+  }
+  
+  .profile-info td:hover {
+    cursor: pointer;
+  }
