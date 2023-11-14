@@ -70,6 +70,9 @@ const Attendens = ({data}) => {
         <button onClick={showPreviousSet}><WestIcon/></button>
         <button onClick={showNextSet}><EastIcon/></button>
       </div>
+      <div>
+        <span>Дни {visibleIndex} из {numberOfItemsToShow}</span>
+      </div>
     </StyledTable>
   )
 }

@@ -53,6 +53,7 @@ const ScoreTable = ({ data, onScoreChange }) => {
       <table>
         <thead>
           <tr>
+            <th>№</th>
             <th>ФИО</th>
             {data.lessons.slice(startIndex, endIndex).map((lesson, lessonIndex) => (
               <th key={lessonIndex} style={{ width: '10%' }}>{lesson}</th>
@@ -62,6 +63,7 @@ const ScoreTable = ({ data, onScoreChange }) => {
         <tbody>
           {data.students.map((student, studentIndex) => (
             <tr key={studentIndex}>
+              <td>{studentIndex+1}</td>
               <td 
               className={highlightedHeader === student.id ? 'highlighted' : ''}>
                 {student.name}</td>
@@ -100,37 +102,29 @@ export default ScoreTable;
 //styles
 
 const StyledTable = styled.div`
-
-table {
-  border-collapse: collapse;
+table{
+  border-collapse:collapse;
   width:100%;
 }
 .highlighted {
   background: #5d5d5d;
 }
-
-th, td {
-  border: 1px solid;
-  padding: 10px;
-  width:auto;
- 
+td:hover{
+  background: #5d5d5d;
 }
-
-td:first-child {
-  max-width:350px;
+th, td{
+  border:1px solid;
+  padding:10px;
+  width:auto
 }
-td:not(:first-child){
-  text-align:center;
+td:first-child{
+  max-width:300px
 }
-
 button{
   margin:15px 15px 15px 0px;
   padding:6px 25px;
   border:none;
   border-radius:2px;
   color:auto;
-}
-td:hover{
-  background:#5d5d5d;
 }
 `
