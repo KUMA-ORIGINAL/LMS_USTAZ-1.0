@@ -25,7 +25,7 @@ const ProfileInfo = () => {
       </tr>
       <tr>
         <th className={highlightedHeader === 'position' ? 'highlighted' : ''}>Должность</th>
-        <td onMouseEnter={() => handleTdHover('position')} onMouseLeave={handleTdMouseLeave}>{storedUserData.position.toUpperCase()} Разработчик</td>
+        <td onMouseEnter={() => handleTdHover('position')} onMouseLeave={handleTdMouseLeave}>{storedUserData.position} Разработчик</td>
       </tr>
       <tr>
         <th className={highlightedHeader === 'birth_date' ? 'highlighted' : ''}>Год рождения</th>
