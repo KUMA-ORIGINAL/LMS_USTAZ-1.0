@@ -1,10 +1,10 @@
 import "./index.css";
 
-const Modal = ({active, setActive, content}) => {
+const Modal = ({active, setActive, children}) => {
   return (
     <div className={active ? "modal active" : "modal"} onClick={() =>setActive(false)}>
         <div className={active ? "modal__content active" : "modal__content"} onClick={e => e.stopPropagation()}>
-            {content}
+            {children}
         </div>
     </div>
   )

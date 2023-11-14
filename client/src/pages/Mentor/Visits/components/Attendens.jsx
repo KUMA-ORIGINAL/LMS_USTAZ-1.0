@@ -11,6 +11,15 @@ import EastIcon from '@mui/icons-material/East';
 
 const Attendens = ({data}) => {
     const [visibleIndex, setVisibleIndex] = useState(0);
+    const [highlightedHeader, setHighlightedHeader] = useState(null);
+
+    const handleTdHover = (header) => {
+      setHighlightedHeader(header);
+    }
+  
+    const handleTdMouseLeave = () => {
+      setHighlightedHeader(null);
+    }  
 
     const numberOfItemsToShow = 6;
   
@@ -42,9 +51,10 @@ const Attendens = ({data}) => {
           {data.students.map((student, studentIndex) => (
             <tr key={studentIndex}>
               <td>{studentIndex + 1}</td>
-              <td>{student.name}</td>
+              <td 
+              className={highlightedHeader === student.name ? 'highlighted' : ''}>{student.name}</td>
               {student.visits.slice(visibleIndex, visibleIndex + numberOfItemsToShow).map((visitStatus, visitIndex) => (
-                <td key={visitIndex}>
+                <td onMouseEnter={() => handleTdHover(student.name)} onMouseLeave={handleTdMouseLeave}  key={visitIndex}>
                   {visitStatus === 'check' ? (
                     <CheckIcon />
                   ) : (
@@ -70,6 +80,12 @@ const StyledTable = styled.div`
 table{
   border-collapse:collapse;
   width:100%;
+}
+.highlighted {
+  background: #5d5d5d;
+}
+td:hover{
+  background: #5d5d5d;
 }
 th, td{
   border:1px solid;

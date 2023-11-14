@@ -23,6 +23,8 @@ import MentorLecture from "./Mentor/Lecture"
 import MentorSchedule from "./Mentor/Schedule";
 import MentorStudentsList from "./Mentor/StudentsList";
 import MentorStudentsRating from "./Mentor/StudentsRating";
+import MentorProjects from "./Mentor/StudentsProjects";
+
 
 //students pages
 import StudentHome from "./Student/Home";
@@ -64,6 +66,7 @@ const Routing = () => {
           <Route path="schedule" element={<MentorSchedule/>}/>
           <Route path="student-list" element={<MentorStudentsList/>}/>
           <Route path="student-rating" element={<MentorStudentsRating/>}/>
+          <Route path="student-projects" element={<MentorProjects/>}/>
         </Route>
         
         <Route path="/student" element={<StudentPageLayout/>}>

@@ -73,7 +73,6 @@ const Module = () => {
     setExpanded(newExpanded ? panel : false);
   };
 
-
   
   return (
     <div className='module-content'>

@@ -18,12 +18,15 @@
   }
   .modal__content{
     width: 625px;
-    height: 750px;
+    height: 200px;
     padding: 40px;
+    position: relative;
     border-radius: 12px;
-    background-color: white;
+    background-color: whitesmoke;
+    backdrop-filter: blur(10px);
     transform: scale(0.5);
     transition: all 0.4s ;
+    color: black;
   }
   .modal__content.active{
     transform: scale(1);

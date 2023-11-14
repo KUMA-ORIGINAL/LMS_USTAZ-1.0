@@ -26,7 +26,9 @@ const TextEditor = () => {
 
   })
   return (
-    <div  ref={wrapperRef} style={{maxHeight:"250px", maxWidth:"600px"}}></div>
+    <div  ref={wrapperRef} style={{maxHeight:"250px", maxWidth:"600px"}}>
+  
+    </div>
   )
 }
 
