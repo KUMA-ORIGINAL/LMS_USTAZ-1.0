@@ -1,34 +1,45 @@
-import React from 'react'
-import "./index.css"
-import ProjectCard from './components/ProjectCard'
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
+import ProjectsList from './components/ProjectsList';
+import styled from "styled-components";
+import { useState } from 'react';
+import Modal from "../../../components/Modal/index"
 
 const StudentProjects = () => {
-    const projectData = [
-        {
-            title: "React: Новые возможности.",
-            category: "Самостоятельная работа",
-            date: "3 Ноября, 2023", 
-            student:"Каныбеков Максат"
-        }
-    ];
-  return (
-    <div>
-        <h2 className='project-title'>Загрузить новую работу</h2>
-        <button className="project-upload">
-            Загрузить
-            <DriveFolderUploadOutlinedIcon/>
-        </button>
-        <div className="">
-            <h2 className='project-title'>Мои работы</h2>
-            <div style={{display:"flex", flexWrap:"wrap", gap:"20px"}}>
-            {projectData.map((data, index) => {
-                return <ProjectCard data={data} />
-            })}
+    const [modal, setModal] = useState(false);
+
+    return (
+        <ProjectWrapper>
+            <h2>Загрузить работы</h2>
+            <button onClick={() => setModal(true)}>
+                Загрузить
+                <DriveFolderUploadOutlinedIcon />
+            </button>
+            <div>
+                <h2>Мои работы</h2>
+                <ProjectsList />
             </div>
-        </div>
-    </div>
-  )
+            <Modal active={modal} setActive={setModal}>
+                <h6>Загрузка работы</h6>
+            </Modal>
+        </ProjectWrapper>
+    )
 }
 
 export default StudentProjects
+
+
+const ProjectWrapper = styled.div`
+    button{
+        margin-top: 8px;
+        margin-bottom: 30px;
+        padding: 8px 20px;
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
+        border: none;
+        border-radius: 5px;
+    }
+    button:active{
+        background: grey;
+    }
+`

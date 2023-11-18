@@ -1,32 +1,73 @@
 import React from 'react'
 import ProgramImg from "../../assets/images/shaking-hands.png";
-import TimeImg from "../../assets/images/time.png";
-import "./index.css";
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
+import {  useTheme } from "@mui/material";
+import TimelapseOutlinedIcon from '@mui/icons-material/TimelapseOutlined';
+import { tokens } from "../../theme";
 
 
-const CourseCard = () => {
+const CourseCard = ({data}) => {
+  const [progress, setProgress] = React.useState(10);
+  const { name, mentor, duration, photo } = data;
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prevProgress) => (prevProgress >= 100 ? 10 : prevProgress + 10));
+    }, 800);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   return (
-    <div className='course__card'>
-      <div className="course__card-header">
-        <p>Программная <br /> инженерия</p>
-        <img src={ProgramImg} alt="" />
-      </div>
-      <h4 className="course__card-title">Front-End: Разработка интерфейсов</h4>
-      <div className="course__card-footer">
-        <div className="course__footer-duration">
-          <div>
-        <img src={TimeImg} alt="" />
-        <p>6 месяцев</p>
-          </div>
-          <div>
-        <img src={TimeImg} alt="" />
-        <p>Каныбеков Максат</p>
-          </div>
-        </div>
-        <button className="course__footer-btn">Подробнее</button>
-      </div>
-    </div>
+    <Card sx={{ display: 'flex',justifyContent:"space-between", width:"320px",maxWidth:"320px", maxHeight:"155px", background:colors.primary[400], cursor:"pointer" }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <CardContent >
+        <Typography  sx={{fontSize:"15px"}}component="div" variant="h5">
+          {name || "Course"}
+        </Typography>
+        <Typography sx={{fontSize:"12px"}} variant="subtitle1" color="text.secondary" component="div">
+          {mentor || "Mentor"}
+        </Typography>
+      </CardContent>
+      <CardContent>
+      <LinearProgressWithLabel value={progress} />
+      <Box sx={{ display: 'flex', alignItems: 'center', columnGap: "5px",}}>
+          <TimelapseOutlinedIcon />
+          <Typography sx={{fontSize:"12px"}} variant="subtitle1" color="text.secondary" component="div" >
+          {duration || "0"} месяцев
+        </Typography>
+      </Box>
+      </CardContent>
+    </Box>
+    <CardMedia
+      component="img"
+      sx={{ width: 150 }}
+      image={photo || ProgramImg}
+      title={name || "title"}
+    />
+  </Card>
   )
 }
 
 export default CourseCard;
+
+
+function LinearProgressWithLabel(props) {
+  return (
+    <Box sx={{ display: 'flex', alignItems: 'center', columnGap:"10px", marginBottom:"7px"}}>
+      <Box sx={{ width: '100%', }}>
+        <LinearProgress color='info' variant="determinate"  {...props} />
+      </Box>
+      <Box >
+        <Typography variant="body2" color="text.secondary">{`${Math.round(props.value)}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}

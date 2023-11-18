@@ -1,44 +1,69 @@
 import React, { useState } from 'react';
+import EditIcon from '@mui/icons-material/Edit';
+import { IconButton } from '@mui/material';
 import "./index.css";
 
 const ProfileInfo = () => {
   const storedUserData = JSON.parse(localStorage.getItem("user"));
-  const [highlightedHeader, setHighlightedHeader] = useState(null);
 
-  const handleTdHover = (header) => {
-    setHighlightedHeader(header);
-  }
-
-  const handleTdMouseLeave = () => {
-    setHighlightedHeader(null);
-  }
 
   return (
     <table className='profile-info'>
       <tr>
-        <th className={highlightedHeader === 'last_name' ? 'highlighted' : ''}>Фамилия</th>
-        <td onMouseEnter={() => handleTdHover('last_name')} onMouseLeave={handleTdMouseLeave}>{storedUserData.last_name}</td>
+        <th>Фамилия</th>
+        <td>
+          <input type="text" value={storedUserData.last_name} />
+          <IconButton sx={{padding:"2px"}}>
+        <EditIcon/>
+          </IconButton>
+        </td>
       </tr>
       <tr>
-        <th className={highlightedHeader === 'first_name' ? 'highlighted' : ''}>Имя</th>
-        <td onMouseEnter={() => handleTdHover('first_name')} onMouseLeave={handleTdMouseLeave}>{storedUserData.first_name}</td>
+        <th>Имя</th>
+        <td>
+        <input type="text" value={storedUserData.first_name} />
+          <IconButton sx={{padding:"2px"}}>
+        <EditIcon/>
+          </IconButton>
+        </td>
       </tr>
       <tr>
-        <th className={highlightedHeader === 'position' ? 'highlighted' : ''}>Должность</th>
-        <td onMouseEnter={() => handleTdHover('position')} onMouseLeave={handleTdMouseLeave}>{storedUserData.position} Разработчик</td>
+        <th>Должность</th>
+        <td>
+        <input type="text" value="*******" />
+          <IconButton sx={{padding:"2px"}}>
+        <EditIcon/>
+          </IconButton>
+        </td>
       </tr>
       <tr>
-        <th className={highlightedHeader === 'birth_date' ? 'highlighted' : ''}>Год рождения</th>
-        <td onMouseEnter={() => handleTdHover('birth_date')} onMouseLeave={handleTdMouseLeave}>{storedUserData.birth_date}</td>
+        <th>Telegram</th>
+        <td>
+        <input type="text" value={storedUserData.first_name} />
+          <IconButton sx={{padding:"2px"}}>
+        <EditIcon/>
+          </IconButton>
+        </td>
       </tr>
       <tr>
-        <th className={highlightedHeader === 'telegram' ? 'highlighted' : ''}>Telegram ник</th>
-        <td onMouseEnter={() => handleTdHover('telegram')} onMouseLeave={handleTdMouseLeave}>@ivan_mentor</td>
+        <th>Номер телефона</th>
+        <td>
+        <input type="text" value={storedUserData.phone_number} />
+          <IconButton sx={{padding:"2px"}}>
+        <EditIcon/>
+          </IconButton>
+        </td>
       </tr>
       <tr>
-        <th className={highlightedHeader === 'phone_number' ? 'highlighted' : ''}>Номер телефона</th>
-        <td onMouseEnter={() => handleTdHover('phone_number')} onMouseLeave={handleTdMouseLeave}>{storedUserData.phone_number}</td>
+        <th>Пароль</th>
+        <td>
+        <input type="text" value="*******" />
+          <IconButton sx={{padding:"2px"}}>
+        <EditIcon/>
+          </IconButton>
+        </td>
       </tr>
+      
     </table>
   )
 }

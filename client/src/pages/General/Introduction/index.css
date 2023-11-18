@@ -301,6 +301,8 @@ h1 span {
 .intro-courses{
     max-width: 1200px;
     margin: 150px auto;
+    display: flex;
+    flex-direction: column;
 }
 .intro__courses-title{
     text-align: center;
@@ -319,11 +321,10 @@ h1 span {
     margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    gap: 15px;
 }
 .intro__courses-card{
-    max-width: 400px;
+    max-width: 350px;
     padding: 12px;
     border-radius: 20px;
     border: 3px solid rgba(50, 52, 101, 0.50);
@@ -332,12 +333,19 @@ h1 span {
     flex-direction: column;
     row-gap: 10px;
 }
-.intro__cc-img{
+.intro__cmimg-wrapper {
   max-width: 350px;
-  max-height: 234px;
-  object-fit: cover;
-  border-radius: 15px;
+  max-height: 350px;
+  border-radius: 50%;
 }
+
+.intro__cm-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%; 
+}
+
 .intro__cc-text{
     max-width: 350px;
     color: rgba(255, 255, 255, 0.40);
@@ -380,6 +388,8 @@ h1 span {
 .iform{
     max-width: 1200px;
     margin: 150px auto;
+    display: flex;
+    flex-direction: column;
 }
 .iform-title{
     text-align: center;
@@ -495,10 +505,6 @@ h1 span {
 
 
 /* Metods */
-
-.metods {
-  margin-top: 120px;
-}
 .metods__title {
   text-align: center;
   color: rgba(255, 255, 255, 0.80);

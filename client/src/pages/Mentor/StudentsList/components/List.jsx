@@ -1,57 +1,30 @@
-import styled from 'styled-components'
+import React from 'react'
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
 
-const List = ({ students }) => {
+const StudentItem = ({ title }) => {
   return (
-    <StyledTable>
-      <thead>
-        <tr>
-          <th>№</th>
-          <th>Фамилия</th>
-          <th>Имя</th>
-          <th>Telegram</th>
-          <th>Email</th>
-          <th>Номер Телефона</th>
-          <th>Рейтинг</th>
-          <th>Баллы</th>
-        </tr>
-      </thead>
-      <tbody>
-        {students.map((student, index) => (
-          <tr key={index}>
-            <td>{index + 1}</td>
-            <td>{student.lastName}</td>
-            <td>{student.firstName}</td>
-            <td>{student.telegram}</td>
-            <td>{student.email}</td>
-            <td>{student.tel}</td>
-            <td>{student.raiting}</td>
-            <td>{student.coins}</td>
-          </tr>
-        ))}
-      </tbody>
-    </StyledTable>
+    <>
+      <ListItem sx={{ cursor: "pointer" }}>
+        <ListItemAvatar>
+          <Avatar alt={title} src="/static/images/avatar/2.jpg" />
+        </ListItemAvatar>
+        <Typography
+          sx={{ display: 'inline' }}
+          component="span"
+          variant="body2"
+          color="text.primary"
+        >
+          {title}
+        </Typography>
+      </ListItem>
+      <Divider variant="inset" component="li" />
+    </>
   )
 }
 
-export default List
-
-//styles for this components
-
-const StyledTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-
-  th,
-  td {
-    border: 1px solid;
-    padding: 10px;
-  }
-
-  td:first-child {
-    max-width: 50px;
-  }
-
-  tr:hover {
-    background-color: grey;
-  }
-`
+export default StudentItem

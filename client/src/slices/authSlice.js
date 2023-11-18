@@ -49,6 +49,7 @@ export const authSlice = createSlice({
       state.tokens = tokens;
 
       localStorage.setItem("user", JSON.stringify(state));
+      localStorage.setItem("token", JSON.stringify(state.tokens.access));
     },
     logout: (state) => {
       Object.keys(initialState).forEach((key) => {

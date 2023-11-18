@@ -1,5 +1,4 @@
  import EyeCloseImg from "../../../assets/images/auth-eyeclose.png";
-import { useLoginUserMutation } from "../../../http/auth.api";
 import EyeImg from "../../../assets/images/auth-eye.png";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +6,7 @@ import { useDispatch } from "react-redux";
 import {toast} from "react-toastify";
 import "./index.css";
 import {setUser} from "../../../slices/authSlice"
+import AuthService from "../../../services/AuthService";
 
 const Authorization = () => {
   const navigate = useNavigate();
@@ -15,58 +15,73 @@ const Authorization = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
-  const [
-    loginUser,
-    {
-      data: loginData,
-      isSuccess: isLoginSuccess,
-      isError: isLoginError,
-      error: loginError,
-    },
-  ] = useLoginUserMutation();
+
 
   const handleLogin = async () => {
-    if (email && password) {
-      await loginUser({ email, password });
-    } else {
-      toast.error("Заполните все поля!");
-    }
-  };
-  useEffect(() => {
-    console.log(loginData);
-    if (isLoginSuccess) {
-      toast.success("Вы успешно авторизовались!");
-      const user = loginData.user ?? {}; // Use an empty object if user is undefined
+    try{
+      const response = await AuthService.login(email, password);
+      console.log(response.data);
       dispatch(
         setUser({
-          accessToken: loginData.tokens.access,
-          id: loginData.id,
-          name: loginData.first_name,
-          first_name: loginData.first_name,
-          last_name: loginData.last_name,
-          position:loginData.position,
-          phone_number:loginData.phone_number,
-          birth_date:loginData.birth_date,
-          profile_photo: loginData.profile_photo,
-          role: loginData.role,
-          email: loginData.email,
-          tokens:loginData.tokens,
-        })
-      );
-      if(loginData.role === "mentor"){
-        navigate("/mentor/profile")
-      }else if(loginData.role === "student"){
-        navigate("/student/profile")
-      }
+          accessToken: response.data.tokens.access,
+          id: response.data.id,
+          name: response.data.first_name,
+          first_name: response.data.first_name,
+          last_name: response.data.last_name,
+          position:response.data.position,
+          phone_number:response.data.phone_number,
+          birth_date:response.data.birth_date,
+          profile_photo: response.data.profile_photo,
+          role: response.data.role,
+          email: response.data.email,
+          tokens:response.data.tokens,
+        }))
+    }catch (e){
+      console.log(e.response);
     }
-  }, [isLoginSuccess]);
+  };
+
+  const storedUserData = JSON.parse(localStorage.getItem("user"));
+
+  // useEffect(() => {
+  //   if(storedUserData.role === "mentor"){
+  //     navigate("/mentor/profile")
+  //   }else if(storedUserData.role  === "student"){
+  //     navigate("/student/profile")
+  //   }
+  // }, [])
+  // useEffect(() => {
+  //   console.log(loginData);
+  //   if (isLoginSuccess) {
+  //     toast.success("Вы успешно авторизовались!");
+  //     const user = loginData.user ?? {}; // Use an empty object if user is undefined
+  //     dispatch(
+  //       setUser({
+  //         accessToken: loginData.tokens.access,
+  //         id: loginData.id,
+  //         name: loginData.first_name,
+  //         first_name: loginData.first_name,
+  //         last_name: loginData.last_name,
+  //         position:loginData.position,
+  //         phone_number:loginData.phone_number,
+  //         birth_date:loginData.birth_date,
+  //         profile_photo: loginData.profile_photo,
+  //         role: loginData.role,
+  //         email: loginData.email,
+  //         tokens:loginData.tokens,
+  //       })
+  //     );
+  //     if(loginData.role === "mentor"){
+  //       navigate("/mentor/profile")
+  //     }else if(loginData.role === "student"){
+  //       navigate("/student/profile")
+  //     }
+  //   }
+  // }, [isLoginSuccess]);
   
   
 
-  if (isLoginError) {
-    console.error("Login Error:", loginError);
-    toast.error("Неправильный пароль или email!");
-  }
+
   
   return (
     <div className="container">

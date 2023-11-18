@@ -52,7 +52,7 @@ export default NewsList;
 const List  = styled.div`
     display:flex;
     flex-wrap:wrap;
-    gap:20px;
+    gap:16px;
 `
 const Link = styled.a`
 display:block;

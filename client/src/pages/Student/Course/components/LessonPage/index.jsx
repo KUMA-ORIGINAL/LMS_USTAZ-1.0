@@ -7,7 +7,7 @@ const LessonPage = () => {
     <section className="lesson-page">
       <div className="lp-content">
         <h2 className="lp-title">Направления в IT</h2>
-        <img src={img1} alt="" />
+        <img src={img1} alt="" className='lp-img' />
         <div className="lp-info">
           <ol>
             <li>

@@ -1,5 +1,8 @@
 import React, {useState} from 'react'
 import ScoreTable from '../../Mentor/StudentsRating/components/ScoreTable'
+import { Line } from "react-chartjs-2"
+import { Chart as ChartJs } from "chart.js/auto"
+import { useTheme } from '@mui/material';
 
 const StudentScores = () => {
   //testing data
@@ -89,10 +92,61 @@ const StudentScores = () => {
     })
     setData(newData)
   }
+  const theme = useTheme();
+  const generateRandomData = () => {
+    const labels = [
+      "1 тема",
+      "1 тема",
+      "1 тема",
+      "1 тема",
+      "1 тема",
+      "1 тема",
+      "1 тема",
+    ];
 
+    const data = [];
+    for (let i = 0; i < labels.length; i++) {
+      const sales = Math.floor(Math.random() * 10);
+      data.push(sales);
+    }
+
+    return {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Баллы',
+          data: data,
+          borderWidth: 2,
+          pointRadius: 4,
+        },
+      ],
+    };
+  };
+
+  const options = {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          color: theme.palette.mode === "dark" ? "white" : 'black',
+        },
+      },
+      x: {
+        ticks: {
+          color: theme.palette.mode === "dark" ? "white" : 'black',
+        },
+      },
+    },
+  };
+
+  const [getdata, setgetData] = useState(generateRandomData());
   return (
     <div className="content">
       <ScoreTable data={data} onScoreChange={handleScoreChange} />
+      <div style={{ width: "950px", margin: "50px auto" }}>
+          <Line data={getdata} options={options} />
+        </div>
     </div>
   )
 }
