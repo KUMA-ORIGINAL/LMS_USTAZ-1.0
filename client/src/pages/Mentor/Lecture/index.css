@@ -16,10 +16,4 @@
 
     border-radius: 5px;
     border: none;
-
-    background: #1F2A40;
-    color: white;
-}
-.mcourse__addmodule:active{
-    background: #182233;
 }

@@ -52,10 +52,7 @@ export const authSlice = createSlice({
       localStorage.setItem("token", JSON.stringify(state.tokens.access));
     },
     logout: (state) => {
-      Object.keys(initialState).forEach((key) => {
-        state[key] = initialState[key];
-      });
-      localStorage.removeItem("user");
+      localStorage.clear()
     },
   },
 });

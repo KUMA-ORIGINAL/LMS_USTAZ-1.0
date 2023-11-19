@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material';
 import "./index.css";
 
 const ProfileInfo = () => {
-  const storedUserData = JSON.parse(localStorage.getItem("user"));
+  const storedUserData = JSON.parse(localStorage.getItem("user")) || {};
 
 
   return (
@@ -12,7 +12,7 @@ const ProfileInfo = () => {
       <tr>
         <th>Фамилия</th>
         <td>
-          <input type="text" value={storedUserData.last_name} />
+          <input type="text" value={storedUserData.last_name || ""} />
           <IconButton sx={{padding:"2px"}}>
         <EditIcon/>
           </IconButton>
@@ -21,7 +21,7 @@ const ProfileInfo = () => {
       <tr>
         <th>Имя</th>
         <td>
-        <input type="text" value={storedUserData.first_name} />
+        <input type="text" value={storedUserData.first_name || ""} />
           <IconButton sx={{padding:"2px"}}>
         <EditIcon/>
           </IconButton>
@@ -39,7 +39,7 @@ const ProfileInfo = () => {
       <tr>
         <th>Telegram</th>
         <td>
-        <input type="text" value={storedUserData.first_name} />
+        <input type="text" value={storedUserData.first_name || ""} />
           <IconButton sx={{padding:"2px"}}>
         <EditIcon/>
           </IconButton>
@@ -48,7 +48,7 @@ const ProfileInfo = () => {
       <tr>
         <th>Номер телефона</th>
         <td>
-        <input type="text" value={storedUserData.phone_number} />
+        <input type="text" value={storedUserData.phone_number || ""} />
           <IconButton sx={{padding:"2px"}}>
         <EditIcon/>
           </IconButton>

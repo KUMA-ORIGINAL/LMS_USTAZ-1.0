@@ -6,10 +6,8 @@ import { Link } from "react-router-dom";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
-import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
 import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
@@ -79,7 +77,7 @@ const SideBar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  Ustaz LMS
+                  Студент
                 </Typography>
 
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -89,46 +87,25 @@ const SideBar = () => {
             )}
           </MenuItem>
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <MenuItem
-            
-              style={{
-                backgroundColor: "transparent", // Устанавливаем фон элемента в прозрачный цвет
-                color: theme.palette.mode === "dark" ? "#fff" : "#000", // Устанавливаем цвет текста
-                cursor: "pointer", // Устанавливаем курсор на указатель при наведении
-              }}
-              onClick={colorMode.toggleColorMode}
-              icon={
-                theme.palette.mode === "dark" ? (
-                  <DarkModeOutlinedIcon />
-                ) : (
-                  <LightModeOutlinedIcon />
-                )
-              }
-            >
-
-              <Typography>
-                {theme.palette.mode === "dark" ? "Темная" : "Светлая"}
-              </Typography>
-            </MenuItem>
             <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-            Студент
+            {isCollapsed ? null : "Главная"}
             </Typography>
 
             <Item
-              title="Главная"
+              title="Панель"
               to="/student/home"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Профиль"
-              to="/student/profile"
-              icon={<PersonOutlinedIcon />}
+              title="Обьявления"
+              to="/student/home"
+              icon={<NewspaperOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -138,7 +115,7 @@ const SideBar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Курсы
+              {isCollapsed ? null : "Дисциплина"}
             </Typography>
             <Item
               title="Расписание"

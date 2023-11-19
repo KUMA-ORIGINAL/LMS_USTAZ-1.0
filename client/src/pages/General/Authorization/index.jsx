@@ -16,7 +16,6 @@ const Authorization = () => {
   const dispatch = useDispatch();
 
 
-
   const handleLogin = async () => {
     try{
       const response = await AuthService.login(email, password);
@@ -36,53 +35,33 @@ const Authorization = () => {
           email: response.data.email,
           tokens:response.data.tokens,
         }))
+        toast.success("Вы успешно авторизовались!");
+        if(response.data.role === "mentor"){
+          navigate("/mentor/profile")
+        }else if(response.data.role === "student"){
+          navigate("/student/profile")
+        }else{
+          navigate("/auth")
+        }
     }catch (e){
+      toast.error("Проверьте правильность логина или пароля!");
       console.log(e.response);
     }
   };
-
-  const storedUserData = JSON.parse(localStorage.getItem("user"));
-
-  // useEffect(() => {
-  //   if(storedUserData.role === "mentor"){
-  //     navigate("/mentor/profile")
-  //   }else if(storedUserData.role  === "student"){
-  //     navigate("/student/profile")
-  //   }
-  // }, [])
-  // useEffect(() => {
-  //   console.log(loginData);
-  //   if (isLoginSuccess) {
-  //     toast.success("Вы успешно авторизовались!");
-  //     const user = loginData.user ?? {}; // Use an empty object if user is undefined
-  //     dispatch(
-  //       setUser({
-  //         accessToken: loginData.tokens.access,
-  //         id: loginData.id,
-  //         name: loginData.first_name,
-  //         first_name: loginData.first_name,
-  //         last_name: loginData.last_name,
-  //         position:loginData.position,
-  //         phone_number:loginData.phone_number,
-  //         birth_date:loginData.birth_date,
-  //         profile_photo: loginData.profile_photo,
-  //         role: loginData.role,
-  //         email: loginData.email,
-  //         tokens:loginData.tokens,
-  //       })
-  //     );
-  //     if(loginData.role === "mentor"){
-  //       navigate("/mentor/profile")
-  //     }else if(loginData.role === "student"){
-  //       navigate("/student/profile")
-  //     }
-  //   }
-  // }, [isLoginSuccess]);
   
-  
+  const user = JSON.parse(localStorage.getItem("user"))
 
-
-  
+  useEffect(() => {
+    if(user){
+      if(user.role === "mentor"){
+        navigate("/mentor/profile")
+      }else if(user.role === "student"){
+        navigate("/student/profile")
+      }else{
+        navigate("/auth")
+      }
+    }
+  },[])
   return (
     <div className="container">
       <div className="auth__content">

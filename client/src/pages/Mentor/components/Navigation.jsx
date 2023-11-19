@@ -9,20 +9,19 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
-import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import AddTaskOutlinedIcon from '@mui/icons-material/AddTaskOutlined';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
-
-
+import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
+import AddIcon from '@mui/icons-material/Add';
+import Button from '@mui/material/Button';
 import "react-pro-sidebar/dist/css/styles.css";
-import { ColorModeContext, tokens } from "../../../theme";
 
-// Create item for navigation
+import { tokens } from "../../../theme";
+
+
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -46,22 +45,19 @@ const SideBar = () => {
   const location = useLocation();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState(location.pathname);
-  
-
   const theme = useTheme();
-
   const colors = tokens(theme.palette.mode);
-  const colorMode = useContext(ColorModeContext);
+
   return (
     <Box
       sx={{
-        "& .pro-sidebar":{
-          maxWidth:"220px !important",
-          minWidth:"200px !importtant"
+        "& .pro-sidebar": {
+          maxWidth: "220px !important",
+          minWidth: "200px !importtant"
         },
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
-          
+
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
@@ -95,7 +91,7 @@ const SideBar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  LMS
+                  Ментор
                 </Typography>
 
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -105,52 +101,47 @@ const SideBar = () => {
             )}
           </MenuItem>
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <MenuItem
-              style={{
-                color: theme.palette.mode === "dark" ? "#fff" : "#000", // Устанавливаем цвет текста
-                cursor: "pointer",
-              }}
-              onClick={colorMode.toggleColorMode}
-              icon={
-                theme.palette.mode === "dark" ? (
-                  <DarkModeOutlinedIcon />
-                ) : (
-                  <LightModeOutlinedIcon />
-                )
-              }
-            >
-              <Typography>
-                {theme.palette.mode === "dark" ? "Темная" : "Светлая"}
-              </Typography>
-            </MenuItem>
             <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-            Ustaz
+              {isCollapsed ? "" : "Главная"}
             </Typography>
 
             <Item
-              title="Главная"
+              title="Панель"
               to="/mentor/home"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Профиль"
-              to="/mentor/profile"
-              icon={<PersonOutlinedIcon />}
+              title="Обьявления"
+              to="/mentor/home"
+              icon={<NewspaperOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
+            <Button
+              sx={{
+                m: "15px 0 5px 20px",
+                bgcolor: colors.blueAccent[700],
+                ':hover': { bgcolor: colors.blueAccent[400] },
+                maxWidth: isCollapsed ? "30px" : "none",
+                minWidth: "0 !important"
+              }}
+              variant="contained"
+              startIcon={isCollapsed ? null : <AddIcon />}
+            >
+              {isCollapsed ? <AddIcon /> : 'Новая группа'}
+            </Button>
             <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "20px 0 5px 20px" }}
             >
-              {isCollapsed ? "" : "Группа"  }
+              {isCollapsed ? "" : "Группа"}
             </Typography>
             <Item
               title="Занятия"
@@ -176,14 +167,7 @@ const SideBar = () => {
             <Item
               title="Оценки"
               to="/mentor/student-rating"
-              icon={<GradeOutlinedIcon  />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Студенты"
-              to="/mentor/student-list"
-              icon={<PeopleAltOutlinedIcon  />}
+              icon={<GradeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -195,9 +179,9 @@ const SideBar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Книги"
-              to="/mentor/lecture"
-              icon={<LibraryBooksOutlinedIcon />}
+              title="Студенты"
+              to="/mentor/student-list"
+              icon={<PeopleAltOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

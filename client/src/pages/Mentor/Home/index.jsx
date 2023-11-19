@@ -1,18 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CourseCard from '../../../components/CourseCard'
 import NewsList from '../../../components/NewsList'
+import CourseService from '../../../services/CourseService'
 
 const MentorHome = () => {
+  const [data, setData] = useState([]);
+
+  async function getCourse(){
+    try{
+      const response  = await CourseService.getCourse();
+      console.log(response.data)
+      setData(response.data)
+    }catch(e){
+      console.log(e);
+    }
+  }
   return (
     <>
       <h2 style={{marginBottom:"20px"}}>Курсы</h2>
+        <button onClick={getCourse}>Click</button>
       <div style={{display:"flex", flexWrap:"wrap", gap:"20px",}}>
-      <CourseCard/>
-      <CourseCard/>
-      <CourseCard/>
-      <CourseCard/>
-      <CourseCard/>
-      <CourseCard/>
+        {data.map((course) => (
+  <CourseCard key={course.id} data={course} />
+))}
       </div>
       <h2 style={{margin:"20px 0px"}}>
         Новости

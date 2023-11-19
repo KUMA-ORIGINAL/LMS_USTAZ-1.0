@@ -323,6 +323,7 @@ h1 span {
     flex-wrap: wrap;
     gap: 15px;
 }
+
 .intro__courses-card{
     max-width: 350px;
     padding: 12px;
@@ -337,15 +338,20 @@ h1 span {
   max-width: 350px;
   max-height: 350px;
   border-radius: 50%;
+  overflow: hidden; /* Гарантирует, что изображение не выходит за пределы контейнера */
 }
 
 .intro__cm-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 50%; 
+  border-radius: 50%;
+  transition: transform 0.3s ease; /* Добавляет плавный эффект перехода */
 }
 
+.intro__cm-img:hover {
+  transform: scale(1.1);
+}
 .intro__cc-text{
     max-width: 350px;
     color: rgba(255, 255, 255, 0.40);

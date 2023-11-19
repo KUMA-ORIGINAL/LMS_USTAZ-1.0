@@ -18,11 +18,6 @@
 
     border: none;
     border-radius: 7px;
-
-    padding: 15px 20px;
-    background: #1F2A40;
     color: white;
-}
-.module__info-btn:active{
-    background: #182233;
+    padding: 15px 20px;
 }

@@ -8,8 +8,7 @@ const TOOLBAR_OPTIONS = [
   ["bold", "italic"],
   [{ color: [] }, { background: [] }],
   [{ align: [] }],
-  ["link", "image", "blockquote", "code-block"],
-  ["clean"],
+  ["link", "image", "blockquote", "code-block"],  
 ]
 
 const TextEditor = () => {
@@ -26,7 +25,7 @@ const TextEditor = () => {
 
   })
   return (
-    <div  ref={wrapperRef} style={{maxHeight:"250px", maxWidth:"600px"}}>
+    <div   ref={wrapperRef} style={{maxHeight:"250px", maxWidth:"600px", color:"black"}}>
   
     </div>
   )

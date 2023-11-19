@@ -1,11 +1,14 @@
+import AttachFileOutlinedIcon from '@mui/icons-material/AttachFileOutlined';
 import {useState} from 'react'
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import AttachFileOutlinedIcon from '@mui/icons-material/AttachFileOutlined';
 import Lesson from '../Lesson/index';
-import "./index.css";
 import Modal from '../../../../../components/Modal';
 import TextEditor from '../TextEditor/index.';
+import { useTheme } from "@mui/material";
+import { tokens } from "../../../../../theme";
+import "./index.css";
+
 const Module = () => {
   const [modal, setModal] = useState(false)
   const html = [
@@ -22,7 +25,8 @@ const Module = () => {
       title:"Списки"
     }
   ]
-  console.log(modal);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   return (
     <div className='module'>
       <Paper elevation={2} className="module-card">
@@ -34,7 +38,7 @@ const Module = () => {
             Язык гипертекствой разметки
           </Typography>
         </div>
-        <button className='module__info-btn' onClick={() => setModal(true)}>
+        <button className='module__info-btn' style={{background:colors.grey[500]}}  onClick={() => setModal(true)}>
           <AttachFileOutlinedIcon />
           Добавить урок
         </button>
@@ -45,7 +49,11 @@ const Module = () => {
         })
       }
       <Modal active={modal} setActive={setModal}>
-        <TextEditor/>
+      <div className="" style={{display:"flex", flexDirection:"column"}}>
+        <h2 style={{color:"black"}}>Добавить новый урок</h2>
+          <input type="text" placeholder='Название урока' style={{padding:"15px", margin:"20px 0px"}}/>
+          <TextEditor/>
+        </div>
       </Modal>
     </div>
   )

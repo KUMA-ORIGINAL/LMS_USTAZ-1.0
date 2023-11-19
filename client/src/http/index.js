@@ -9,6 +9,7 @@ const $api = axios.create({
 })
 
 $api.interceptors.request.use((config) => {
+   
     const token = JSON.parse(localStorage.getItem('token'));
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
@@ -24,7 +25,6 @@ $api.interceptors.response.use((config) => {
         originalRequest._isRetry = true;    
         try {
             const token = JSON.parse(localStorage.getItem('user'));
-
             const response = await axios.post(`${API_URL}user/token/refresh/`, 
             {
                 refresh: token.tokens.refresh,
