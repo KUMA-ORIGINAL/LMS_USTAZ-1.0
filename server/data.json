@@ -1,0 +1,42 @@
+[
+    {
+      "model": "account.user",
+      "pk": 2,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$XLUGMVTIdsqOogJPwZx08Q$rK26q1uXUPX0bQ6Ar7d7MysBkPWJTwmUX2u97OlIOPI=",
+        "email": "kurmanbek.asanov.94@mail.ru",
+        "phone_number": "+996709556597",
+        "role": "mentor",
+        "position": "backend",
+        "birth_date": "2004-07-05",
+        "profile_photo": ""
+      }
+    },
+    {
+      "model": "account.user",
+      "pk": 3,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$FTaVslE838MOUu9N1uI9iD$wruvmDoxGIuUehufsD2wSRp1mD+CglhfpypuHv+BPuA=",
+        "email": "maksatkanybekov2004@gmail.com",
+        "phone_number": "+996709556597",
+        "role": "student",
+        "position": null,
+        "birth_date": "2023-10-27",
+        "age": 0,
+        "profile_photo": ""
+      }
+    },
+    {
+      "model": "account.user",
+      "pk": ,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$ht2wrpmv4WNO7mM33EecgO$D6EmB8A0WxJ/AGNatlzW4OcMEnciHRCiBMuTVxy7DxU=",
+        "email": "kurmanbek.asanovv.94@mail.ru",
+        "phone_number": "+375234234234",
+        "role": "student",
+        "position": null,
+        "birth_date": "2023-10-29",
+        "age": 0,
+        "profile_photo": ""
+      }
+    }]

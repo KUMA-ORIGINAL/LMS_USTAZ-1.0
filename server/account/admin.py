@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import User, ProfileStudent, Award
+from .models import User, ProfileStudent, Award, Attendance
 
 
 @admin.register(User)
@@ -15,7 +15,7 @@ class UserAdmin(admin.ModelAdmin):
         }),
         ('required', {
             'fields': ('email', 'password', 'phone_number', 'first_name', 'last_name', 'role', 'position',
-                       'birth_date', 'age', 'profile_photo', 'get_photo')
+                       'birth_date', 'profile_photo', 'get_photo')
         }),
     )
     readonly_fields = ('get_photo',)
@@ -36,3 +36,11 @@ class AwardAdmin(admin.ModelAdmin):
 class ProfileStudentAdmin(admin.ModelAdmin):
     list_display = ['id', 'student', 'course', 'points']
     list_display_links = ['id', 'student']
+
+
+@admin.register(Attendance)
+class AttendanceAdmin(admin.ModelAdmin):
+    list_display = ('student', 'schedule', 'is_present')
+    list_filter = ('schedule', 'is_present')
+    search_fields = ('student__first_name', 'student__last_name', 'schedule__title')
+    ordering = ('schedule', 'student')

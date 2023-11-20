@@ -20,11 +20,9 @@ SECRET_KEY = 'django-insecure-#8pift(78=tr!%gbixs6%uk%)y3!msba6uca=@1-%u&5n77zoc
 # CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOWED_ORIGINS= [
+CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"
 ]
-
-
 
 # Application definition
 
@@ -45,6 +43,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'course.apps.CourseConfig',
     'analytics.apps.AnalyticsConfig',
+    'news.apps.NewsConfig'
 ]
 
 MIDDLEWARE = [
@@ -125,6 +124,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'account.User'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',  # По умолчанию
+)
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

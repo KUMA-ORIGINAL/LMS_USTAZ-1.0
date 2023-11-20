@@ -6,9 +6,9 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .models import User, ProfileStudent
+from .models import User, ProfileStudent, Attendance
 from .permissions import IsAdminOrMentorOrReadPermission
-from .serializers import UserSerializer, ProfileStudentSerializer, UserLoginSerializer
+from .serializers import UserSerializer, ProfileStudentSerializer, UserLoginSerializer, AttendanceSerializer
 
 
 class UserLoginAPIView(GenericAPIView):
@@ -74,3 +74,9 @@ class ProfileStudentView(viewsets.ModelViewSet):
         queryset = queryset.annotate(rank=Window(expression=Rank(), order_by=F('points').desc()))
 
         return queryset
+
+
+class AttendanceView(viewsets.ModelViewSet):
+    queryset = Attendance.objects.all()
+    serializer_class = AttendanceSerializer
+    permission_classes = [IsAdminOrMentorOrReadPermission]

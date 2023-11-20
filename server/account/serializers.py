@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
-from .models import User, ProfileStudent
+from .models import User, ProfileStudent, Attendance
 
 
 class UserLoginSerializer(serializers.Serializer):
@@ -17,7 +17,7 @@ class UserLoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'role', 'first_name', 'last_name', 'position', 'birth_date', 'age', 'phone_number',
+        fields = ['id', 'email', 'role', 'first_name', 'last_name', 'position', 'birth_date', 'phone_number',
                   'profile_photo']
 
     def to_representation(self, instance):
@@ -33,3 +33,10 @@ class ProfileStudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProfileStudent
         fields = ('id', 'points', 'updated', 'created', 'student', 'course', 'awards', 'rank')
+
+
+class AttendanceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Attendance
+        fields = '__all__'
