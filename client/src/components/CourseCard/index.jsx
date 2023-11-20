@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ProgramImg from "../../assets/images/shaking-hands.png";
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -9,21 +9,49 @@ import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgres
 import {  useTheme } from "@mui/material";
 import TimelapseOutlinedIcon from '@mui/icons-material/TimelapseOutlined';
 import { tokens } from "../../theme";
+import UserService from '../../services/UserService';
 
 
 const CourseCard = ({data}) => {
   const [progress, setProgress] = React.useState(10);
-  const { name, mentor, duration, photo } = data;
-  React.useEffect(() => {
+  const { name, mentor, duration,created, photo } = data;
+  const [mentorName, setMentorName] = useState("")
+  useEffect(() => {
+    const getMentorFullName = async (mentorId) => {
+      try {
+        const response = await UserService.getUser(mentorId);
+        console.log(response.data);
+        setMentorName(response.data.first_name)
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    const calculateProgress = () => {
+      const startDate = new Date(created);
+      const currentDate = new Date();
+      const elapsedTime = currentDate - startDate;
+      const courseDurationInMilliseconds = duration * 30 * 24 * 60 * 60 * 1000; // Assuming duration is in months
+
+      const calculatedProgress = (elapsedTime / courseDurationInMilliseconds) * 100;
+      setProgress(calculatedProgress >= 100 ? 100 : calculatedProgress);
+    };
+
+    getMentorFullName(mentor);
+    calculateProgress();
+
     const timer = setInterval(() => {
-      setProgress((prevProgress) => (prevProgress >= 100 ? 10 : prevProgress + 10));
-    }, 800);
+      calculateProgress();
+    }, 60000); // Update progress every minute
+
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [mentor, duration, created]);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  
 
   return (
     <Card sx={{ display: 'flex',justifyContent:"space-between", width:"320px",maxWidth:"320px", maxHeight:"155px", background:colors.primary[400], cursor:"pointer" }}>
@@ -33,7 +61,7 @@ const CourseCard = ({data}) => {
           {name || "Course"}
         </Typography>
         <Typography sx={{fontSize:"12px"}} variant="subtitle1" color="text.secondary" component="div">
-          {mentor || "Mentor"}
+          {mentorName || "Mentor"}
         </Typography>
       </CardContent>
       <CardContent>

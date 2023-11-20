@@ -24,6 +24,7 @@ import MentorSchedule from './Mentor/Schedule'
 import MentorStudentsList from './Mentor/StudentsList'
 import MentorStudentsRating from './Mentor/StudentsRating'
 import MentorProjects from './Mentor/StudentsProjects'
+import CreateCourse from './Mentor/CreateCourse'
 
 //students pages
 import StudentHome from './Student/Home'
@@ -37,6 +38,7 @@ import StudentProject from './Student/Projects'
 import StudentBooks from './Student/Book'
 import StudentSchedule from './Student/Schedule'
 import LessonPage from './Student/Course/components/LessonPage'
+import MentorNotifications from './Mentor/Notifications'
 
 const Routing = () => {
   return (
@@ -65,6 +67,8 @@ const Routing = () => {
           <Route path="student-list" element={<MentorStudentsList />} />
           <Route path="student-rating" element={<MentorStudentsRating />} />
           <Route path="student-projects" element={<MentorProjects />} />
+          <Route path='create-course' element={<CreateCourse/>}/>
+          <Route path='notifications' element={<MentorNotifications/>}/>
         </Route>
 
         <Route path="/student" element={<StudentPageLayout />}>

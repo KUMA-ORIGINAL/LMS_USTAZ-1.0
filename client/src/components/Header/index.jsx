@@ -18,6 +18,8 @@ import { ColorModeContext, tokens } from "../../theme";
 import { useDispatch } from "react-redux";
 import Avatar from '@mui/material/Avatar';
 import { logout } from '../../slices/authSlice';
+import { toast } from 'react-toastify';
+import AuthService from '../../services/AuthService';
 
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -86,11 +88,32 @@ export default function Header() {
     }
   };
 
+  const toNotificationsPage = () => {
+    if(user){
+      switch (user.role) {
+          case 'mentor':
+            navigate('/mentor/notifications');
+            break;
+          case 'student':
+            navigate('/student/notifications');
+            break;
+          default:
+            navigate('/auth');
+        }
+        handleMenuClose()
+  }
+  }
+
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    dispatch(logout())
-    navigate("/auth")
+  const handleLogout =  () => {
+    try{
+      toast.success("Вы успешно вышли с аккаунта!")
+      navigate("/auth")
+      dispatch(logout())
+    }catch(e){
+      toast.error("Не получилось выйти с аккаунта!")
+    }
   }
 
   const renderMenu = (
@@ -144,6 +167,7 @@ export default function Header() {
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              onClick={toNotificationsPage}
             >
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
