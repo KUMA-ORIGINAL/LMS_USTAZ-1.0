@@ -4,12 +4,13 @@ const initialState = {
   id: null,
   email: "",
   role: "",
-  firstName: "",
-  lastName: "",
-  birthDate: "",
+  first_name: "",
+  last_name: "",
+  birth_data: "",
   age: 0,
-  phoneNumber: "",
-  profilePicture: "",
+  position:"",
+  phone_number: "",
+  profile_photo: "",
   tokens: {
     refresh: "",
     access: "",
@@ -30,28 +31,28 @@ export const authSlice = createSlice({
         birth_date,
         age,
         phone_number,
-        profile_picture,
+        profile_photo,
+        position,
         tokens,
       } = action.payload;
 
       state.id = id;
       state.email = email;
       state.role = role;
-      state.firstName = first_name;
-      state.lastName = last_name;
-      state.birthDate = birth_date;
+      state.first_name = first_name;
+      state.last_name = last_name;
+      state.birth_data = birth_date;
       state.age = age;
-      state.phoneNumber = phone_number;
-      state.profilePicture = profile_picture;
+      state.phone_number = phone_number;
+      state.profile_photo = profile_photo;
+      state.position = position
       state.tokens = tokens;
 
       localStorage.setItem("user", JSON.stringify(state));
+      localStorage.setItem("token", JSON.stringify(state.tokens.access));
     },
     logout: (state) => {
-      Object.keys(initialState).forEach((key) => {
-        state[key] = initialState[key];
-      });
-      localStorage.removeItem("user");
+      localStorage.clear()
     },
   },
 });

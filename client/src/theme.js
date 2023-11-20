@@ -1,6 +1,9 @@
 import { createContext, useState, useMemo } from "react";
 import { createTheme } from "@mui/material/styles";
 
+
+
+
 export const tokens = (mode) => ({
   ...(mode === "dark"
     ? {
@@ -26,16 +29,16 @@ export const tokens = (mode) => ({
           800: "#080b12",
           900: "#040509",
         },
-        greenAccent: {
-          100: "#dbf5ee",
-          200: "#b7ebde",
-          300: "#94e2cd",
-          400: "#70d8bd",
-          500: "#4cceac",
-          600: "#3da58a",
-          700: "#2e7c67",
-          800: "#1e5245",
-          900: "#0f2922",
+        iceAccent: {
+          100: "#ccdefc",
+          200: "#99bdfa",
+          300: "#669bf7",
+          400: "#337af5",
+          500: "#0059f2",
+          600: "#0047c2",
+          700: "#003591",
+          800: "#002461",
+          900: "#001230"
         },
         redAccent: {
           100: "#f8dcdb",
@@ -49,15 +52,15 @@ export const tokens = (mode) => ({
           900: "#2c100f",
         },
         blueAccent: {
-          100: "#e1e2fe",
-          200: "#c3c6fd",
-          300: "#a4a9fc",
-          400: "#868dfb",
-          500: "#6870fa",
-          600: "#535ac8",
-          700: "#3e4396",
-          800: "#2a2d64",
-          900: "#151632",
+          100: "#d0e2f6",
+          200: "#a1c5ed",
+          300: "#73a7e3",
+          400: "#448ada",
+          500: "#156dd1",
+          600: "#1157a7",
+          700: "#0d417d",
+          800: "#082c54",
+          900: "#04162a"
         },
       }
     : {
@@ -83,16 +86,16 @@ export const tokens = (mode) => ({
           800: "#a1a4ab",
           900: "#d0d1d5",
         },
-        greenAccent: {
-          100: "#0f2922",
-          200: "#1e5245",
-          300: "#2e7c67",
-          400: "#3da58a",
-          500: "#4cceac",
-          600: "#70d8bd",
-          700: "#94e2cd",
-          800: "#b7ebde",
-          900: "#dbf5ee",
+        iceAccent: {
+          100: "#001230",
+          200: "#002461",
+          300: "#003591",
+          400: "#0047c2",
+          500: "#0059f2",
+          600: "#337af5",
+          700: "#669bf7",
+          800: "#99bdfa",
+          900: "#ccdefc",
         },
         redAccent: {
           100: "#2c100f",
@@ -106,15 +109,15 @@ export const tokens = (mode) => ({
           900: "#f8dcdb",
         },
         blueAccent: {
-          100: "#151632",
-          200: "#2a2d64",
-          300: "#3e4396",
-          400: "#535ac8",
-          500: "#6870fa",
-          600: "#868dfb",
-          700: "#a4a9fc",
-          800: "#c3c6fd",
-          900: "#e1e2fe",
+          100: "#04162a",
+          200: "#082c54",
+          300: "#0d417d",
+          400: "#1157a7",
+          500: "#156dd1",
+          600: "#448ada",
+          700: "#73a7e3",
+          800: "#a1c5ed",
+          900: "#d0e2f6",
         },
       }),
 });
@@ -131,7 +134,7 @@ export const themeSettings = (mode) => {
               main: colors.primary[500],
             },
             secondary: {
-              main: colors.greenAccent[500],
+              main: colors.iceAccent[500],
             },
             neutral: {
               dark: colors.grey[700],
@@ -147,7 +150,7 @@ export const themeSettings = (mode) => {
               main: colors.primary[100],
             },
             secondary: {
-              main: colors.greenAccent[100],
+              main: colors.iceAccent[100],
             },
             neutral: {
               dark: colors.grey[700],
