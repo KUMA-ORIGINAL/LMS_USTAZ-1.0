@@ -134,8 +134,9 @@ const SideBar = () => {
               variant="contained"
               startIcon={isCollapsed ? null : <AddIcon />}
             >
-              {isCollapsed ? <AddIcon /> : 'Новая группа'}
+              <Link to="/mentor/create-course">{isCollapsed ? <AddIcon /> : 'Новая группа'}</Link>
             </Button>
+        
             <Typography
               variant="h6"
               color={colors.grey[300]}

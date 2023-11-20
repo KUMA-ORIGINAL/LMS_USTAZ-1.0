@@ -6,13 +6,18 @@ import CourseService from '../../../services/CourseService'
 const MentorHome = () => {
   const [data, setData] = useState([]);
 
-  async function getCourse(){
-    try{
-      const response  = await CourseService.getCourse();
-      console.log(response.data)
-      setData(response.data)
-    }catch(e){
-      console.log(e);
+  async function getCourse() {
+    try {
+      const response = await CourseService.getCourse();
+      console.log(response.data);
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+        console.error("Response headers:", error.response.headers);
+      }
     }
   }
   return (
