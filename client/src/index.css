@@ -1,19 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;900&display=swap');
 
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Montserrat", sans-serif, serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif, serif;
 }
 
 html {
-  /* --main-color:#3F8CFF;
-  --secondary-color:#599bff;
-  --active-color:#0063f7; */
   scroll-behavior: smooth;
 }
-
 
 
 html, 
@@ -32,10 +28,6 @@ body{
   max-width: 1200px;
   margin: 0 auto;
 }
-/* .rbc-off-range-bg {
-  background: #444444 !important  ;
-} */
-
 
 @media all and (max-width:480px) {
   .container{
@@ -57,20 +49,17 @@ body{
   overflow-y: scroll;
 }
 
-/* width */
+/* scroll styles */
 ::-webkit-scrollbar {
   width: 5px;
 }
-
-/* Track */
 ::-webkit-scrollbar-track {
   background:  #1F2A40;
 }
-
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: #0059f2;
 }
+
 
 
 .sidebar {

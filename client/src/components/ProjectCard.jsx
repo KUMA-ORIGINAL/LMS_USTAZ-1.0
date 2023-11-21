@@ -1,16 +1,15 @@
-import ProjectImg from "../../assets/images/project.png";
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
+import { useTheme, Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography } from "@mui/material";
+
+
+import { tokens } from "../theme";
+
+
+//import images and icons
+import ProjectImg from "../assets/images/project.png";
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
-import Typography from '@mui/material/Typography';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import { useTheme } from "@mui/material";
-import { tokens } from "../../theme";
+
+
 
 const ProjectCard = ({data}) => {
   const theme = useTheme();
@@ -22,7 +21,7 @@ const ProjectCard = ({data}) => {
     <CardHeader
       avatar={
         <Avatar sx={{ bgcolor: colors.blueAccent[500] }} aria-label="project">
-          R
+          M
         </Avatar>
       }
       title={student}
