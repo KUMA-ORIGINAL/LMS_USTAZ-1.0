@@ -178,7 +178,7 @@ export default function Header() {
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                 variant="dot"
               >
-                <Avatar sx={{ width: 30, height: 30, bgcolor: colors.iceAccent[300] }} alt={user.first_name}
+                <Avatar sx={{ width: 30, height: 30, bgcolor: colors.greenAccent[300] }} alt={user.first_name}
                   src={`http://localhost:8000/${user.profile_photo}`} />
               </StyledBadge>
             </IconButton>

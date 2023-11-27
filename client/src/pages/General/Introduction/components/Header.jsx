@@ -76,9 +76,9 @@ const Header = () => {
                 </a>
               </li>
             </ul>
-          <Link to="/auth" className="header__content-btn" >
-            Войти
-          </Link>
+          <a href="#" className="header__content-btn" >
+            Хочу связаться
+          </a>
         </div>
       </div>
     </div>
@@ -115,9 +115,13 @@ const Header = () => {
       </div>
     
     <div className="headerIntro">
-      <h1> Ustaz<span>School</span></h1>
-      <p className="headerItext">Твой путь в мир Айти!</p>
+      <h1 className="headerInto-title"> Ustaz<span>School</span></h1>
+      <p className="headerItext">Создай лучшую версию себя!</p>
+      <div className="headerIntoWrapper">
+        <a href="">Узнать подробнее</a>
+      </div>
       <img src={DownArrowImg} alt="" className="header__downarrow" />
+      
     </div>
     </div>
     </header>

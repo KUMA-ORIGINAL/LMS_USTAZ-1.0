@@ -1,0 +1,11 @@
+.visit-table{
+    display: grid;
+    grid-template-columns: repeat(5, 85px);
+    grid-template-rows: repeat(3, 85px);
+}
+.visit_box{
+    border: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

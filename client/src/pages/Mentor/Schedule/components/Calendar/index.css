@@ -8,6 +8,10 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 }
+.calendar-header{
+  margin-left: 50px;
+  margin-bottom: 10px;
+}
 .calendar-dates {
   max-width: 1000px;
   margin-left: 50px;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import FolderOpenOutlinedIcon from '@mui/icons-material/FolderOpenOutlined'
 import Typography from '@mui/material/Typography'
 import Lesson from '../Lesson/index'
@@ -7,6 +7,9 @@ import MuiAccordionSummary from '@mui/material/AccordionSummary'
 import MuiAccordionDetails from '@mui/material/AccordionDetails'
 import { styled } from '@mui/material/styles'
 import './index.css'
+import ModuleService from '../../../../../services/ModuleService'
+import {  tokens } from "../../../../../theme";
+import { useTheme } from '@mui/material';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -31,6 +34,7 @@ const AccordionSummary = styled((props) => <MuiAccordionSummary {...props} />)(
     '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
       transform: 'rotate(90deg)',
     },
+    borderRadius:"8px",
     transition: 'height 0.3s ease',
   })
 )
@@ -42,225 +46,63 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   transition: '3s ease',
 }))
 
-const frontend = [
-  {
-    title: 'Направления в IT',
-  },
-  {
-    title: 'Front-end Back-end',
-  },
-  {
-    title: 'Front-end',
-  },
-  {
-    title: 'HTML,CSS,JavaScript',
-  },
-]
-const html = [
-  {
-    title: 'Структура документа',
-  },
-  {
-    title: 'Элементы и атрибуты',
-  },
-  {
-    title: 'Заголовки и абзацы',
-  },
-  {
-    title: 'Списки',
-  },
-]
-const css = [
-  {
-    title: 'Что такое CSS',
-  },
-  {
-    title: 'Селекторы, CSS-свойства, Значение ',
-  },
-  {
-    title: 'flexbox grid',
-  },
-  {
-    title: 'Методология CSS',
-  },
-]
-const javascript = [
-  {
-    title: 'Введение в JavaScript.',
-  },
-  {
-    title: 'Переменные и типы данных в JavaScript.',
-  },
-  {
-    title: 'Операторы и условные выражения.',
-  },
-  {
-    title: 'Функции и область видимости.',
-  },
-]
-const git = [
-  {
-    title: 'Основы Git - Создание Git-репозитория',
-  },
-  {
-    title: 'Принципы работы GitHub',
-  },
-  {
-    title: 'git init, git clone, git add, git commit, git push',
-  },
-  {
-    title: 'Методология CSS',
-  },
-]
 
-const Module = () => {
-  const [expanded, setExpanded] = React.useState('panel1')
+
+
+
+const Module = ({data}) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const [expanded, setExpanded] = useState(false  )
+  const [lectures, setLectures] = useState([])
 
   const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false)
+    setExpanded(newExpanded ?  panel : false)
   }
 
-  
+  const {title, description, id, order} = data
+
+  const getLectures = async () => {
+    try {
+      const response = await ModuleService.getLectures(id);
+      setLectures(response.data)
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+
+  useEffect(() => {
+    getLectures();
+  },[]);
+
+
   return (
     <div className="module-content">
       <Accordion
         expanded={expanded === 'panel1'}
         onChange={handleChange('panel1')}
       >
-        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+        <AccordionSummary  aria-controls="panel1d-content" id="panel1d-header">
           <div className="moduls">
             <div className="">
               <Typography variant="h5" component="div">
-                1.Введение в веб-разработку
+               {order}.{title}
               </Typography>
               <Typography variant="body2">
-                Различие Front-End и Back-end
+               {description}
               </Typography>
             </div>
             <div className="">
-              <button className="module__info-btn">
+              <button className="module__info-btn" style={{background:colors.primary[400]}}>
                 <FolderOpenOutlinedIcon />
                 Изучить
               </button>
             </div>
           </div>
         </AccordionSummary>
-        <AccordionDetails>
-          {frontend.map((lessons, index) => {
-            return <Lesson title={lessons.title} type={'student'} />
-          })}
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === 'panel2'}
-        onChange={handleChange('panel2')}
-      >
-        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <div className="moduls">
-            <div className="">
-              <Typography variant="h5" component="div">
-                2.HTML - Hyper Tetx Markup Language
-              </Typography>
-              <Typography variant="body2">
-                Язык гипертекстовой разметки (.html)
-              </Typography>
-            </div>
-            <div className="">
-              <button className="module__info-btn">
-                <FolderOpenOutlinedIcon />
-                Изучить
-              </button>
-            </div>
-          </div>
-        </AccordionSummary>
-        <AccordionDetails>
-          {html.map((lessons, index) => {
-            return <Lesson title={lessons.title} type={'student'} />
-          })}
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion
-        expanded={expanded === 'panel3'}
-        onChange={handleChange('panel3')}
-      >
-        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <div className="moduls">
-            <div className="">
-              <Typography variant="h5" component="div">
-                3.СSS - Cascading Style Sheet
-              </Typography>
-              <Typography variant="body2">
-                Каскадные таблицы стилей (.css)
-              </Typography>
-            </div>
-            <div className="">
-              <button className="module__info-btn">
-                <FolderOpenOutlinedIcon />
-                Изучить
-              </button>
-            </div>
-          </div>
-        </AccordionSummary>
-        <AccordionDetails>
-          {css.map((lessons, index) => {
-            return <Lesson title={lessons.title} type={'student'} />
-          })}
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion
-        expanded={expanded === 'panel4'}
-        onChange={handleChange('panel4')}
-      >
-        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <div className="moduls">
-            <div className="">
-              <Typography variant="h5" component="div">
-                4.Javascript
-              </Typography>
-              <Typography variant="body2">
-                Язык программирования JavaScript (.js)
-              </Typography>
-            </div>
-            <div className="">
-              <button className="module__info-btn">
-                <FolderOpenOutlinedIcon />
-                Изучить
-              </button>
-            </div>
-          </div>
-        </AccordionSummary>
-        <AccordionDetails>
-          {javascript.map((lessons, index) => {
-            return <Lesson title={lessons.title} type={'student'} />
-          })}
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion
-        expanded={expanded === 'panel5'}
-        onChange={handleChange('panel5')}
-      >
-        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <div className="moduls">
-            <div className="">
-              <Typography variant="h5" component="div">
-                5.Git, Github
-              </Typography>
-              <Typography variant="body2">Git и командная работа</Typography>
-            </div>
-            <div className="">
-              <button className="module__info-btn">
-                <FolderOpenOutlinedIcon />
-                Изучить
-              </button>
-            </div>
-          </div>
-        </AccordionSummary>
-        <AccordionDetails>
-          {git.map((lessons, index) => {
-            return <Lesson title={lessons.title} type={'student'} />
+        <AccordionDetails>{lectures.length === 0 ? "Уроков нет" : 
+          lectures.map((lessons, index) => {
+            return <Lesson title={lessons.title} order={lessons.order}  id={lessons.id} type={'student'} />
           })}
         </AccordionDetails>
       </Accordion>

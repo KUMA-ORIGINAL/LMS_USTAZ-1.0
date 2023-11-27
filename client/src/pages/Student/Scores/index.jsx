@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
 import ScoreTable from '../../Mentor/StudentsRating/components/ScoreTable'
 import { Line } from "react-chartjs-2"
+import { Bar } from 'react-chartjs-2';
+import "./index.css"
 import { Chart as ChartJs } from "chart.js/auto"
-import { useTheme } from '@mui/material';
+import { useTheme, Button } from '@mui/material';
 
 const StudentScores = () => {
   //testing data
@@ -139,14 +141,81 @@ const StudentScores = () => {
       },
     },
   };
+  
 
+
+  const [streak, setStreak] = useState(0);
+  const [visits, setVisits] = useState([
+    { date: '01.01', status: true },
+    { date: '01.01', status: true },
+    { date: '01.02', status: true },
+    { date: '01.03', status: true },
+    { date: '01.04', status: false },
+    { date: '01.05', status: true },
+    { date: '01.06', status: false },
+    { date: '01.07', status: true },
+  ]);
+
+  const updateStreak = () => {
+    const currentStreak = calculateStreak(visits);
+    setStreak(currentStreak);
+  };
   const [getdata, setgetData] = useState(generateRandomData());
+  const calculateStreak = (visits) => {
+    let currentStreak = 0;
+
+    for (let i = 0; i < visits.length; i++) {
+      if (visits[i].status) {
+        currentStreak++;
+      } else {
+        currentStreak = 0;
+      }
+
+      if (currentStreak === 15) {
+        console.log('Streak of 15 achieved!');
+      }
+    }
+
+    return currentStreak;
+  };
   return (
     <div className="content">
-      <ScoreTable data={data} onScoreChange={handleScoreChange} />
-      <div style={{ width: "950px", margin: "50px auto" }}>
-          <Line data={getdata} options={options} />
+        <div>
+        <div className="profileinfo">
+          <h2>Мои достижения</h2>
+          <div className="profile__info-metricks">
+            <div className="profile__metric-card">
+              <p className="pm__card-title">Место в рейтинге</p>
+              <p className="pm__card-metric">1</p>
+            </div>
+            <div className="profile__metric-card">
+              <p className="pm__card-title">Всего баллов</p>
+              <p className="pm__card-metric">150</p>
+            </div>
+            <div className="profile__metric-card">
+              <p className="pm__card-title">Всего наград</p>
+              <p className="pm__card-metric">1</p>
+            </div>
+          </div>
         </div>
+      </div>
+      <h2  style={{ margin: "50px 0px 20px 0px" }}>Мои баллы</h2>
+      <ScoreTable data={data} onScoreChange={handleScoreChange} />
+         <h2 style={{ margin: "50px 0px 20px 0px" }}>Моя активность</h2>
+      <div style={{ height: "270px", display:"flex"}}>
+          <Line data={getdata} options={options} />
+          <div className="visit-table">
+        {visits.map((visit, index) => (
+          <div
+            key={index}
+            className={`visit_box ${visit.status ? 'visited' : 'not-visited'}`}
+          >
+            {visit.status ? '🔥' : '❌'}
+          </div>
+        ))}
+      </div>
+        </div>
+
     </div>
   )
 }

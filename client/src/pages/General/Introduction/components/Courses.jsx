@@ -26,7 +26,7 @@ const Courses = () => {
       </div>
       <div className="intro__courses-card">
           <img src={HTMLImg} alt="" className="intro__cc-img"/>
-          <p  className="intro__cc-suptitle">8 месяцев</p>
+          <p  className="intro__cc-suptitle">9 месяцев</p>
           <h4  className="intro__cc-title">FRONT-END (REACT.JS)</h4>
           <p  className="intro__cc-text">Курс представляет собой  учебный опыт, нацеленный на формирование навыков и знаний, необходимых в области разработки интерфейсов веб-приложений. </p>
           <div className="intro__courses-mentor">
@@ -41,7 +41,7 @@ const Courses = () => {
       </div>
       <div className="intro__courses-card">
           <img src={HTMLImg} alt="" className="intro__cc-img"/>
-          <p  className="intro__cc-suptitle">8 месяцев</p>
+          <p  className="intro__cc-suptitle">9 месяцев</p>
           <h4  className="intro__cc-title">BACK-END (PYTHON - DJANGO)</h4>
           <p  className="intro__cc-text">Присоединяйтесь к нашему  курсу по back-end разработке, который предоставит вам  знания и навыки для создания мощных и эффективных серверных приложений</p>
           <div className="intro__courses-mentor">

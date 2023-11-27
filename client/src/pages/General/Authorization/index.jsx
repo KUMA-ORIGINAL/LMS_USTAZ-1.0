@@ -35,6 +35,7 @@ const Authorization = () => {
           email: response.data.email,
           tokens:response.data.tokens,
         }))
+        
         toast.success("Вы успешно авторизовались!");
         if(response.data.role === "mentor"){
           navigate("/mentor/profile")

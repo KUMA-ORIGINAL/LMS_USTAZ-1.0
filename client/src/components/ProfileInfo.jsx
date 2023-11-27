@@ -1,96 +1,69 @@
-import { IconButton } from '@mui/material';
+import { IconButton, Avatar } from '@mui/material';
 import styled from 'styled-components';
 
 
 //import icons
 import EditIcon from '@mui/icons-material/Edit';
-
-
-//styles
-const StyledTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-`;
-const StyledTh = styled.th`
-  padding: 18px;
-  border: 1px solid #ddd;
-  text-align: left;
-  width: 180px;
-`;
-
-const StyledInput = styled.input`
-  border: none;
-  background: transparent;
-  outline: none;
-  color: gray;
-  font-weight: bold;
-`;
-
-const StyledTd = styled.td`
-  width: 100%;
-  padding: 18px;
-  border: 1px solid #ddd;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Badge from '@mui/material/Badge';
 
 const ProfileInfo = () => {
   const storedUserData = JSON.parse(localStorage.getItem('user')) || {};
 
   return (
-    <StyledTable className="profile-info">
-      <tr>
-        <StyledTh>Фамилия</StyledTh>
-        <StyledTd>
-          <StyledInput type="text" value={storedUserData.last_name || ''} />
-          <IconButton sx={{ padding: '2px' }}>
-            <EditIcon />
-          </IconButton>
-        </StyledTd>
-      </tr>
-      <tr>
-        <StyledTh>Имя</StyledTh>
-        <StyledTd>
-          <StyledInput type="text" value={storedUserData.first_name || ''} />
-          <IconButton sx={{ padding: '2px' }}>
-            <EditIcon />
-          </IconButton>
-        </StyledTd>
-      </tr>
-      <tr>
-        <StyledTh>Telegram</StyledTh>
-        <StyledTd>
-          <StyledInput type="text" value={storedUserData.first_name || ''} />
-          <IconButton sx={{ padding: '2px' }}>
-            <EditIcon />
-          </IconButton>
-        </StyledTd>
-      </tr>
-      <tr>
-        <StyledTh>Номер телефона</StyledTh>
-        <StyledTd>
-          <StyledInput type="text" value={storedUserData.phone_number || ''} />
-          <IconButton sx={{ padding: '2px' }}>
-            <EditIcon />
-          </IconButton>
-        </StyledTd>
-      </tr>
-      <tr>
-        <StyledTh>Пароль</StyledTh>
-        <StyledTd>
-          <StyledInput type="text" value="*******" />
-          <IconButton sx={{ padding: '2px' }}>
-            <EditIcon />
-          </IconButton>
-        </StyledTd>
-      </tr>
-    </StyledTable>
+    <div style={{display:"flex", flexDirection:"column", gap:"20px", width:"100%"}}>
+      <div style={{display:"flex", justifyContent:"space-between"}}>
+        <h3>Личная информация</h3>
+        <Button sx={{bgcolor:"#452fe5"}} variant="contained">Сохранить </Button>
+      </div>
+      <div style={{display:"flex", gap:"20px"}}>
+        <TextField
+          required
+          color='info'
+          id="outlined-required"
+          label="Имя"
+          defaultValue={storedUserData.first_name || ""}
+        />
+                <TextField
+          required
+          color='info'
+          id="outlined-required"
+          label="Фамилия"
+          defaultValue={storedUserData.last_name || ""}
+        />
+      </div>
+      <div>
+        <TextField
+          required
+          color='info'
+          id="outlined-required"
+          label="Email"
+          defaultValue={storedUserData.email || ""}
+        />
+      </div>
+        <div style={{display:"flex", gap:"20px"}}>
+        <TextField
+          required
+          color='info'
+          id="outlined-required"
+          label="Номер телефона"
+          defaultValue={storedUserData.phone_number || ""}
+        />
+               <TextField
+          required
+          color='info'
+          id="outlined-required"
+          label="Telegram"
+          defaultValue={"@mxknb"}
+        />
+        </div>
+        <div style={{display:"flex"}}>
+        <Avatar sx={{width:"100px", height:"100px"}} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        <input type="image" name="" id="" />
+        </div>
+
+    </div>
   );
 };
 

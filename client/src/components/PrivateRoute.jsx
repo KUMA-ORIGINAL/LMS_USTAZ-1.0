@@ -1,12 +1,12 @@
-import { useSelector } from 'react-redux';
-import { selectAuth } from '../../../slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 const PrivateRoute = ({ children }) => {
- const {id} = useSelector(selectAuth)
- const navigate = useNavigate()
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  return id ? children : navigate("/auth");
+  const navigate = useNavigate()
+
+  return user ? children : navigate("/auth");
 };
+
 
 export default PrivateRoute;

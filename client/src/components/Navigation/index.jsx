@@ -1,9 +1,17 @@
 import React from 'react'
 
-const Navigation = () => {
+//import sidebar templates
+import MentorSidebar from './components/MentorSidebar';
+import StudentSidebar from './components/StudentSidebar';
+
+const SideBar = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
-    <>Navigation</>
+    <>
+    {user.role === "mentor" ? <MentorSidebar/> : <StudentSidebar/>} 
+    </>
   )
 }
 
-export default Navigation
+export default SideBar

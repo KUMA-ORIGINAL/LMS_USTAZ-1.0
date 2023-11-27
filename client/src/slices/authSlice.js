@@ -21,7 +21,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser: (state, action) => {
+    setUser: (  state, action) => {
       const {
         id,
         email,
@@ -49,9 +49,10 @@ export const authSlice = createSlice({
       state.tokens = tokens;
 
       localStorage.setItem("user", JSON.stringify(state));
-      localStorage.setItem("token", JSON.stringify(state.tokens.access));
+      localStorage.setItem("token",state.tokens.access);
+      localStorage.setItem("refresh", state.tokens.refresh)
     },
-    logout: (state) => {
+    logout: () => {
       localStorage.clear()
     },
   },

@@ -31,7 +31,7 @@ const Questions = () => {
   return (
     <section id='faq' className="questions">
       <div className="container">
-        <h3 className="questions__title">Часто задаваемые вопросы</h3>
+        <h3 className="metods__title">Ответы на ваши <br /> вопросы</h3>
         <ul className="questions__content">
           {questions.map((item, id) => {
             return (

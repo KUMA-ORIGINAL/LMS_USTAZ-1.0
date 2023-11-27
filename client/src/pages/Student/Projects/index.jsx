@@ -6,7 +6,9 @@ import Modal from "../../../components/Modal"
 
 const StudentProjects = () => {
     const [modal, setModal] = useState(false);
-
+    const [title, setTitle] = useState("")
+    const [date, setDate] = useState("")
+    const [description, setDescription] = useState("")
     return (
         <ProjectWrapper>
             <h2>Загрузить работы</h2>
@@ -19,7 +21,8 @@ const StudentProjects = () => {
                 <ProjectsList />
             </div>
             <Modal active={modal} setActive={setModal}>
-                <h6>Загрузка работы</h6>
+                <p>Загрузка работы</p>
+                <input type="text"  />
             </Modal>
         </ProjectWrapper>
     )

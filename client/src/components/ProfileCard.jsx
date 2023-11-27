@@ -1,7 +1,11 @@
 import { Avatar } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 import styled from 'styled-components';
+import { logout } from '../slices/authSlice';
 
 const StyledProfileCard = styled.div`
   width: 300px;
@@ -57,6 +61,18 @@ const ProfileCard = () => {
   const storedUserData = JSON.parse(localStorage.getItem('user')) || {};
   const { role, last_name, first_name, email } = storedUserData;
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    try {
+      toast.success("Вы успешно вышли с аккаунта!")
+      navigate("/auth")
+      dispatch(logout())
+    } catch (e) {
+      toast.error("Не получилось выйти с аккаунта!")
+    }
+  }
+
   return (
     <StyledProfileCard>
       <RoleBadge>{role || ''}</RoleBadge>
@@ -69,7 +85,7 @@ const ProfileCard = () => {
         <ProfileTitle>{last_name || ''} {first_name || ''}</ProfileTitle>
         <ProfileEmail>{email || ''}</ProfileEmail>
       </StyledProfileWrapper>
-      <LogoutButton>Выйти</LogoutButton>
+      <LogoutButton onClick={handleLogout}>Выйти</LogoutButton>
     </StyledProfileCard>
   );
 };

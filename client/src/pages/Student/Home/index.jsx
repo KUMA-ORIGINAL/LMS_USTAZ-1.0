@@ -4,8 +4,10 @@ import CourseService from '../../../services/CourseService'
 import './index.css'
 import { useEffect, useState } from 'react'
 
+
 const StudentHome = () => {
   const [course, setCourse] = useState([])
+
   async function getCourse() {
     try {
         const response = await CourseService.getCourse();
@@ -16,19 +18,24 @@ const StudentHome = () => {
     }
 }
 
+useEffect(() => {
+  getCourse();
+},[])
+
+const user = JSON.parse(localStorage.getItem("user"));
+
 
   return (
     <section className="student-home">
       <div className="sh__welcome">
-        👋 Как дела, {'Максат'}? Готов покорять мир программирования💻🚀?
+        👋 Как дела, {user.first_name}? Готов покорять мир программирования💻🚀?
       </div>
-      <button onClick={getCourse}>Click</button>
       <div className="sh__content">
         <div className="sh__courses">
           <h2 style={{ margin: "30px 0px" }}>Мои курсы</h2>
           <div className="sh__courses-card">
             {course.map((data) => {
-              return<CourseCard/>  
+              return <CourseCard data={data}/>  
             } )}
           </div>
         </div>

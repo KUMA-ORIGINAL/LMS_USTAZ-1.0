@@ -3,38 +3,42 @@ import Attendens from './components/Attendens';
 
 const MentorVisits = () => {
   const dataFromBackend = {
-    dates: ['01.01', '01.02', '01.03', '01.04', '01.05', '01.06', "01.07"],
     students: [
       {
         name: 'Иванов Иван',
-        visits: ['check', 'check', 'check', 'cancel', 'check', 'cancel', "check"],
+        visits: [
+          { date: '01.01', status: true },
+          { date: '01.02', status: true },
+          { date: '01.03', status: true },
+          { date: '01.04', status: false },
+          { date: '01.05', status: true },
+          { date: '01.06', status: false },
+          { date: '01.07', status: true },
+        ],
       },
       {
-        name: 'Петров Петр',
-        visits: ['check', 'cancel', 'check', 'check', 'cancel', 'check', "cancel"],
+        name: 'Иванов Иван',
+        visits: [
+          { date: '01.01', status: true },
+          { date: '01.02', status: true },
+          { date: '01.03', status: true },
+          { date: '01.04', status: false },
+          { date: '01.05', status: true },
+          { date: '01.06', status: false },
+          { date: '01.07', status: true },
+        ],
       },
       {
-        name: 'Сидоров Алексей',
-        visits: ['check', 'cancel', 'check', 'check', 'cancel', 'check', "cancel"],
-      },
-      {
-        name: 'Козлов Николай',
-        visits: ['check', 'cancel', 'check', 'check', 'cancel', 'check', "cancel"],
-      },
-      {
-        name: 'Морозов Николай',
-        visits: ['check', 'cancel', 'check', 'check', 'cancel', 'check', "cancel"],
-      },
-      {
-        name: 'Васильев Дмитрий',
-        visits: ['check', 'cancel', 'check', 'check', 'cancel', 'check', "cancel"],
-      },      {
-        name: 'Павлов Андрей',
-        visits: ['check', 'cancel', 'check', 'check', 'cancel', 'check', "cancel"],
-      },
-      {
-        name: 'Федоров Артем',
-        visits: ['check', 'check', 'check', 'check', 'cancel', 'check', "cancel"],
+        name: 'Иванов Иван',
+        visits: [
+          { date: '01.01', status: true },
+          { date: '01.02', status: false },
+          { date: '01.03', status: false },
+          { date: '01.04', status: false },
+          { date: '01.05', status: true },
+          { date: '01.06', status: false },
+          { date: '01.07', status: true },
+        ],
       },
     ],
   };

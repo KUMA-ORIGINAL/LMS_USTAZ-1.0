@@ -1,189 +1,73 @@
+import { useState, useEffect } from 'react';
+import ScheduleService from '../../../services/ScheduleService';
 import Calendar from './components/Calendar';
+import Modal from '../../../components/Modal';
 
 const MentorSchedule = () => {
-  const lessonsData = [
-    {
-      id: 1,
-      title: 'Введение в веб разработку',
-      date: '2023-11-01',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 1',
-    },
-    {
-      id: 2,
-      title: 'Занятие 2',
-      date: '2023-11-03',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 3,
-      title: 'Занятие 3',
-      date: '2023-11-06',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 4,
-      title: 'Занятие 4',
-      date: '2023-11-08',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 5,
-      title: 'Занятие 5',
-      date: '2023-11-10',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 6,
-      title: 'Занятие 5',
-      date: '2023-11-13',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 7,
-      title: 'Занятие 5',
-      date: '2023-11-15',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 8,
-      title: 'Занятие 5',
-      date: '2023-11-17',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 9,
-      title: 'Занятие 5',
-      date: '2023-11-20',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 10,
-      title: 'Занятие 5',
-      date: '2023-11-22',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 11,
-      title: 'Занятие 5',
-      date: '2023-11-24',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 1,
-      title: 'Введение в веб разработку',
-      date: '2023-12-01',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 1',
-    },
-    {
-      id: 2,
-      title: 'Занятие 2',
-      date: '2023-12-04',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 3,
-      title: 'Занятие 3',
-      date: '2023-12-06',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 4,
-      title: 'Занятие 4',
-      date: '2023-12-08',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 5,
-      title: 'Занятие 5',
-      date: '2023-12-11',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 6,
-      title: 'Занятие 5',
-      date: '2023-12-13',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 7,
-      title: 'Занятие 5',
-      date: '2023-12-15',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 8,
-      title: 'Занятие 5',
-      date: '2023-12-18',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 9,
-      title: 'Занятие 5',
-      date: '2023-12-20',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 10,
-      title: 'Занятие 5',
-      date: '2023-12-22',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-    {
-      id: 11,
-      title: 'Занятие 5',
-      date: '2023-12-25',
-      startTime: '15:30',
-      endTime: '17:00',
-      description: 'Описание занятия 2',
-    },
-  ];
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const [lesson, setLesson] = useState([]);
+  const [modal, setModal] = useState(false)
+  const [title, setTitle] = useState("");
+  const [selectedDate, setSelectedDate] = useState('');
+  const [startTime, setStartTime] = useState("")
+  const [endTime, setEndTime] = useState("");
+
+  const getSchedule = async () => {
+    try {
+      const response = await ScheduleService.getSchedule(11);
+      setLesson(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+
+  useEffect(() => {
+    getSchedule();
+  }, [])
+
+  const uniqueMonths = [...new Set(lesson.map(data => data.date.split('-')[1]))];
+
+  const createSchedule = async() =>{
+    try {
+      const newData = {
+          title: title,
+          description: "string",
+          date: selectedDate,
+          start_time: startTime,
+          end_time: endTime,
+          course: 11
+      }
+      const response  = await ScheduleService.createSchedule(newData);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
 
   return (
     <div>
-      <Calendar year={2023} month={10} lessons={lessonsData} />
-      <Calendar year={2023} month={11 } lessons={lessonsData} />
+     {user.role === "mentor" ?  <button onClick={() => setModal(true)}>Добавить занятие</button> : null}
+      {uniqueMonths.map(month => {
+        const firstLessonOfMonth = lesson.find(data => data.date.split('-')[1] === month);
+        if (firstLessonOfMonth) {
+          const year = firstLessonOfMonth.date.split('-')[0];
+          return <Calendar key={`${year}-${month}`} year={year} month={month - 1} lessons={lesson} />;
+        }
+        return null;
+      })}
+      {user.role === "mentor" ? 
+    <Modal active={modal} setActive={setModal}>
+      <div className="" style={{display:"flex", flexDirection:"column"}}>
+      <h3 style={{color:"black"}}>Добавить занятие</h3>
+      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Название темы' style={{padding:"15px", margin:"10px 0px"}}/>
+      <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} style={{padding:"15px", margin:"10px 0px"}} />
+      <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} style={{padding:"15px", margin:"10px 0px"}} />
+      <input type="date" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)}   pattern="\d{4}-\d{2}-\d{2}"  placeholder="yyyy-mm-dd"/>
+      <button onClick={createSchedule} >Сохранить занятие</button>
+      </div>
+    </Modal> : null}
     </div>
   );
 };

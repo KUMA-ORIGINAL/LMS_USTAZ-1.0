@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import "./index.css"
 import Modal from '../../../../../components/Modal';
-import TextEditor from '../TextEditor/index.';
+// import TextEditor from '../TextEditor/index.';
 
 const Lesson = ({title}) => {
   const [modal, setModal] = useState(false);
@@ -17,7 +17,7 @@ const Lesson = ({title}) => {
         <EditIcon/>
         </button>
         <Modal active={modal} setActive={setModal}>
-        <TextEditor/>
+        {/* <TextEditor/> */}
       </Modal>
     </Paper>
   )

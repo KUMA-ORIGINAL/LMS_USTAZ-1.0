@@ -9,7 +9,8 @@ import WestIcon from '@mui/icons-material/West';
 import EastIcon from '@mui/icons-material/East';
 
 
-const Attendens = ({data}) => {
+const 
+Attendens = ({data}) => {
     const [visibleIndex, setVisibleIndex] = useState(0);
     const [highlightedHeader, setHighlightedHeader] = useState(null);
 
@@ -42,8 +43,8 @@ const Attendens = ({data}) => {
           <tr>
             <th>№</th>
             <th>ФИО</th>
-            {data.dates.slice(visibleIndex, visibleIndex + numberOfItemsToShow).map((date, index) => (
-              <th key={index}>{date}</th>
+            {data.students[0]?.visits.slice(visibleIndex, visibleIndex + numberOfItemsToShow).map((visit, index) => (
+              <th key={index}>{visit.date}</th>
             ))}
           </tr>
         </thead>
@@ -51,11 +52,14 @@ const Attendens = ({data}) => {
           {data.students.map((student, studentIndex) => (
             <tr key={studentIndex}>
               <td>{studentIndex + 1}</td>
-              <td 
-              className={highlightedHeader === student.name ? 'highlighted' : ''}>{student.name}</td>
-              {student.visits.slice(visibleIndex, visibleIndex + numberOfItemsToShow).map((visitStatus, visitIndex) => (
-                <td onMouseEnter={() => handleTdHover(student.name)} onMouseLeave={handleTdMouseLeave}  key={visitIndex}>
-                  {visitStatus === 'check' ? (
+              <td className={highlightedHeader === student.name ? 'highlighted' : ''}>{student.name}</td>
+              {student.visits.slice(visibleIndex, visibleIndex + numberOfItemsToShow).map((visit, visitIndex) => (
+                <td
+                  onMouseEnter={() => handleTdHover(student.name)}
+                  onMouseLeave={handleTdMouseLeave}
+                  key={visitIndex}
+                >
+                  {visit.status ? (
                     <CheckIcon />
                   ) : (
                     <CancelIcon />
@@ -67,8 +71,8 @@ const Attendens = ({data}) => {
         </tbody>
       </table>
       <div>
-        <button onClick={showPreviousSet}><WestIcon/></button>
-        <button onClick={showNextSet}><EastIcon/></button>
+        <button onClick={showPreviousSet}><WestIcon /></button>
+        <button onClick={showNextSet}><EastIcon /></button>
       </div>
       <div>
         <span>Дни {visibleIndex} из {numberOfItemsToShow}</span>
