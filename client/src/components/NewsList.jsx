@@ -1,5 +1,5 @@
 import React from 'react';
-import NewsCard from '../NewsCard';
+import NewsCard from './NewsCard';
 import styled from 'styled-components';
 
 const NewsList = () => {

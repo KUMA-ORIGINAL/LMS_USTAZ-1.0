@@ -1,13 +1,23 @@
+import styled from "styled-components";
+
+//import components
 import ProfileCard from "../../../components/ProfileCard";
 import ProfileInfo from "../../../components/ProfileInfo";
-import "./index.css";
+
+
+//styles
+const StyledSection = styled.section`
+  padding: 50px;
+  display: flex;
+  column-gap: 50px;
+`
 
 const MentorProfile = () => {
   return (
-    <section>
+    <StyledSection>
       <ProfileCard/>
       <ProfileInfo/>
-    </section>
+    </StyledSection>
   );
 };
 

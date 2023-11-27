@@ -1,10 +1,12 @@
 import {useState} from 'react'
 import Module from './components/Module/index';
 import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
-import "./index.css";
 import Modal from '../../../components/Modal';
 import { useTheme } from "@mui/material";
 import { tokens } from "../../../theme";
+import "./index.css";
+
+
 
 const StudentCourse = () => {
   const [modal, setModal] = useState(false);

@@ -1,12 +1,6 @@
-import React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { useTheme } from "@mui/material";
-import { tokens } from "../../theme";
+import { useTheme, Card, CardActions, CardMedia, CardContent, Typography, Button } from "@mui/material";
+import { tokens } from "../theme";
+
 
 const NewsCard = ({ title, description, date, imageUrl }) => {
   const theme = useTheme();
@@ -15,7 +9,7 @@ const NewsCard = ({ title, description, date, imageUrl }) => {
   const truncatedDescription = description.length > 150
   ? description.slice(0, 120) + '...'  
   : description;
-  
+
   return (
     <Card sx={{ maxWidth: 320, maxHeight:400,  background:colors.primary[400]}}>
       <CardMedia

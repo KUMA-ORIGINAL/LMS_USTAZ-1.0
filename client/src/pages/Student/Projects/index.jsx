@@ -2,7 +2,7 @@ import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUpload
 import ProjectsList from './components/ProjectsList';
 import styled from "styled-components";
 import { useState } from 'react';
-import Modal from "../../../components/Modal/index"
+import Modal from "../../../components/Modal"
 
 const StudentProjects = () => {
     const [modal, setModal] = useState(false);
