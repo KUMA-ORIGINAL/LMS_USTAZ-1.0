@@ -6,9 +6,12 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .models import User, ProfileStudent, Attendance
+from course.models import Course, Schedule
+from course.serializers import CourseSerializer
+from .models import User, ProfileStudent, Attendance, ProjectStudent
 from .permissions import IsAdminOrMentorOrReadPermission
-from .serializers import UserSerializer, ProfileStudentSerializer, UserLoginSerializer, AttendanceSerializer
+from .serializers import UserSerializer, ProfileStudentSerializer, UserLoginSerializer, AttendanceSerializer, \
+    ProjectStudentSerializer
 
 
 class UserLoginAPIView(GenericAPIView):
@@ -22,6 +25,19 @@ class UserLoginAPIView(GenericAPIView):
         serializer = UserSerializer(user)
         token = RefreshToken.for_user(user)
         data = serializer.data
+        match data['role']:
+            case 'student':
+                student_courses = Course.objects.filter(students=user)
+                student_course_serializer = CourseSerializer(student_courses, many=True)
+                data["student_courses"] = student_course_serializer.data
+            case 'mentor':
+                mentor_courses = Course.objects.filter(mentor=user)
+                mentor_course_serializer = CourseSerializer(mentor_courses, many=True)
+                data['mentor_courses'] = mentor_course_serializer.data
+            case 'assistant':
+                assistant_courses = Course.objects.filter(assistant=user)
+                assistant_course_serializer = CourseSerializer(assistant_courses, many=True)
+                data["assistant_courses"] = assistant_course_serializer.data
         data["tokens"] = {"refresh": str(token), "access": str(token.access_token)}
         return Response(data, status=status.HTTP_200_OK)
 
@@ -45,8 +61,9 @@ class UserView(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        queryset = User.objects.all()
         role = self.request.query_params.get('role')
+
+        queryset = User.objects.all()
         if role is not None:
             queryset = queryset.filter(role=role)
         return queryset
@@ -63,14 +80,12 @@ class ProfileStudentView(viewsets.ModelViewSet):
         max_points = self.request.query_params.get('max_points')
 
         queryset = ProfileStudent.objects.all()
-
         if course_id is not None:
             queryset = queryset.filter(course_id=course_id)
         if min_points is not None:
             queryset = queryset.filter(points__gte=min_points)
         if max_points is not None:
             queryset = queryset.filter(points__lte=max_points)
-
         queryset = queryset.annotate(rank=Window(expression=Rank(), order_by=F('points').desc()))
 
         return queryset
@@ -80,3 +95,30 @@ class AttendanceView(viewsets.ModelViewSet):
     queryset = Attendance.objects.all()
     serializer_class = AttendanceSerializer
     permission_classes = [IsAdminOrMentorOrReadPermission]
+
+    def get(self, request, *args, **kwargs):
+        schedules = Schedule.objects.all()  # Получаем все расписания
+        students_data = []
+
+        for schedule in schedules:
+            # Получаем все посещения для данного расписания
+            attendances = Attendance.objects.filter(schedule=schedule)
+            students_attendance = StudentAttendanceSerializer(attendances, many=True).data
+
+            # Добавляем информацию о студентах и их посещаемости в общий список
+            students_data.extend(students_attendance)
+
+        return Response({'students': students_data})
+
+
+class ProjectStudentView(viewsets.ModelViewSet):
+    serializer_class = ProjectStudentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user_id = self.request.query_params.get('user_id')
+
+        queryset = ProjectStudent.objects.all()
+        if user_id is not None:
+            queryset = queryset.filter(user_id=user_id)
+        return queryset

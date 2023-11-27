@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
@@ -26,21 +25,21 @@ class Course(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='course/%Y/%m/%d')
+    photo = models.ImageField(upload_to='course/')
     start_month = models.DateField()
     end_month = models.DateField()
     days_of_week = models.CharField(max_length=14)
     start_time = models.TimeField()
     end_time = models.TimeField()
-    mentor = models.ForeignKey(settings.AUTH_USER_MODEL,
+    mentor = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='courses_mentor',
                                limit_choices_to={'role': 'mentor'})
-    assistant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL,
+    assistant = models.ForeignKey(User, on_delete=models.SET_NULL,
                                   null=True, blank=True,
                                   related_name='courses_assisting',
                                   limit_choices_to={'role': 'mentor'})
-    students = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='courses_enrolled',
+    students = models.ManyToManyField(User, related_name='courses_enrolled',
                                       limit_choices_to={'role': 'student'})
     is_completed = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -78,7 +77,7 @@ class Content(models.Model):
                                related_name='contents',
                                on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    content_html = models.TextField()
     order = OrderField(blank=True, for_fields=['module'])
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -97,7 +96,7 @@ class Task(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     due_date = models.DateTimeField()
     max_score = models.PositiveIntegerField()
-    description = models.TextField()
+    content_html = models.TextField()
 
     def __str__(self):
         return self.title
@@ -134,3 +133,7 @@ class Schedule(models.Model):
 
     def __str__(self):
         return f'{self.title} | {self.date}'
+
+
+class ImageUpload(models.Model):
+    image = models.ImageField(upload_to='content_html/images/')

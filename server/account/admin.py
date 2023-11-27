@@ -1,23 +1,63 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from django.utils.safestring import mark_safe
 
-from .models import User, ProfileStudent, Award, Attendance
+from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .models import User, ProfileStudent, Award, Attendance, ProjectStudent
+
+
+class ProfileInline(admin.StackedInline):
+    model = ProfileStudent
+    can_delete = False
+    verbose_name_plural = "Profile"
 
 
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'email', 'first_name', 'last_name', 'role')
+class UserAdmin(UserAdmin):
+    fieldsets = (
+        (None, {"fields": ("email", "password")}),
+        (
+            "Permissions",
+            {
+                "fields": (
+                    "is_staff",
+                    "is_active",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
+                )
+            },
+        ),
+        ("Dates", {"fields": ("last_login", "date_joined")}),
+        ('required', {
+                 'fields': ('phone_number', 'telegram', 'first_name', 'last_name', 'role', 'position',
+                            'profile_photo', 'get_photo')})
+    )
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": (
+                    "email",
+                    "password1",
+                    "password2",
+                ),
+            },
+        ),
+    )
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+
+    model = User
+
+    ordering = ["email"]
+
+    inlines = (ProfileInline,)
+
+    list_display = ('id', 'email', 'first_name', 'last_name', 'role', 'telegram')
     list_display_links = ('id', 'email')
     list_filter = ('role',)
-    fieldsets = (
-        ('None', {
-            'fields': ('last_login', 'is_superuser', 'is_staff', 'is_active', 'date_joined')
-        }),
-        ('required', {
-            'fields': ('email', 'password', 'phone_number', 'first_name', 'last_name', 'role', 'position',
-                       'birth_date', 'profile_photo', 'get_photo')
-        }),
-    )
     readonly_fields = ('get_photo',)
 
     def get_photo(self, obj):
@@ -34,13 +74,19 @@ class AwardAdmin(admin.ModelAdmin):
 
 @admin.register(ProfileStudent)
 class ProfileStudentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'student', 'course', 'points']
-    list_display_links = ['id', 'student']
+    list_display = ['id', 'user', 'course', 'points']
+    list_display_links = ['id', 'user']
 
 
 @admin.register(Attendance)
 class AttendanceAdmin(admin.ModelAdmin):
-    list_display = ('student', 'schedule', 'is_present')
+    list_display = ('id', 'user', 'schedule', 'is_present')
     list_filter = ('schedule', 'is_present')
-    search_fields = ('student__first_name', 'student__last_name', 'schedule__title')
-    ordering = ('schedule', 'student')
+    search_fields = ('user__first_name', 'user__last_name', 'schedule__title')
+    ordering = ('schedule', 'user')
+
+
+@admin.register(ProjectStudent)
+class ProjectStudentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'type_of_project', 'user', 'created')
+    list_filter = ('type_of_project', 'user')

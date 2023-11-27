@@ -1,12 +1,13 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.parsers import MultiPartParser, FormParser
 
 from account.permissions import IsAdminOrMentorOrReadPermission
-from .models import Course, Module, Content, Task, Solution, Schedule
+from .models import Course, Module, Content, Task, Solution, Schedule, ImageUpload
 from .serializers import CourseSerializer, ModuleSerializer, ContentSerializer, TaskSerializer, SolutionSerializer, \
-    ScheduleSerializer, ScoreSerializer
+    ScheduleSerializer, ScoreSerializer, ImageUploadSerializer
 
 
 class CourseView(viewsets.ModelViewSet):
@@ -112,7 +113,7 @@ class ScheduleView(viewsets.ModelViewSet):
         return queryset
 
 
-# class ExamView(viewsets.ModelViewSet):
-#     queryset = Exam.objects.all()
-#     serializer_class = ContentSerializer
-#     permission_classes = [IsAdminOrMentorOrReadPermission]
+class ImageUploadView(generics.CreateAPIView):
+    serializer_class = ImageUploadSerializer
+    queryset = ImageUpload.objects.all()
+    permission_classes = [IsAdminOrMentorOrReadPermission]
