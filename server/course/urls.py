@@ -15,3 +15,4 @@ urlpatterns = [
     path('image-upload/', ImageUploadView.as_view(), name='image-upload'),
     path('', include(router.urls)),
 ]
+
