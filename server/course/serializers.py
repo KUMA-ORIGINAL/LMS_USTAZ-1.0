@@ -1,13 +1,24 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from .models import Course, Module, Content, Task, Solution, Schedule
+from .models import Course, Module, Content, Task, Solution, Schedule, ImageUpload
+
+
+class MentorSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = get_user_model()
+        fields = ('id', 'first_name', 'last_name')
 
 
 class CourseSerializer(serializers.ModelSerializer):
+    mentor = MentorSerializer()
+    assistant = MentorSerializer()
 
     class Meta:
         model = Course
-        fields = '__all__'
+        fields = ('id', 'title', 'description', 'photo', 'start_month', 'end_month', 'days_of_week',
+                  'start_time', 'end_time', 'mentor', 'assistant', 'students', 'is_completed', 'created')
 
 
 class ModuleSerializer(serializers.ModelSerializer):
@@ -47,9 +58,7 @@ class ScoreSerializer(serializers.Serializer):
     students = serializers.ListField(child=serializers.DictField())
 
 
-
-# class ExamSerializer(serializers.ModelSerializer):
-#
-#     class Meta:
-#         model = Exam
-#         fields = '__all__'
+class ImageUploadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImageUpload
+        fields = ('id', 'image')

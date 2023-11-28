@@ -3,6 +3,7 @@ from datetime import timedelta
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from account.models import Attendance
 from course.models import Course, Schedule, Solution
 
 
@@ -17,7 +18,7 @@ def create_schedule(sender, instance, created, **kwargs):
         while start_date <= end_date:
             if start_date.weekday() in days_of_week:
                 # Создайте событие расписания для выбранного дня
-                schedule = Schedule(
+                Schedule.objects.create(
                     title=instance.title,
                     description=instance.description,
                     date=start_date,
@@ -25,8 +26,13 @@ def create_schedule(sender, instance, created, **kwargs):
                     end_time=instance.end_time,
                     course=instance,
                 )
-                schedule.save()
             start_date += timedelta(days=1)
+
+
+# @receiver(post_save, sender=Schedule)
+# def create_attendance(sender, instance, created, **kwargs):
+#     if created:
+#         Attendance.objects.create(schedule=instance)
 
 
 @receiver(post_save, sender=Solution)
