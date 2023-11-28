@@ -42,6 +42,20 @@ class AttendanceSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ListAttendanceSerializer(serializers.ModelSerializer):
+    date = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Attendance
+        fields = ('date', 'is_present')
+
+    def get_date(self, obj):
+        schedule = obj.schedule
+        if schedule:
+            return schedule.date.strftime('%d.%m')
+        return ''
+
+
 class ProjectStudentSerializer(serializers.ModelSerializer):
 
     class Meta:
