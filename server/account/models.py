@@ -104,14 +104,14 @@ class Attendance(models.Model):
 class ProjectStudent(models.Model):
     TYPE_OF_PROJECT_CHOICES = (
         ('practical_work', 'Практическая работа'),
-        ('independent work', 'Cамостоятельная работа'),
-        ('Project', 'Проект')
+        ('independent_work', 'Cамостоятельная работа'),
+        ('project', 'Проект')
     )
     RATING_CHOICES = (
-        (1, '1 звезда'),
-        (2, '2 звезды'),
-        (3, '3 звезды'),
-        (4, '4 звезды'),
+        (1, '1 звезд'),
+        (2, '2 звезд'),
+        (3, '3 звезд'),
+        (4, '4 звезд'),
         (5, '5 звезд'),
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'student'})
@@ -121,4 +121,7 @@ class ProjectStudent(models.Model):
     content_html = models.TextField()
     photo = models.ImageField(upload_to='project_photos/', blank=True)
     created = models.DateTimeField(auto_now_add=True)
-    stars = models.IntegerField(choices=RATING_CHOICES)
+    stars = models.IntegerField(choices=RATING_CHOICES, blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.title} {self.user}'
