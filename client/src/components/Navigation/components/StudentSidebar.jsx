@@ -11,11 +11,14 @@ import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined
 import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { tokens } from "../../../theme";
+import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 import SchoolIcon from '@mui/icons-material/School';
 import Ustaz from "../../../assets/images/orn.png";
-
+import { useEffect} from 'react'
+import { fetchAllCourses, selectCourses, selectLoading, selectError} from "../../../slices/CourseSlice"
+import { useDispatch, useSelector } from 'react-redux';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -36,12 +39,27 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const StudentSidebar = () => {
+  const dispatch = useDispatch();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const courses = useSelector(selectCourses);
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  const handleCourseClick = (courseId) => {
+    sessionStorage.setItem('selectedCourseId', courseId);
+  };
+  useEffect(() => {
+    if (user.student_courses) {
+      dispatch(fetchAllCourses(user.student_courses));
+    }
+  }, [handleCourseClick]);
 
   const theme = useTheme();
 
   const colors = tokens(theme.palette.mode);
+
+const storedId = sessionStorage.getItem('selectedCourseId');
+
   return (
     <Box
       sx={{
@@ -118,7 +136,8 @@ const StudentSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-
+            {storedId !== null && storedId !== undefined ? 
+            <>
             <Typography
               variant="h6"
               color={colors.grey[300]}
@@ -167,6 +186,25 @@ const StudentSidebar = () => {
               >
                 {isCollapsed ? <AddIcon /> : 'Новый проект'}
               </Button>
+              </> :             (
+              courses && courses.map((data) => (
+                <Button
+                sx={{
+                  m: "15px 0 5px 20px",
+                  bgcolor: colors.blueAccent[700],
+                  ':hover': { bgcolor: colors.blueAccent[800] },
+                  maxWidth: isCollapsed ? "30px" : "none",
+                  minWidth: "0 !important",
+                }}
+                variant="contained"
+                onClick={() => handleCourseClick(data.id)}
+                startIcon={isCollapsed ? null : <BookOutlinedIcon />}
+              >
+                {isCollapsed ? <BookOutlinedIcon/>  : data.title}
+              </Button>
+              ))
+             ) 
+              }
               <img style={{opacity:0.4, height:"150px", position:"absolute",zIndex:"-1", top:"600px", left:"-300px", rotate:"90deg"}} src={Ustaz} alt="" />
           </Box>
         </Menu>

@@ -59,7 +59,7 @@ const RoleBadge = styled.div`
 
 const ProfileCard = () => {
   const storedUserData = JSON.parse(localStorage.getItem('user')) || {};
-  const { role, last_name, first_name, email } = storedUserData;
+  const { role, last_name, first_name, email, profile_photo, telegram } = storedUserData;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -78,7 +78,7 @@ const ProfileCard = () => {
       <RoleBadge>{role || ''}</RoleBadge>
       <Avatar
         alt={first_name}
-        src="/static/images/avatar/1.jpg"
+        src={`http://localhost:8000/${profile_photo}`}
         sx={{ width: 130, height: 130, bgcolor: "#0d417d", color: "white", border: '1px solid white' }}
       />
       <StyledProfileWrapper>

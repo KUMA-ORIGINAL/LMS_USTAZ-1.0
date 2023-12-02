@@ -1,8 +1,8 @@
 import $api from "../http";
 
 export default class ModuleService{
-    static async getModule(){
-        return $api.get("course/module/?course_id=11")
+    static async getModule(id){
+        return $api.get(`course/module/?course_id=${id}`)
     }
     static async getLectures(id){
         return $api.get(`course/content/?module_id=${id}`)
@@ -15,5 +15,8 @@ export default class ModuleService{
     }
     static async createContent({title, description, module}){
         return $api.post("course/content/", {title, description, module})
+    }
+    static async imageUpload(img){
+        return $api.post("/image", {img})
     }
 }

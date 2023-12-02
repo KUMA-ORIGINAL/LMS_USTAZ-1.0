@@ -15,7 +15,8 @@
 .profile__info-metricks{
   margin-top: 20px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  row-gap: 20px;
 }
 .profile__metric-card{
   width: 250px;
@@ -23,6 +24,10 @@
   border: 1px solid white;
   box-shadow: 1px 3px 5px 5px rgba(0, 0, 0, 0.15);
   padding: 8px 20px;
+}
+.pwrapper{
+  display: flex;
+  column-gap: 50px;
 }
 .pm__card-title{
   color: grey;

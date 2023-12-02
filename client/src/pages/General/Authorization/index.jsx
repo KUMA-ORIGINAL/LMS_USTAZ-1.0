@@ -20,21 +20,21 @@ const Authorization = () => {
     try{
       const response = await AuthService.login(email, password);
       console.log(response.data);
-      dispatch(
-        setUser({
-          accessToken: response.data.tokens.access,
-          id: response.data.id,
-          name: response.data.first_name,
-          first_name: response.data.first_name,
-          last_name: response.data.last_name,
-          position:response.data.position,
-          phone_number:response.data.phone_number,
-          birth_date:response.data.birth_date,
-          profile_photo: response.data.profile_photo,
-          role: response.data.role,
-          email: response.data.email,
-          tokens:response.data.tokens,
-        }))
+        dispatch(
+          setUser({
+            id: response.data.id,
+            name: response.data.first_name,
+            first_name: response.data.first_name,
+            last_name: response.data.last_name,
+            position:response.data.position,
+            phone_number:response.data.phone_number,
+            profile_photo: response.data.profile_photo,
+            telegram: response.data.telegram,
+            role: response.data.role,
+            email: response.data.email,
+            tokens:response.data.tokens,
+            student_courses: response.data.student_courses,
+          }))
         
         toast.success("Вы успешно авторизовались!");
         if(response.data.role === "mentor"){

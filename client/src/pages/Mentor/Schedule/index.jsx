@@ -13,9 +13,11 @@ const MentorSchedule = () => {
   const [startTime, setStartTime] = useState("")
   const [endTime, setEndTime] = useState("");
 
+  const courseId = sessionStorage.getItem('selectedCourseId');
+
   const getSchedule = async () => {
     try {
-      const response = await ScheduleService.getSchedule(11);
+      const response = await ScheduleService.getSchedule(courseId);
       setLesson(response.data);
       console.log(response.data);
     } catch (error) {
