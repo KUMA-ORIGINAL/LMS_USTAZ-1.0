@@ -80,8 +80,8 @@ class ProfileStudentAdmin(admin.ModelAdmin):
 
 @admin.register(Attendance)
 class AttendanceAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'schedule', 'is_present')
-    list_filter = ('schedule', 'is_present')
+    list_display = ('id', 'user', 'schedule', 'status')
+    list_filter = ('schedule', 'status')
     search_fields = ('user__first_name', 'user__last_name', 'schedule__title')
     ordering = ('schedule', 'user')
 

@@ -116,4 +116,4 @@ class ScheduleView(viewsets.ModelViewSet):
 class ImageUploadView(generics.CreateAPIView):
     serializer_class = ImageUploadSerializer
     queryset = ImageUpload.objects.all()
-    permission_classes = [IsAdminOrMentorOrReadPermission]
+    permission_classes = [IsAuthenticated]

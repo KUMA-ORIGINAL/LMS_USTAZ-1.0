@@ -43,7 +43,7 @@ class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True)
     phone_number = PhoneNumberField()
-    telegram = models.URLField()
+    telegram = models.CharField(max_length=100)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
     position = models.CharField(max_length=50, choices=POSITION_CHOICES, blank=True, null=True)
     profile_photo = models.ImageField(upload_to='profile_photos', blank=True)
@@ -94,21 +94,34 @@ class Attendance(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'student'}, null=True)
     schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE)
-    is_present = models.BooleanField(null=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    status = models.BooleanField(null=True)
 
     def __str__(self):
-        return f"{self.user} - {self.schedule} ({'Present' if self.is_present else 'Absent'})"
+        return f"{self.user} - {self.schedule} ({'Present' if self.status else 'Absent'})"
 
 
 class ProjectStudent(models.Model):
     TYPE_OF_PROJECT_CHOICES = (
         ('practical_work', 'Практическая работа'),
-        ('independent work', 'Cамостоятельная работа'),
-        ('Project', 'Проект')
+        ('independent_work', 'Cамостоятельная работа'),
+        ('project', 'Проект')
+    )
+    RATING_CHOICES = (
+        (1, '1 звезд'),
+        (2, '2 звезд'),
+        (3, '3 звезд'),
+        (4, '4 звезд'),
+        (5, '5 звезд'),
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'student'})
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     type_of_project = models.CharField(max_length=100, choices=TYPE_OF_PROJECT_CHOICES)
     title = models.CharField(max_length=100)
     content_html = models.TextField()
     photo = models.ImageField(upload_to='project_photos/', blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    stars = models.IntegerField(choices=RATING_CHOICES, blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.title} {self.user}'

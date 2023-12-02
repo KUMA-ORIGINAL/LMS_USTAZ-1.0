@@ -11,7 +11,7 @@ from course.serializers import CourseSerializer
 from .models import User, ProfileStudent, Attendance, ProjectStudent
 from .permissions import IsAdminOrMentorOrReadPermission
 from .serializers import UserSerializer, ProfileStudentSerializer, UserLoginSerializer, AttendanceSerializer, \
-    ProjectStudentSerializer
+    ProjectStudentSerializer, ListAttendanceSerializer
 
 
 class UserLoginAPIView(GenericAPIView):
@@ -27,17 +27,14 @@ class UserLoginAPIView(GenericAPIView):
         data = serializer.data
         match data['role']:
             case 'student':
-                student_courses = Course.objects.filter(students=user)
-                student_course_serializer = CourseSerializer(student_courses, many=True)
-                data["student_courses"] = student_course_serializer.data
+                student_courses = Course.objects.filter(students=user).values_list('id', flat=True)
+                data["student_courses"] = student_courses
             case 'mentor':
-                mentor_courses = Course.objects.filter(mentor=user)
-                mentor_course_serializer = CourseSerializer(mentor_courses, many=True)
-                data['mentor_courses'] = mentor_course_serializer.data
+                mentor_courses = Course.objects.filter(mentor=user).values_list('id', flat=True)
+                data['mentor_courses'] = mentor_courses
             case 'assistant':
-                assistant_courses = Course.objects.filter(assistant=user)
-                assistant_course_serializer = CourseSerializer(assistant_courses, many=True)
-                data["assistant_courses"] = assistant_course_serializer.data
+                assistant_courses = Course.objects.filter(assistant=user).values_list('id', flat=True)
+                data["assistant_courses"] = assistant_courses
         data["tokens"] = {"refresh": str(token), "access": str(token.access_token)}
         return Response(data, status=status.HTTP_200_OK)
 
@@ -96,19 +93,32 @@ class AttendanceView(viewsets.ModelViewSet):
     serializer_class = AttendanceSerializer
     permission_classes = [IsAdminOrMentorOrReadPermission]
 
-    def get(self, request, *args, **kwargs):
-        schedules = Schedule.objects.all()  # Получаем все расписания
-        students_data = []
+    def list(self, request, *args, **kwargs):
+        course_id = request.query_params.get('course_id')
+        try:
+            schedules = Schedule.objects.filter(course_id=course_id)
+            students = Course.objects.get(pk=course_id).students.all()
+            attendance = Attendance.objects.filter(schedule__in=schedules, user__in=students)
+            attendance_mapping = {(a.schedule_id, a.user_id): True for a in attendance}
+            print(attendance_mapping)
 
-        for schedule in schedules:
-            # Получаем все посещения для данного расписания
-            attendances = Attendance.objects.filter(schedule=schedule)
-            students_attendance = StudentAttendanceSerializer(attendances, many=True).data
-
-            # Добавляем информацию о студентах и их посещаемости в общий список
-            students_data.extend(students_attendance)
-
-        return Response({'students': students_data})
+            students_attendance = []
+            for student in students:
+                student_attendance = {
+                    'id': student.pk,
+                    'name': f'{student.first_name} {student.last_name}',
+                    'visits': []
+                }
+                for schedule in schedules:
+                    date = schedule.date.strftime('%d.%m')
+                    student_attendance['visits'].append({
+                        'date': date,
+                        'status': attendance_mapping.get((schedule.pk, student.pk), False)
+                    })
+                students_attendance.append(student_attendance)
+            return Response(students_attendance)
+        except Course.DoesNotExist:
+            return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
 
 
 class ProjectStudentView(viewsets.ModelViewSet):
@@ -117,8 +127,11 @@ class ProjectStudentView(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user_id = self.request.query_params.get('user_id')
+        course_id = self.request.query_params.get('course_id')
 
         queryset = ProjectStudent.objects.all()
         if user_id is not None:
             queryset = queryset.filter(user_id=user_id)
+        if course_id is not None:
+            queryset = queryset.filter(course_id=course_id)
         return queryset

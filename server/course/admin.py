@@ -54,7 +54,7 @@ class SolutionAdmin(admin.ModelAdmin):
 
 @admin.register(Schedule)
 class ScheduleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'date', 'start_time', 'end_time', 'course')
+    list_display = ('id', 'title', 'date', 'start_time', 'end_time', 'course')
     list_filter = ('course', 'date')
     search_fields = ('title', 'course__title')
     date_hierarchy = 'date'
