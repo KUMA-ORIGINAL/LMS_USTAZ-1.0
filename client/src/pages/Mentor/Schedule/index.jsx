@@ -39,9 +39,10 @@ const MentorSchedule = () => {
           date: selectedDate,
           start_time: startTime,
           end_time: endTime,
-          course: 11
+          course: courseId
       }
       const response  = await ScheduleService.createSchedule(newData);
+      setModal(false)
       console.log(response.data);
     } catch (error) {
       console.log(error.response);

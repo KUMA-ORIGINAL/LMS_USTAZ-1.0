@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-
+import OrnamentImg from '../assets/images/ornament-side.png'
 //import components
 import SideBar from './Navigation'
 import Header from './Header'
@@ -15,6 +15,7 @@ const Container = styled.section`
   min-height: 100vh;
   max-height: 100vh;
   position: relative;
+  overflow-x:hidden;
 `
 const Content = styled.div`
   padding: 20px;
@@ -24,7 +25,13 @@ const Content = styled.div`
 const TopContent = styled.div`
   height:100px;
 `
-
+const Image = styled.img`
+position:absolute;
+bottom:0;
+right:0;
+z-index:-99;
+opacity:0.5;
+`
 
 const Layout = () => {
   return (
@@ -35,6 +42,7 @@ const Layout = () => {
           <Header />
         </TopContent>
         <Outlet />
+
       </Content>
     </Container>
   )

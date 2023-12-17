@@ -49,7 +49,7 @@ const CourseCard = ({ data }) => {
       const endDate = new Date(data.end_month);
       const currentDate = new Date();
     
-      // Ensure that the course is ongoing
+  
       if (currentDate < startDate) {
         setProgress(0);
       } else if (currentDate > endDate) {

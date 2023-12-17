@@ -43,11 +43,7 @@ body{
   position: relative;
 }
 
-.content {
-  padding: 20px;
-  flex: 1;
-  overflow-y: scroll;
-}
+
 
 /* scroll styles */
 ::-webkit-scrollbar {

@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 
 // General pages
-import Introduction from './General/Introduction'
 import Authorization from './General/Authorization'
 import Layout from '../components/Layout'
 import PrivateRoute from '../components/PrivateRoute'
@@ -15,7 +14,6 @@ import MentorSchedule from './Mentor/Schedule'
 import MentorStudentsList from './Mentor/StudentsList'
 import MentorStudentsRating from './Mentor/StudentsRating'
 import MentorProjects from './Mentor/StudentsProjects'
-import CreateCourse from './Mentor/CreateCourse'
 import CreateLesson from './Mentor/CreateLesson'
 
 //students pages
@@ -25,15 +23,13 @@ import StudentCourse from './Student/Course'
 import StudentScores from './Student/Scores'
 import StudentProject from './Student/Projects'
 import LessonPage from './Student/Course/components/LessonPage'
-import MentorNotifications from './Mentor/Notifications'
 import AwardsPage from './Student/Awards'
 
 const Routing = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Introduction />} />
-        <Route path="/auth" element={<Authorization />} />
+        <Route path="/" element={<Authorization />} />
         
         <Route path="/mentor" element={<Layout />}>
           <Route path="home" element={<MentorHome />} />
@@ -44,9 +40,7 @@ const Routing = () => {
           <Route path="student-list" element={<MentorStudentsList />} />
           <Route path="student-rating" element={<MentorStudentsRating />} />
           <Route path="student-projects" element={<MentorProjects />} />
-          <Route path='create-course' element={<CreateCourse/>}/>
-          <Route path='create-lesson' element={<CreateLesson/>}/>
-          <Route path='notifications' element={<MentorNotifications/>}/>
+          <Route path='create-lesson/lesson/:id' element={<CreateLesson/>}/>
         </Route>
 
        <Route path="/student" element={<Layout />}>

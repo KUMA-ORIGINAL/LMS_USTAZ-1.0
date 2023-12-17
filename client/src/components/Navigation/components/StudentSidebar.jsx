@@ -17,7 +17,7 @@ import Button from '@mui/material/Button';
 import SchoolIcon from '@mui/icons-material/School';
 import Ustaz from "../../../assets/images/orn.png";
 import { useEffect} from 'react'
-import { fetchAllCourses, selectCourses, selectLoading, selectError} from "../../../slices/CourseSlice"
+import { fetchAllCourses, selectCourses} from "../../../slices/CourseSlice"
 import { useDispatch, useSelector } from 'react-redux';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -42,23 +42,26 @@ const StudentSidebar = () => {
   const dispatch = useDispatch();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const [click, setClick] = useState(false)
   const courses = useSelector(selectCourses);
   const user = JSON.parse(localStorage.getItem('user'));
 
   const handleCourseClick = (courseId) => {
     sessionStorage.setItem('selectedCourseId', courseId);
+    setClick(true)
   };
-  useEffect(() => {
-    if (user.student_courses) {
-      dispatch(fetchAllCourses(user.student_courses));
-    }
-  }, [handleCourseClick]);
-
+  
+  
   const theme = useTheme();
-
+  
   const colors = tokens(theme.palette.mode);
 
 const storedId = sessionStorage.getItem('selectedCourseId');
+useEffect(() => {
+  if (user.student_courses) {
+    dispatch(fetchAllCourses(user.student_courses));
+  }
+}, [click]);
 
   return (
     <Box

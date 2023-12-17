@@ -95,7 +95,7 @@ const StudentScores = () => {
 
   return (
     <div className="content">
-        <div>
+
         <div className="profileinfo">
           <h2>Мои метрики</h2>
           <div className="pwrapper">
@@ -123,7 +123,6 @@ const StudentScores = () => {
           </div>
           </div>
         </div>
-      </div>
       <h2  style={{ margin: "50px 0px 20px 0px" }}>Мои баллы</h2>
       <ScoreTable data={data} onScoreChange={handleScoreChange} />
 

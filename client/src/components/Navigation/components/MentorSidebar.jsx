@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
@@ -15,10 +15,13 @@ import AddTaskOutlinedIcon from '@mui/icons-material/AddTaskOutlined';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
 import AddIcon from '@mui/icons-material/Add';
+import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
 import Button from '@mui/material/Button';
 import "react-pro-sidebar/dist/css/styles.css";
 
 import { tokens } from "../../../theme";
+import { fetchAllCourses, selectCourses } from "../../../slices/CourseSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -43,9 +46,26 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const MentorSidebar = () => {
   const location = useLocation();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [click, setClick] = useState(false)
   const [selected, setSelected] = useState(location.pathname);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const user = JSON.parse(localStorage.getItem('user'));
+  const dispatch = useDispatch();
+  const courses = useSelector(selectCourses);
+  const handleCourseClick = (courseId) => {
+    sessionStorage.setItem('selectedCourseId', courseId);
+    setClick(true)
+  };
+
+  const storedId = sessionStorage.getItem('selectedCourseId');
+  
+  useEffect(() => {
+    if (user.mentor_courses) {
+      dispatch(fetchAllCourses(user.mentor_courses));
+    }
+  }, [click]);
+  
 
   return (
     <Box
@@ -117,20 +137,10 @@ const MentorSidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
-              <Button
-                sx={{
-                  m: "15px 0 5px 20px",
-                  bgcolor: colors.greenAccent[700],
-                  ':hover': { bgcolor: colors.greenAccent[800] },
-                  maxWidth: isCollapsed ? "30px" : "none",
-                  minWidth: "0 !important",
-                }}
-                variant="contained"
-                startIcon={isCollapsed ? null : <AddIcon />}
-              >
-                <Link to="/mentor/create-course">{isCollapsed ? <AddIcon /> : 'Новая группа'}</Link>
-              </Button>
 
+
+              {storedId !== null && storedId !== undefined ? 
+              <>
               <Typography
                 variant="h6"
                 color={colors.grey[300]}
@@ -180,6 +190,26 @@ const MentorSidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
+              
+              </> :
+              (
+              courses && courses.map((data) => (
+                <Button
+                sx={{
+                  m: "15px 0 5px 20px",
+                  bgcolor: colors.blueAccent[700],
+                  ':hover': { bgcolor: colors.blueAccent[800] },
+                  maxWidth: isCollapsed ? "30px" : "none",
+                  minWidth: "0 !important",
+                }}
+                variant="contained"
+                onClick={() => handleCourseClick(data.id)}
+                startIcon={isCollapsed ? null : <BookOutlinedIcon />}
+              >
+                {isCollapsed ? <BookOutlinedIcon/>  : data.title}
+              </Button>
+              ))
+             ) }
             </Box>
           </Menu> 
     

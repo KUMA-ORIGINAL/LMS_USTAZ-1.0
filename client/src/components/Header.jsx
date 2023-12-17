@@ -81,33 +81,19 @@ export default function Header() {
           navigate('/student/profile');
           break;
         default:
-          navigate('/auth');
+          navigate('/');
       }
       handleMenuClose()
     }
   };
 
-  const toNotificationsPage = () => {
-    if (user) {
-      switch (user.role) {
-        case 'mentor':
-          navigate('/mentor/notifications');
-          break;
-        case 'student':
-          navigate('/student/notifications');
-          break;
-        default:
-          navigate('/auth');
-      }
-      handleMenuClose()
-    }
-  }
+ 
 
 
   const handleLogout = () => {
     try {
       toast.success("Вы успешно вышли с аккаунта!")
-      navigate("/auth")
+      navigate("/")
       dispatch(logout())
     } catch (e) {
       toast.error("Не получилось выйти с аккаунта!")
@@ -155,16 +141,7 @@ export default function Header() {
                 <LightModeOutlinedIcon />
               )}
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-              onClick={toNotificationsPage}
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+
             <IconButton
               size="large"
               edge="end"

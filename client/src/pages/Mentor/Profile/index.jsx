@@ -8,8 +8,8 @@ import ProfileInfo from "../../../components/ProfileInfo";
 //styles
 const StyledSection = styled.section`
   padding: 50px;
-  display: flex;
-  column-gap: 50px;
+  display:flex;
+  flex-direction:column;
 `
 
 const MentorProfile = () => {

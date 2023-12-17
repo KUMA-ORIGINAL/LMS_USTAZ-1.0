@@ -40,8 +40,7 @@ export const fetchAllCourses = (courseIds) => async (dispatch) => {
       const response = await CourseService.getCourse(courseId);
       courses.push(response.data);
     }
-    console.log(courses);
-    dispatch(fetchCoursesSuccess(courses));
+     dispatch(fetchCoursesSuccess(courses));
   } catch (error) {
     console.error(error.response);
     dispatch(fetchCoursesFailure('Failed to fetch courses.'));

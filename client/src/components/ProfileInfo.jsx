@@ -17,7 +17,6 @@ const ProfileInfo = () => {
         <h3>Личная информация</h3>
         <Button sx={{bgcolor:"#452fe5"}} variant="contained">Сохранить </Button>
       </div>
-      <div style={{display:"flex", gap:"20px"}}>
         <TextField
           required
           color='info'
@@ -32,8 +31,6 @@ const ProfileInfo = () => {
           label="Фамилия"
           defaultValue={storedUserData.last_name || ""}
         />
-      </div>
-      <div>
         <TextField
           required
           color='info'
@@ -41,7 +38,6 @@ const ProfileInfo = () => {
           label="Email"
           defaultValue={storedUserData.email || ""}
         />
-      </div>
         <div style={{display:"flex", gap:"20px"}}>
         <TextField
           required

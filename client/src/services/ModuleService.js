@@ -13,8 +13,8 @@ export default class ModuleService{
     static async createModule({ title, description, course}){
         return $api.post("course/module/", {title, description, course})
     }
-    static async createContent({title, description, module}){
-        return $api.post("course/content/", {title, description, module})
+    static async createContent({title, content_html, module}){
+        return $api.post("course/content/", {title, content_html, module})
     }
     static async imageUpload(img){
         return $api.post("/image", {img})

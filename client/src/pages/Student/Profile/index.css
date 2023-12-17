@@ -4,7 +4,8 @@
 }
 .profile-user{
   display: flex;
-  column-gap: 30px;
+  align-items: start;
+  column-gap: 120px;
 }
 
 

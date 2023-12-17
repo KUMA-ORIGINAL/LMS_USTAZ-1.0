@@ -11,6 +11,7 @@ const initialState = {
   phone_number: "",
   profile_photo: "",
   student_courses: [],
+  mentor_courses: [],
   tokens: {
     refresh: "",
     access: "",
@@ -33,7 +34,8 @@ export const authSlice = createSlice({
         profile_photo,
         position,
         tokens,
-        student_courses
+        student_courses,
+        mentor_courses,
       } = action.payload;
 
       state.id = id;
@@ -46,7 +48,8 @@ export const authSlice = createSlice({
       state.profile_photo = profile_photo;
       state.position = position;
       state.tokens = tokens;
-      state.student_courses = student_courses.map((course) => course.id);
+      state.student_courses = student_courses;
+      state.mentor_courses = mentor_courses;
 
       localStorage.setItem("user", JSON.stringify(state));
       localStorage.setItem("token", state.tokens.access);

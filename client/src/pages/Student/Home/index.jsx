@@ -27,7 +27,6 @@ const StudentHome = () => {
     return <div>Error: {error}</div>;
   }
 
-  console.log(courses, "k");
 
   return (
     <section className="student-home">
