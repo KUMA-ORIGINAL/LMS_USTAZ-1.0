@@ -1,9 +1,8 @@
 import { Route, Routes } from 'react-router-dom'
 
 // General pages
-import Authorization from './General/Authorization'
+import Authorization from './Authorization'
 import Layout from '../components/Layout'
-import PrivateRoute from '../components/PrivateRoute'
 
 //mentor pages
 import MentorHome from './Mentor/Home'

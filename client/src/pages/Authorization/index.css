@@ -25,12 +25,13 @@ video {
   height: auto;
   padding: 30px 20px;
   border-radius: 10px;
-  background: white;
+  backdrop-filter: blur(100px);
+  border: 2px solid #ffffff;
   box-shadow: 0px 6px 58px 0px rgba(196, 203, 214, 0.1);
 }
 .auth__form-title {
   text-align: center;
-  color: #0a1629;
+  color: white;
   margin-bottom: 20px;
 }
 .auth__form-title span{
