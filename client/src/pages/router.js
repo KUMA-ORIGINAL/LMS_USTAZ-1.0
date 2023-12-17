@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 // General pages
 import Authorization from './Authorization'
 import Layout from '../components/Layout'
+import NotFound from "./NotFound"
 
 //mentor pages
 import MentorHome from './Mentor/Home'
@@ -29,6 +30,7 @@ const Routing = () => {
     <>
       <Routes>
         <Route path="/" element={<Authorization />} />
+        <Route path="*" element={<NotFound />} />
         
         <Route path="/mentor" element={<Layout />}>
           <Route path="home" element={<MentorHome />} />
