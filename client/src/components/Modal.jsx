@@ -12,7 +12,7 @@ const StyledModal = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index:1;
+  z-index:10000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,7 +30,7 @@ const StyledModalContent = styled.div`
   width: 625px;
   padding: 35px;
   position: relative;
-  border-radius: 12px;
+  border-radius: 5px;
   background: white;
   transform: scale(0.5);
   transition: all 0.4s;
