@@ -16,6 +16,12 @@ export default class ModuleService{
     static async createContent({title, content_html, module}){
         return $api.post("course/content/", {title, content_html, module})
     }
+    static async updateContent(id, data) {
+        return $api.patch(`course/content/${id}/`, data);
+    }
+    static async deleteContent(id){
+        return $api.delete(`course/content/${id}`)
+    }
     static async imageUpload(img){
         return $api.post("/image", {img})
     }

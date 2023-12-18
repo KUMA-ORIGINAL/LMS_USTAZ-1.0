@@ -12,7 +12,7 @@ const Lesson = ({title, id}) => {
         <Typography variant="h6" component="div">
           {title}
         </Typography>
-        <Link to={`/mentor/create-lesson/lesson/${id}`} >
+        <Link to={`/mentor/update-lesson/lesson/${id}`} >
           gtht
         </Link>
     </Paper>

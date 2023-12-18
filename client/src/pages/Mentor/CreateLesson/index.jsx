@@ -26,19 +26,6 @@ const CreateLesson = () => {
       }
     }
 
-    const getLecture = async () => {
-      try {
-        const response  = await ModuleService.getLecture(id)
-        console.log(response.data);
-        setContentHtml(response.data.content_html)
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    }
-
-    useEffect(() => {
-      getLecture()
-    }, [])
   return (
     <div style={{ padding:"20px", borderRadius:"4px", background:"blue"}}>
         <TextField
@@ -49,7 +36,7 @@ const CreateLesson = () => {
           value={title} 
           onChange={handleTitleChange} 
         />    
-        <TextEditor content={content_html} onTextChange={handleTextChange}/>
+        <TextEditor  onTextChange={handleTextChange}/>
         <button onClick={createLesson}>Save Lesson</button>
     </div>
   )

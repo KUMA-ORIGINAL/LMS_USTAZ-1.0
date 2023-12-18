@@ -14,7 +14,7 @@ const TOOLBAR_OPTIONS = [
   ["link", "image", "blockquote", "code-block"],
 ];
 
-const TextEditor = ({ onTextChange }) => {
+const TextEditor = ({ onTextChange, content }) => {
   const wrapperRef = useRef(null);
   const quillRef = useRef(null);
   const [isQuillInitialized, setIsQuillInitialized] = useState(false);
@@ -67,6 +67,7 @@ const TextEditor = ({ onTextChange }) => {
           }
         },
       });
+
   
       quill.on("text-change", () => {
         const content = quill.root.innerHTML;
@@ -78,15 +79,18 @@ const TextEditor = ({ onTextChange }) => {
     }
   }, [onTextChange, isQuillInitialized]);
 
-
-
-  useEffect(() => {
+useEffect(() => {
     if (quillRef.current && !quillRef.current.root.innerHTML) {
       console.log("Pasting HTML:", onTextChange);
       quillRef.current.clipboard.dangerouslyPasteHTML(onTextChange);
     }
-  }, [onTextChange]);
+}, [onTextChange]);
 
+useEffect(() => {
+  if (quillRef.current && quillRef.current.root.innerHTML !== content) {
+    quillRef.current.clipboard.dangerouslyPasteHTML(content);
+  }
+}, [content]);
 
 
 
