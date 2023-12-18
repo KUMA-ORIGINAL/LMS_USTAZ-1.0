@@ -22,6 +22,12 @@ export default class ModuleService{
     static async deleteContent(id){
         return $api.delete(`course/content/${id}`)
     }
+    static async updateModule(id, data) {
+        return $api.patch(`course/module/${id}/`, data)
+    }
+    static async deleteModule(id){
+        return $api.delete(`course/module/${id}`)
+    }
     static async imageUpload(img){
         return $api.post("/image", {img})
     }

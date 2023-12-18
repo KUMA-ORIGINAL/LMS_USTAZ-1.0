@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Module from './components/Module/index';
 import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
 import Modal from '../../../components/Modal';
-import { useTheme, Button } from "@mui/material";
+import { useTheme, Button, Menu, MenuItem } from "@mui/material";
 import { tokens } from "../../../theme";
 import "./index.css";
 import ModuleService from '../../../services/ModuleService';
@@ -14,6 +14,8 @@ const StudentCourse = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const courseId = sessionStorage.getItem('selectedCourseId');
+
+
 
   const createModule = async () => {
     try {
@@ -61,6 +63,7 @@ const StudentCourse = () => {
             return <Module data={data}/>
           })}
       </div>
+      
       <Modal active={modal} setActive={setModal}>
         <div className="" style={{ display: "flex", flexDirection: "column" }}>
           <h2 style={{ color: "black" }}>Добавить новый модуль</h2>
