@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { useParams } from "react-router-dom";
 import TextEditor from "./components/TextEditor";
-import ModuleService from "../../../services/ModuleService";
 import { toast } from "react-toastify";
+import LessonService from "../../../services/LessonService";
 
 
 
@@ -23,7 +23,7 @@ const UpdateLesson = () => {
 
   const getLecture = async () => {
     try {
-      const response = await ModuleService.getLecture(id);
+      const response = await LessonService.getLesson(id);
       const { title, content_html } = response.data;
       setTitle(title);
       setContentHtml(content_html);
@@ -40,7 +40,7 @@ const UpdateLesson = () => {
 
   const deleteLesson = async () => {
     try {
-      await ModuleService.deleteContent(id);
+      await LessonService.deleteLesson(id);
       toast.success("Урок успешно удален!");
     } catch (error) {
       console.log(error.response);
@@ -50,7 +50,7 @@ const UpdateLesson = () => {
 
   const updateLesson = async () => {
     try {
-      await ModuleService.updateContent(id, { title, content_html });
+      await LessonService.updateLesson(id, { title, content_html });
       toast.success("Урок успешно обновлен!");
     } catch (error) {
       toast.error("Не удалось обновить урок!")

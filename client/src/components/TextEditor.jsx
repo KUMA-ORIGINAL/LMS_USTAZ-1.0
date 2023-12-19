@@ -90,7 +90,7 @@ const TextEditor = ({ onTextChange }) => {
 
 
 
-  return <div ref={wrapperRef} style={{ overflowY: "auto" }} />;
+  return <div ref={wrapperRef} style={{ color:"black !important" }} />;
 };
 
 export default TextEditor;

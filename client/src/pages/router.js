@@ -11,7 +11,6 @@ import MentorProfile from './Mentor/Profile'
 import MentorVisits from './Mentor/Visits'
 import MentorLecture from './Mentor/Lecture'
 import MentorSchedule from './Mentor/Schedule'
-import MentorStudentsList from './Mentor/StudentsList'
 import MentorStudentsRating from './Mentor/StudentsRating'
 import MentorProjects from './Mentor/StudentsProjects'
 import CreateLesson from './Mentor/CreateLesson'
@@ -39,7 +38,6 @@ const Routing = () => {
           <Route path="lecture" element={<MentorLecture />} />
           <Route path="visits" element={<MentorVisits />} />
           <Route path="schedule" element={<MentorSchedule />} />
-          <Route path="student-list" element={<MentorStudentsList />} />
           <Route path="student-rating" element={<MentorStudentsRating />} />
           <Route path="student-projects" element={<MentorProjects />} />
           <Route path='create-lesson/lesson/:id' element={<CreateLesson/>}/>
