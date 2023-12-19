@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import WestIcon from '@mui/icons-material/West';
-import EastIcon from '@mui/icons-material/East';
-
-
+import {
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Button,
+  TableContainer,
+  Paper,
+  Pagination,
+} from '@mui/material';
 
 const ScoreTable = ({ data, onScoreChange }) => {
   const [editableCell, setEditableCell] = useState(null);
@@ -38,60 +45,65 @@ const ScoreTable = ({ data, onScoreChange }) => {
     return editableCell && editableCell.studentId === studentId && editableCell.lessonIndex === lessonIndex;
   };
 
-  const totalPages = Math.ceil(data[0]?.scores.length / itemsPerPage);
+  const totalPages = Math.ceil(data.lessons.length / itemsPerPage);
 
-  const goToPage = (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      setPage(newPage);
-    }
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
   };
+
+  const lessonsToShow = data.lessons.slice(startIndex, endIndex);
 
   return (
     <StyledTable>
-      <table>
-        <thead>
-          <tr>
-            <th>№</th>
-            <th>ФИО</th>
-            {data[0]?.scores.slice(startIndex, endIndex).map((score, lessonIndex) => (
-              <th key={lessonIndex} style={{ width: '10%' }}>{score.lesson}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((student, studentIndex) => (
-            <tr key={studentIndex}>
-              <td>{studentIndex + 1}</td>
-              <td className={highlightedHeader === student.id ? 'highlighted' : ''}>{student.name}</td>
-              {student.scores.slice(startIndex, endIndex).map((score, lessonIndex) => (
-                <td
-                  onMouseEnter={() => handleTdHover(student.id)}
-                  onMouseLeave={handleTdMouseLeave}
-                  key={lessonIndex}
-                  onClick={() => handleEditCell(student.id, lessonIndex + startIndex)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  {isCellEditable(student.id, lessonIndex + startIndex) ? (
-                    <div>
-                      <input type="number" value={score.score} onChange={(e) => onScoreChange(student.id, lessonIndex + startIndex, e.target.value)} />
-                      <button onClick={handleSaveScore}>Сохранить</button>
-                      <button onClick={handleCancelEdit}>Отмена</button>
-                    </div>
-                  ) : (
-                    score.score
-                  )}
-                </td>
+      <TableContainer component={Paper} sx={{background:"#0f2342"}}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell >№</TableCell>
+              <TableCell>ФИО</TableCell>
+              {lessonsToShow.map((lesson, lessonIndex) => (
+                <TableCell key={lessonIndex} style={{ maxWidth: '10%' }}>
+                  {lesson}
+                </TableCell>
               ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div>
-        <button onClick={() => goToPage(page - 1)}><WestIcon /></button>
-        <button onClick={() => goToPage(page + 1)}><EastIcon /></button>
-      </div>
-      <div>
-        <span>Страница {page} из {totalPages}</span>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.students.map((student, studentIndex) => (
+              <TableRow key={studentIndex}>
+                <TableCell className={highlightedHeader === student.id ? 'highlighted' : ''}>{studentIndex + 1}</TableCell>
+                <TableCell className={highlightedHeader === student.id ? 'highlighted' : ''}>{student.name}</TableCell>
+                {student.scores.slice(startIndex, endIndex).map((score, lessonIndex) => (
+                  <TableCell
+                    onMouseEnter={() => handleTdHover(student.id)}
+                    onMouseLeave={handleTdMouseLeave}
+                    key={lessonIndex}
+                    onClick={() => handleEditCell(student.id, lessonIndex + startIndex)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    {isCellEditable(student.id, lessonIndex + startIndex) ? (
+                      <div>
+                        <input
+                          type="number"
+                          value={score}
+                          onChange={(e) => onScoreChange(student.id, lessonIndex + startIndex, e.target.value)}
+                        />
+                        <Button onClick={handleSaveScore}>Сохранить</Button>
+                        <Button onClick={handleCancelEdit}>Отмена</Button>
+                      </div>
+                    ) : (
+                      score
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+        <Pagination color="info" count={totalPages} page={page} onChange={handlePageChange} />
       </div>
     </StyledTable>
   );
@@ -101,26 +113,21 @@ export default ScoreTable;
 
 
 
+
 //styles
 
 const StyledTable = styled.div`
 table{
   border-collapse:collapse;
   width:100%;
+  overflow:hidden;
 }
 .highlighted {
-  background: #5d5d5d;
+  font-weight:900;
 }
 td:hover{
-  background: #5d5d5d;
-}
-th, td{
-  border:1px solid;
-  padding:10px;
-  width:auto
-}
-td:first-child{
-  max-width:300px
+
+  font-weight:900;
 }
 button{
   margin:15px 15px 15px 0px;

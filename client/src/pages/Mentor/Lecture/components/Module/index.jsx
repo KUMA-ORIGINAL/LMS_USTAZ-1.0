@@ -13,6 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ModuleService from '../../../../../services/ModuleService';
 import { toast } from 'react-toastify';
 import "./index.css";
+import LessonService from '../../../../../services/LessonService';
 
 const Module = ({ data }) => {
   const { title, description, id } = data;
@@ -46,7 +47,7 @@ const Module = ({ data }) => {
 
   const getLectures = async () => {
     try {
-      const response = await ModuleService.getLectures(id);
+      const response = await LessonService.getLessons(id);
       setLectures(response.data);
     } catch (error) {
       console.log(error.response);
