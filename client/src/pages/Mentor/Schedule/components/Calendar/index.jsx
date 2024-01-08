@@ -68,6 +68,7 @@ const Calendar = ({ year, month, lessons }) => {
     try {
       await ScheduleService.deleteSchedule(lessonId)
       toast.success("Вы успешно удалили занятие!")
+      closeEditModal()
     } catch (error) {
       console.log(error.response);
       toast.error("Не получилось удалить занятие!")

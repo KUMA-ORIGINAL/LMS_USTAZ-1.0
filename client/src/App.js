@@ -1,6 +1,6 @@
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { BrowserRouter } from 'react-router-dom';
-import {ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { ColorModeContext, useMode } from './theme'
 import { Provider } from 'react-redux';
 import store from "./store"
@@ -14,7 +14,7 @@ const App = () => {
       <BrowserRouter>
         <ColorModeContext.Provider value={colorMode}>
           <ThemeProvider theme={theme}>
-          <ToastContainer/>
+            <ToastContainer />
             <CssBaseline />
             <Routing />
           </ThemeProvider>

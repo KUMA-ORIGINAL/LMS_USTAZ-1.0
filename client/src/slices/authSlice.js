@@ -6,11 +6,12 @@ const initialState = {
   role: "",
   first_name: "",
   last_name: "",
-  birth_data: "",
-  age: 0,
+  telegram:"",
   position:"",
   phone_number: "",
   profile_photo: "",
+  student_courses: [],
+  mentor_courses: [],
   tokens: {
     refresh: "",
     access: "",
@@ -21,19 +22,20 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser: (  state, action) => {
+    setUser: ( state, action) => {
       const {
         id,
         email,
         role,
         first_name,
         last_name,
-        birth_date,
-        age,
+        telegram,
         phone_number,
         profile_photo,
         position,
         tokens,
+        student_courses,
+        mentor_courses,
       } = action.payload;
 
       state.id = id;
@@ -41,15 +43,16 @@ export const authSlice = createSlice({
       state.role = role;
       state.first_name = first_name;
       state.last_name = last_name;
-      state.birth_data = birth_date;
-      state.age = age;
       state.phone_number = phone_number;
+      state.telegram = telegram;
       state.profile_photo = profile_photo;
-      state.position = position
+      state.position = position;
       state.tokens = tokens;
+      state.student_courses = student_courses;
+      state.mentor_courses = mentor_courses;
 
       localStorage.setItem("user", JSON.stringify(state));
-      localStorage.setItem("token",state.tokens.access);
+      localStorage.setItem("token", state.tokens.access);
       localStorage.setItem("refresh", state.tokens.refresh)
     },
     logout: () => {

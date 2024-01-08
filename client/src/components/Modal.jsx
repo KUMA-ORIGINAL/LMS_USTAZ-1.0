@@ -30,7 +30,7 @@ const StyledModalContent = styled.div`
   width: 625px;
   padding: 35px;
   position: relative;
-  border-radius: 12px;
+  border-radius: 5px;
   background: white;
   transform: scale(0.5);
   transition: all 0.4s;

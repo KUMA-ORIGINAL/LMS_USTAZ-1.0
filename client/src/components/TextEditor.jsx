@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
+
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
-import { ImageUpload } from "quill-image-upload";
-Quill.register("modules/imageUpload", ImageUpload);
+
 
 const TOOLBAR_OPTIONS = [
   [{ header: [1, 2, 3, false] }],
@@ -18,6 +19,37 @@ const TextEditor = ({ onTextChange }) => {
   const quillRef = useRef(null);
   const [isQuillInitialized, setIsQuillInitialized] = useState(false);
 
+  const handleImageInsertion = () => {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files[0];
+      if (file) {
+        const formData = new FormData();
+        formData.append('image', file);
+        try {
+          const response = await axios.post('http://localhost:8000/api/course/image-upload/', formData, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+          });
+          const range = quillRef.current.getSelection();
+          const imageUrl = response.data.image;
+          quillRef.current.clipboard.dangerouslyPasteHTML(
+            range.index,
+            `<img src="${imageUrl}" alt="image" />`
+          );
+        } catch (error) {
+          console.error('Image upload failed:', error);
+        }
+      }
+    };
+  };
+  
+  
   useEffect(() => {
     if (wrapperRef.current && !isQuillInitialized) {
       const editor = document.createElement("div");
@@ -26,32 +58,16 @@ const TextEditor = ({ onTextChange }) => {
 
       const quill = new Quill(editor, {
         theme: "snow",
-        modules: {
-          toolbar: TOOLBAR_OPTIONS,
-        imageUpload: {
-            url: "http://media.test3.cheggnet.com:6002/media-api/rest/item", // server url. If the url is empty then the base64 returns
-            method: "POST", 
-            name: "image",
-            withCredentials: true, 
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`
-            },
-            // customUploader: () => {}, // add custom uploader
-            callbackOK: (serverResponse, next) => {
-              console.log("serverResponse", serverResponse, serverResponse.location);
-              next(serverResponse.location);
-            },
-            callbackKO: serverError => {
-              alert(serverError);
-            },
-            checkBeforeSend: (file, next) => {
-              console.log("file", file);
-              next(file); // go back to component and send to the server
+        modules: { 
+          toolbar: {
+            container: TOOLBAR_OPTIONS,
+            handlers: {
+              image: handleImageInsertion,
             }
           }
         },
       });
-
+  
       quill.on("text-change", () => {
         const content = quill.root.innerHTML;
         onTextChange(content);
@@ -62,13 +78,19 @@ const TextEditor = ({ onTextChange }) => {
     }
   }, [onTextChange, isQuillInitialized]);
 
+
+
   useEffect(() => {
     if (quillRef.current && !quillRef.current.root.innerHTML) {
+      console.log("Pasting HTML:", onTextChange);
       quillRef.current.clipboard.dangerouslyPasteHTML(onTextChange);
     }
   }, [onTextChange]);
 
-  return <div ref={wrapperRef} style={{ overflowY: "auto" }} />;
+
+
+
+  return <div ref={wrapperRef} style={{ color:"black !important" }} />;
 };
 
 export default TextEditor;

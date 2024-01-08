@@ -8,10 +8,10 @@ import ModuleService from '../../../services/ModuleService';
 const Lecture = () => {
 
   const [modules, setModules] = useState([]);
-
+  const courseId = sessionStorage.getItem('selectedCourseId');
   const getModule = async () =>{
     try {
-      const response = await ModuleService.getModule();
+      const response = await ModuleService.getModule(courseId);
       setModules(response.data)
       
     } catch (error) {

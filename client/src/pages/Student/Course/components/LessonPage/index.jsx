@@ -25,7 +25,7 @@ const LessonPage = () => {
   return (
     <section className="lesson-page">
       <h2>{htmlContent.title}</h2>
-      <div className="lp-content" dangerouslySetInnerHTML={{ __html: htmlContent.description }}/>
+      <div className="lp-content" dangerouslySetInnerHTML={{ __html: htmlContent.content_html }}/>
     </section>
   )
 }

@@ -1,28 +1,31 @@
 import CourseCard from '../../../components/CourseCard'
 import NewsList from '../../../components/NewsList'
-import CourseService from '../../../services/CourseService'
 import './index.css'
 import { useEffect, useState } from 'react'
-
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllCourses, selectCourses, selectLoading, selectError} from "../../../slices/CourseSlice"
 
 const StudentHome = () => {
-  const [course, setCourse] = useState([])
+  const dispatch = useDispatch();
+  const courses = useSelector(selectCourses);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+  const user = JSON.parse(localStorage.getItem('user'));
 
-  async function getCourse() {
-    try {
-        const response = await CourseService.getCourse();
-        console.log(response);
-        setCourse(response.data)
-    } catch (e) {
-        console.log(e.response);
+  useEffect(() => {
+    if (user.student_courses) {
+      dispatch(fetchAllCourses(user.student_courses));
     }
-}
+  }, []);
+  
 
-useEffect(() => {
-  getCourse();
-},[])
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-const user = JSON.parse(localStorage.getItem("user"));
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
 
   return (
@@ -34,9 +37,9 @@ const user = JSON.parse(localStorage.getItem("user"));
         <div className="sh__courses">
           <h2 style={{ margin: "30px 0px" }}>Мои курсы</h2>
           <div className="sh__courses-card">
-            {course.map((data) => {
-              return <CourseCard data={data}/>  
-            } )}
+          {courses && courses.map((data) => (
+    <CourseCard key={data.id} data={data} />
+  ))}
           </div>
         </div>
         <div className="sh__tasks">

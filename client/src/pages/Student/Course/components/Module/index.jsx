@@ -62,6 +62,7 @@ const Module = ({data}) => {
 
   const {title, description, id, order} = data
 
+  
   const getLectures = async () => {
     try {
       const response = await ModuleService.getLectures(id);

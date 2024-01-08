@@ -1,8 +1,8 @@
 import $api from "../http";
 
 export default class ProjectService{
-    static async createProject(){
-        return $api.post();
+    static async createProject(data){
+        return $api.post("user/project-student/", data);
     }
     static async getAllProjects(){
         return $api.get();
