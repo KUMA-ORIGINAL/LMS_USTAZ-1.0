@@ -65,19 +65,19 @@ class Award(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
 
-class ProfileStudent(models.Model):
+class ProgressStudent(models.Model):
     """ Моделька профиля студента """
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, limit_choices_to={'role': 'student'})
     awards = models.ManyToManyField(Award, blank=True)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True, )
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     points = models.PositiveIntegerField(default=0)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def calculate_points(self):
-        total_points = Solution.objects.filter(student=self.student, is_accepted=True).aggregate(
-            total_points=Sum('score'))['total_points']
+        total_points = Solution.objects.filter(user=self.user, is_accepted=True).aggregate(
+            total_points=Sum('grade'))['total_points']
 
         self.points = total_points if total_points is not None else 0
         self.save()
@@ -87,18 +87,6 @@ class ProfileStudent(models.Model):
 
     def __str__(self):
         return f'{self.user}'
-
-
-class Attendance(models.Model):
-    """ Моделька для отметки студентов """
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'student'}, null=True)
-    schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    status = models.BooleanField(null=True)
-
-    def __str__(self):
-        return f"{self.user} - {self.schedule} ({'Present' if self.status else 'Absent'})"
 
 
 class ProjectStudent(models.Model):

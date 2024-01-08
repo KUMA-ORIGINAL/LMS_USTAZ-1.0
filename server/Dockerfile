@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED 1
 # Устанавливаем рабочую директорию внутри контейнера
 WORKDIR /usta_server
 
-COPY . /usta_server/
 COPY requirements.txt /requirements.txt
-
 RUN pip install -r /requirements.txt
+
+COPY . /usta_server/

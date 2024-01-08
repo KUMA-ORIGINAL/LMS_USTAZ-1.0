@@ -3,11 +3,11 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.safestring import mark_safe
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import User, ProfileStudent, Award, Attendance, ProjectStudent
+from .models import User, ProgressStudent, Award, ProjectStudent
 
 
 class ProfileInline(admin.StackedInline):
-    model = ProfileStudent
+    model = ProgressStudent
     can_delete = False
     verbose_name_plural = "Profile"
 
@@ -72,18 +72,10 @@ class AwardAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'name')
 
 
-@admin.register(ProfileStudent)
+@admin.register(ProgressStudent)
 class ProfileStudentAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'course', 'points']
     list_display_links = ['id', 'user']
-
-
-@admin.register(Attendance)
-class AttendanceAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'schedule', 'status')
-    list_filter = ('schedule', 'status')
-    search_fields = ('user__first_name', 'user__last_name', 'schedule__title')
-    ordering = ('schedule', 'user')
 
 
 @admin.register(ProjectStudent)

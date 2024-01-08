@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
-from .models import User, ProfileStudent, Attendance, ProjectStudent
+from .models import User, ProjectStudent, ProgressStudent
 
 
 class UserLoginSerializer(serializers.Serializer):
@@ -27,33 +27,12 @@ class UserSerializer(serializers.ModelSerializer):
         return data
 
 
-class ProfileStudentSerializer(serializers.ModelSerializer):
+class ProgressStudentSerializer(serializers.ModelSerializer):
     rank = serializers.IntegerField()
 
     class Meta:
-        model = ProfileStudent
+        model = ProgressStudent
         fields = ('id', 'user', 'course', 'awards', 'points', 'rank', 'updated', 'created')
-
-
-class AttendanceSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Attendance
-        fields = '__all__'
-
-
-class ListAttendanceSerializer(serializers.ModelSerializer):
-    date = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Attendance
-        fields = ('date', 'is_present')
-
-    def get_date(self, obj):
-        schedule = obj.schedule
-        if schedule:
-            return schedule.date.strftime('%d.%m')
-        return ''
 
 
 class ProjectStudentSerializer(serializers.ModelSerializer):
