@@ -30,9 +30,6 @@ const StudentHome = () => {
 
   return (
     <section className="student-home">
-      <div className="sh__welcome">
-        👋 Как дела, {user.first_name}? Готов покорять мир программирования💻🚀?
-      </div>
       <div className="sh__content">
         <div className="sh__courses">
           <h2 style={{ margin: "30px 0px" }}>Мои курсы</h2>

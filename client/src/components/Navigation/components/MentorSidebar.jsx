@@ -157,13 +157,6 @@ const MentorSidebar = () => {
                   setSelected={setSelected}
                 />
                 <Item
-                  title="Посещения"
-                  to="/mentor/visits"
-                  icon={<AddTaskOutlinedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-                <Item
                   title="Оценки"
                   to="/mentor/student-rating"
                   icon={<GradeOutlinedIcon />}
