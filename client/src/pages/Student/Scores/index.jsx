@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import ScoreTable from '../../Mentor/StudentsRating/components/ScoreTable'
+import ScoreTable from '../../../components/ScoreTable'
 import { Line } from "react-chartjs-2"
 import { Bar } from 'react-chartjs-2';
 import "./index.css"
@@ -80,18 +80,6 @@ const StudentScores = () => {
   
 
 
-  const [streak, setStreak] = useState(0);
-  const [visits, setVisits] = useState([
-    { date: '01.01', status: true },
-    { date: '01.01', status: true },
-    { date: '01.02', status: true },
-    { date: '01.03', status: true },
-    { date: '01.04', status: false },
-    { date: '01.05', status: true },
-    { date: '01.06', status: false },
-    { date: '01.07', status: true },
-  ]);
-
 
   return (
     <div className="content">
@@ -99,10 +87,6 @@ const StudentScores = () => {
         <div className="profileinfo">
           <h2>Мои метрики</h2>
           <div className="pwrapper">
-      <div style={{minWidth:"700px", maxWidth: "700px", display:"flex"}}>
-          <Line data={lineChartData} options={options} />
-         
-        </div>
           <div className="profile__info-metricks">
             <div className="profile__metric-card">
               <p className="pm__card-title">Место в рейтинге</p>
@@ -116,11 +100,11 @@ const StudentScores = () => {
               <p className="pm__card-title">Всего проектов</p>
               <p className="pm__card-metric">1</p>
             </div>
-            <div className="profile__metric-card">
-              <p className="pm__card-title">Всего пропусков</p>
-              <p className="pm__card-metric">1/27 занятий</p>
-            </div>
           </div>
+      <div style={{minWidth:"700px", maxWidth: "700px", display:"flex"}}>
+          <Line data={lineChartData} options={options} />
+
+        </div>
           </div>
         </div>
       <h2  style={{ margin: "50px 0px 20px 0px" }}>Мои баллы</h2>

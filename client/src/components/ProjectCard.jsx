@@ -17,7 +17,7 @@ const ProjectCard = ({ data }) => {
 
   const { title, category, date, student } = data;
   return (
-    <Card sx={{ maxWidth: 350, background: colors.primary[400] }}>
+    <Card sx={{ maxWidth: 270, background: colors.primary[400] }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: colors.blueAccent[500] }} aria-label="project">

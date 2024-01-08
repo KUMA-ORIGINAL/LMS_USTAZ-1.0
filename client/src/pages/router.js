@@ -8,7 +8,6 @@ import NotFound from "./NotFound"
 //mentor pages
 import MentorHome from './Mentor/Home'
 import MentorProfile from './Mentor/Profile'
-import MentorVisits from './Mentor/Visits'
 import MentorLecture from './Mentor/Lecture'
 import MentorSchedule from './Mentor/Schedule'
 import MentorStudentsRating from './Mentor/StudentsRating'
@@ -36,7 +35,6 @@ const Routing = () => {
           <Route path="home" element={<MentorHome />} />
           <Route path="profile" element={<MentorProfile />} />
           <Route path="lecture" element={<MentorLecture />} />
-          <Route path="visits" element={<MentorVisits />} />
           <Route path="schedule" element={<MentorSchedule />} />
           <Route path="student-rating" element={<MentorStudentsRating />} />
           <Route path="student-projects" element={<MentorProjects />} />
