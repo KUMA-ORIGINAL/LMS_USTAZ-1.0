@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
@@ -106,19 +107,24 @@ class Solution(models.Model):
     """ Моделька решение внутри задания """
 
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    student = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'student'})
+    user = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'student'})
     is_accepted = models.BooleanField(default=False)
-    order = OrderField(blank=True, for_fields=['task', 'student'])
-    score = models.PositiveIntegerField(null=True, blank=True,
+    order = OrderField(blank=True, for_fields=['task', 'user'])
+    grade = models.PositiveIntegerField(null=True, blank=True,
                                         validators=[
                                             MinValueValidator(1, message="Баллы должны быть не меньше 1."),
-                                            MaxValueValidator(100, message="Баллы должны быть не больше 100."),
                                         ])
     attachment = models.FileField(upload_to='solutions/%Y/%m/%d')
     created = models.DateTimeField(auto_now_add=True)
 
+    def clean(self):
+        super().clean()
+        max_score = self.task.max_score
+        if self.grade and self.grade > max_score:
+            raise ValidationError(f"Баллы должны быть не больше чем максимальный балл за задание.({max_score})")
+
     def __str__(self):
-        return f"Solution for {self.task.title} by {self.student}"
+        return f"Solution for {self.task.title} by {self.user}"
 
 
 class Schedule(models.Model):
@@ -133,6 +139,26 @@ class Schedule(models.Model):
 
     def __str__(self):
         return f'{self.title} | {self.date}'
+
+
+class Attendance(models.Model):
+    """ Моделька для отметки студентов """
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'student'}, null=True)
+    schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    status = models.BooleanField(null=True)
+
+    def __str__(self):
+        return f"{self.user} - {self.schedule} ({'Present' if self.status else 'Absent'})"
+
+
+class Grade(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    grade = models.DecimalField(max_digits=3, decimal_places=0)
+    created = models.DateTimeField(auto_now_add=True)
 
 
 class ImageUpload(models.Model):

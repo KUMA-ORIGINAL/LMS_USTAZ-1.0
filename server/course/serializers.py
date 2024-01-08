@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from .models import Course, Module, Content, Task, Solution, Schedule, ImageUpload
+from .models import Course, Module, Content, Task, Solution, Schedule, ImageUpload, Attendance, Grade
 
 
 class MentorSerializer(serializers.ModelSerializer):
@@ -53,7 +53,35 @@ class ScheduleSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ScoreSerializer(serializers.Serializer):
+class AttendanceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Attendance
+        fields = '__all__'
+
+
+class ListAttendanceSerializer(serializers.ModelSerializer):
+    date = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Attendance
+        fields = ('date', 'is_present')
+
+    def get_date(self, obj):
+        schedule = obj.schedule
+        if schedule:
+            return schedule.date.strftime('%d.%m')
+        return ''
+
+
+class GradeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Grade
+        fields = '__all__'
+
+
+class ListGradeSerializer(serializers.Serializer):
     tasks = serializers.ListField(child=serializers.CharField())
     students = serializers.ListField(child=serializers.DictField())
 

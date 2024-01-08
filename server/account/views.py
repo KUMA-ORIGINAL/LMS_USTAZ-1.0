@@ -1,19 +1,25 @@
-from django.db.models import Window, F
-from django.db.models.functions import Rank
+from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import extend_schema_view, extend_schema
 from rest_framework import viewsets, status
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from course.models import Course, Schedule
-from course.serializers import CourseSerializer
-from .models import User, ProfileStudent, Attendance, ProjectStudent
+from course.models import Course
+from .filters import ProgressStudentFilter
+from .models import User, ProjectStudent, ProgressStudent
 from .permissions import IsAdminOrMentorOrReadPermission
-from .serializers import UserSerializer, ProfileStudentSerializer, UserLoginSerializer, AttendanceSerializer, \
-    ProjectStudentSerializer, ListAttendanceSerializer
+from .serializers import UserSerializer, UserLoginSerializer, \
+    ProjectStudentSerializer, ProgressStudentSerializer
 
 
+@extend_schema(tags=['Auth'])
+@extend_schema_view(
+    post=extend_schema(
+        summary='Логин'
+    )
+)
 class UserLoginAPIView(GenericAPIView):
     permission_classes = (AllowAny,)
     serializer_class = UserLoginSerializer
@@ -22,7 +28,7 @@ class UserLoginAPIView(GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
-        serializer = UserSerializer(user)
+        serializer = UserSerializer(user, context={'request': request})
         token = RefreshToken.for_user(user)
         data = serializer.data
         match data['role']:
@@ -39,6 +45,7 @@ class UserLoginAPIView(GenericAPIView):
         return Response(data, status=status.HTTP_200_OK)
 
 
+@extend_schema(tags=['Auth'])
 class UserLogoutAPIView(GenericAPIView):
     permission_classes = (IsAuthenticated,)
 
@@ -52,86 +59,65 @@ class UserLogoutAPIView(GenericAPIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(tags=['User'])
 class UserView(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        role = self.request.query_params.get('role')
-
-        queryset = User.objects.all()
-        if role is not None:
-            queryset = queryset.filter(role=role)
-        return queryset
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ('role',)
 
 
-class ProfileStudentView(viewsets.ModelViewSet):
-    queryset = ProfileStudent.objects.all()
-    serializer_class = ProfileStudentSerializer
+@extend_schema(tags=['Progress students'])
+class ProgressStudentView(viewsets.ModelViewSet):
+    queryset = ProgressStudent.objects.all()
+    serializer_class = ProgressStudentSerializer
     permission_classes = [IsAdminOrMentorOrReadPermission]
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = ProgressStudentFilter
 
-    def get_queryset(self):
-        course_id = self.request.query_params.get('course_id')
-        min_points = self.request.query_params.get('min_points')
-        max_points = self.request.query_params.get('max_points')
-
-        queryset = ProfileStudent.objects.all()
-        if course_id is not None:
-            queryset = queryset.filter(course_id=course_id)
-        if min_points is not None:
-            queryset = queryset.filter(points__gte=min_points)
-        if max_points is not None:
-            queryset = queryset.filter(points__lte=max_points)
-        queryset = queryset.annotate(rank=Window(expression=Rank(), order_by=F('points').desc()))
-
-        return queryset
-
-
-class AttendanceView(viewsets.ModelViewSet):
-    queryset = Attendance.objects.all()
-    serializer_class = AttendanceSerializer
-    permission_classes = [IsAdminOrMentorOrReadPermission]
-
-    def list(self, request, *args, **kwargs):
-        course_id = request.query_params.get('course_id')
-        try:
-            schedules = Schedule.objects.filter(course_id=course_id)
-            students = Course.objects.get(pk=course_id).students.all()
-            attendance = Attendance.objects.filter(schedule__in=schedules, user__in=students)
-            attendance_mapping = {(a.schedule_id, a.user_id): True for a in attendance}
-            print(attendance_mapping)
-
-            students_attendance = []
-            for student in students:
-                student_attendance = {
-                    'id': student.pk,
-                    'name': f'{student.first_name} {student.last_name}',
-                    'visits': []
-                }
-                for schedule in schedules:
-                    date = schedule.date.strftime('%d.%m')
-                    student_attendance['visits'].append({
-                        'date': date,
-                        'status': attendance_mapping.get((schedule.pk, student.pk), False)
-                    })
-                students_attendance.append(student_attendance)
-            return Response(students_attendance)
-        except Course.DoesNotExist:
-            return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
+    # def get_queryset(self):
+    #     course_id = self.request.query_params.get('course_id')
+    #     min_points = self.request.query_params.get('min_points')
+    #     max_points = self.request.query_params.get('max_points')
+    #
+    #     queryset = ProfileStudent.objects.all()
+    #     if course_id is not None:
+    #         queryset = queryset.filter(course_id=course_id)
+    #     if min_points is not None:
+    #         queryset = queryset.filter(points__gte=min_points)
+    #     if max_points is not None:
+    #         queryset = queryset.filter(points__lte=max_points)
+    #     queryset = queryset.annotate(rank=Window(expression=Rank(), order_by=F('points').desc()))
+    #
+    #     return queryset
 
 
+@extend_schema(tags=['Project Students'])
+@extend_schema_view(
+    create=extend_schema(
+        summary='Создание проекта для студента'
+    ),
+    list=extend_schema(
+        summary='получение проектов студента'
+    ),
+    update=extend_schema(
+        summary='Изменение существующего проекта'
+    ),
+    partial_update=extend_schema(
+        summary='частичное изменение существующего проекта'
+    ),
+    retrieve=extend_schema(
+        summary='Детальная информация о проекте'
+    ),
+    destroy=extend_schema(
+        summary='Удаление проекта'
+    )
+
+)
 class ProjectStudentView(viewsets.ModelViewSet):
+    queryset = ProjectStudent.objects.all()
     serializer_class = ProjectStudentSerializer
     permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        user_id = self.request.query_params.get('user_id')
-        course_id = self.request.query_params.get('course_id')
-
-        queryset = ProjectStudent.objects.all()
-        if user_id is not None:
-            queryset = queryset.filter(user_id=user_id)
-        if course_id is not None:
-            queryset = queryset.filter(course_id=course_id)
-        return queryset
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ('user_id', 'course_id')

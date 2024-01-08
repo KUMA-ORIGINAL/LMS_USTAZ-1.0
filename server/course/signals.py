@@ -3,8 +3,7 @@ from datetime import timedelta
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from account.models import Attendance
-from course.models import Course, Schedule, Solution
+from course.models import Course, Schedule, Solution, Attendance, Grade
 
 
 @receiver(post_save, sender=Course)
@@ -29,14 +28,18 @@ def create_schedule(sender, instance, created, **kwargs):
             start_date += timedelta(days=1)
 
 
-# @receiver(post_save, sender=Schedule)
-# def create_attendance(sender, instance, created, **kwargs):
-#     if created:
-#         Attendance.objects.create(schedule=instance)
-
-
 @receiver(post_save, sender=Solution)
 def recalculate_student_points(sender, instance, **kwargs):
     if instance.is_accepted:
-        student = instance.student
-        student.profilestudent.calculate_points()
+        user = instance.user
+        task = instance.task
+        grade = instance.grade
+        course = user.progressstudent.course
+        user.progressstudent.calculate_points()
+        if not Grade.objects.filter(user=user, task=task).exists():
+            Grade.objects.create(
+                user=user,
+                course=course,
+                task=task,
+                grade=grade
+            )
