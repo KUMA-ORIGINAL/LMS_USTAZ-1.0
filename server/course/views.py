@@ -36,7 +36,7 @@ class CourseView(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     permission_classes = [IsAdminOrMentorOrReadPermission]
     filter_backends = (DjangoFilterBackend,)
-    filerset_fields = ('subject_id',)
+    filterset_fields = ('subject_id',)
 
 
 @extend_schema(tags=['Modules'])
@@ -65,7 +65,7 @@ class ModuleView(viewsets.ModelViewSet):
     serializer_class = ModuleSerializer
     permission_classes = [IsAdminOrMentorOrReadPermission]
     filter_backends = (DjangoFilterBackend,)
-    filerset_fields = ('course_id',)
+    filterset_fields = ('course_id',)
 
 
 @extend_schema(tags=['Contents'])
@@ -94,7 +94,7 @@ class ContentView(viewsets.ModelViewSet):
     serializer_class = ContentSerializer
     permission_classes = [IsAdminOrMentorOrReadPermission]
     filter_backends = (DjangoFilterBackend,)
-    filerset_fields = ('module_id',)
+    filterset_fields = ('module_id',)
 
 
 @extend_schema(tags=['Tasks'])
@@ -123,7 +123,7 @@ class TaskView(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
     permission_classes = [IsAdminOrMentorOrReadPermission]
     filter_backends = (DjangoFilterBackend,)
-    filerset_fields = ('module_id',)
+    filterset_fields = ('module_id',)
 
 
 @extend_schema(tags=['Solutions'],
@@ -153,7 +153,7 @@ class SolutionView(viewsets.ModelViewSet):
     serializer_class = SolutionSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = (DjangoFilterBackend,)
-    filerset_fields = ('task_id', 'user_id')
+    filterset_fields = ('task_id', 'user_id')
 
 
 @extend_schema(tags=['Schedules'],
@@ -183,7 +183,7 @@ class ScheduleView(viewsets.ModelViewSet):
     serializer_class = ScheduleSerializer
     permission_classes = [IsAdminOrMentorOrReadPermission]
     filter_backends = (DjangoFilterBackend,)
-    filerset_fields = ('course_id',)
+    filterset_fields = ('course_id',)
 
 
 @extend_schema(tags=['Grades'],
